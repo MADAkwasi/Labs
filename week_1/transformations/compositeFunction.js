@@ -1,7 +1,9 @@
 function capitalize(str) {
 	if (typeof str !== "string") return "Input a string value";
 	if (str.trim() === "") return "String is a whitespace or empty string";
-	return str[0].toUpperCase() + str.slice(1);
+
+	if (/^[^a-zA-Z0-9]/.test(str)) return str;
+	else return str[0].toUpperCase() + str.slice(1);
 }
 
 function reverse(str) {
@@ -13,10 +15,12 @@ function reverse(str) {
 function compose(...fns) {
 	return function (inputValue) {
 		return fns.reduceRight((acc, cur) => {
-			if (acc && acc.error) return;
-			return cur(acc);
+			const result = cur(acc);
+			if ((result && result.startsWith("Input")) || result.startsWith("String"))
+				return acc;
+			return result;
 		}, inputValue);
 	};
 }
 
-const capReverse = compose(reverse, capitalize);
+const reverseCaps = compose(reverse, capitalize);
