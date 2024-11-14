@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+
+		<script defer type="module" src="script.js"></script>
+		<title>Document</title>
+	</head>
+	<body>
+		<main class="app">
+			<select class="format">
+				<option value="12-hours">12 hours format</option>
+				<option value="24-hours">24 hours format</option>
+			</select>
+			<button class="alarm-btn">Set Alarm</button>
+			<div class="clock">
+				<p class="digits"></p>
+			</div>
+
+			<div class="form-cont hide">
+				<div class="form">
+					<div>
+						<input type="number" for="hour" placeholder="HH" max="12" min="0" />
+						<input type="number" for="min" placeholder="MM" max="59" min="0" />
+						<select class="option">
+							<option value="AM">AM</option>
+							<option value="PM">PM</option>
+						</select>
+					</div>
+					<div>
+						<button class="add-btn">Done</button>
+						<button class="cancel-btn">Cancel</button>
+					</div>
+				</div>
+			</div>
+
+			<ul></ul>
+			<audio id="myAudio" src="alarm.mp3" preload="auto"></audio>
+		</main>
+	</body>
+</html>

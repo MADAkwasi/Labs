@@ -1,0 +1,131 @@
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background-color: #f1f0ff;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	position: relative;
+}
+
+.app {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+}
+
+p {
+	font-size: 10rem;
+	font-weight: 600;
+	margin-top: 2rem;
+}
+
+.miridian {
+	font-size: 6rem;
+}
+
+select {
+	border: 1px solid #696969;
+	background-color: #f1f0ff;
+	padding: 0.3rem 1.5rem;
+	font-size: 1.4rem;
+}
+
+select:focus {
+	outline: 1px solid #696969;
+	background-color: #f1f0ff;
+}
+
+.alarm-btn {
+	border: 1px solid #696969;
+	background-color: transparent;
+	font-size: 2rem;
+	padding: 1rem 2rem;
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	cursor: pointer;
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 3rem;
+	background-color: #cff4f4;
+	height: 50%;
+	width: 70%;
+	border-radius: 5px;
+}
+
+input {
+	width: 10rem;
+	padding: 1.5rem 0;
+	text-align: center;
+	margin: 0 2rem;
+}
+
+.option {
+	padding: 1.5rem 0;
+	width: 10rem;
+	text-align: center;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.form-cont {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #22222287;
+	z-index: 2;
+}
+
+.form button {
+	padding: 1rem 2rem;
+	font-size: 1.3rem;
+	background-color: transparent;
+	margin: 0 2rem;
+	cursor: pointer;
+}
+
+ul {
+	width: 50%;
+}
+
+ul div {
+	width: 100%;
+	padding: 1rem 4rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+ul p {
+	font-size: 2rem;
+	margin-top: 0;
+}
+
+ul button {
+	font-size: 3rem;
+	cursor: pointer;
+	background-color: transparent;
+	border: none;
+	color: red;
+}
