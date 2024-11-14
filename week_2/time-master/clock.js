@@ -21,10 +21,6 @@ export function Clock() {
 			.padStart(2, "0")} ${miridian}`;
 	};
 
-	// this.setAlarm = function (alarm) {
-	// 	this.alarms.push(alarm);
-	// };
-
 	this.triggerAlarm = function (alarms, audio) {
 		alarms.forEach((time) => {
 			if (time === this.get12HoursTime() || time === this.getFormattedTime())
