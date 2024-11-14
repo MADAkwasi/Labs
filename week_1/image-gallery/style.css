@@ -1,0 +1,129 @@
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background: rgb(2, 0, 36);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 0, 36, 0.8717612044817927) 0%,
+		rgba(9, 9, 121, 0.5048144257703081) 100%,
+		rgba(0, 212, 255, 1) 100%
+	);
+	position: relative;
+}
+
+.lightbox-opened {
+	overflow-y: hidden;
+}
+
+h1 {
+	padding-top: 5rem;
+	text-align: center;
+	font-size: 5rem;
+	color: #fff;
+}
+
+.app-body {
+	margin-top: 5rem;
+	padding: 2rem;
+	display: flex;
+	gap: 2.5rem;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.image-container {
+	height: 20rem;
+	width: 30rem;
+	background-color: #ebebeb;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.thumbnail {
+	height: 100%;
+	width: 100%;
+	margin-bottom: 1.3rem;
+	filter: blur(1px);
+	transition: 0.2s all;
+}
+
+.thumbnail:hover {
+	filter: blur(0);
+	transform: scale(1.1);
+}
+
+.lightbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5rem;
+	height: 100%;
+	width: 100%;
+}
+
+.lightbox-container {
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000000e2;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+
+	opacity: 100%;
+	transition: 0.6s all;
+}
+
+.image {
+	height: 60%;
+	width: 50%;
+}
+
+.info-container {
+	padding: 0 1rem;
+	margin-bottom: 3rem;
+	color: #fff;
+}
+
+.info-container h4 {
+	text-align: center;
+	font-size: 5rem;
+}
+
+.info-container p {
+	font-size: 1.8rem;
+	text-align: center;
+}
+
+button {
+	font-size: 4rem;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+}
+
+#close-btn {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+}
+
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+}
