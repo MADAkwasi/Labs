@@ -31,11 +31,12 @@ export function addAlarm(hourField, minField, miridian, alarmList, alarms) {
 	minField.value = null;
 }
 
-export function removeAlarm(target, alarms) {
+export function removeAlarm(target, audio) {
 	const alarmString = target.previousElementSibling.textContent;
 
 	const time = alarmString.match(/\d{2}:\d{2}:\d{2} [APM]{2}/);
 
 	target.parentElement.remove();
+	audio.pause();
 	return time[0];
 }

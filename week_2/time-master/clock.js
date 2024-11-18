@@ -22,9 +22,15 @@ export function Clock() {
 	};
 
 	this.triggerAlarm = function (alarms, audio) {
+		let triggeredAlarm;
 		alarms.forEach((time) => {
-			if (time === this.get12HoursTime() || time === this.getFormattedTime())
+			if (time === this.get12HoursTime() || time === this.getFormattedTime()) {
 				audio.play();
+				triggeredAlarm = time;
+			}
 		});
+		setTimeout(() => {
+			if (alarms.includes(triggeredAlarm)) audio.play();
+		}, 60000);
 	};
 }

@@ -41,7 +41,7 @@ addBtn.addEventListener("click", () => {
 
 alarmList.addEventListener("click", (e) => {
 	if (e.target.nodeName === "BUTTON") {
-		const time = removeAlarm(e.target, alarms);
+		const time = removeAlarm(e.target, alarm);
 		alarms = alarms.filter((alarm) => alarm !== time);
 	}
 });
