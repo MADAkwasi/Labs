@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/images/favicon-32x32.png"
+		/>
+
+		<link rel="stylesheet" href="src/styles/style.css" />
+		<script type="module" src="src/js/script.js"></script>
+
+		<title>Frontend Mentor | Password generator app</title>
+	</head>
+	<body>
+		<div data-role="toast">
+			<p class="error-msg"></p>
+		</div>
+		<main>
+			<h1>Password Generator</h1>
+
+			<div class="password-container">
+				<h2 class="password">P4$5W0rD</h2>
+
+				<div class="copy">
+					<p class="copy-text hide">COPIED</p>
+					<img src="assets/images/icon-copy.svg" alt="copy" class="copy-icon" />
+				</div>
+			</div>
+			<div class="app">
+				<div class="header">
+					<p>Character Length</p>
+					<p class="string-length">0</p>
+				</div>
+
+				<input
+					type="range"
+					id="length-slider"
+					min="0"
+					max="20"
+					value="0"
+					step="1"
+				/>
+
+				<ul>
+					<div class="parameter">
+						<label class="custom-checkbox">
+							<input type="checkbox" id="uppercase-checkbox" />
+							<span class="checkbox-custom"></span>
+							Include Uppercase Letters
+						</label>
+					</div>
+					<div class="parameter">
+						<label class="custom-checkbox">
+							<input type="checkbox" id="lowercase-checkbox" />
+							<span class="checkbox-custom"></span>
+							Include Lowercase Letters
+						</label>
+					</div>
+					<div class="parameter">
+						<label class="custom-checkbox">
+							<input type="checkbox" id="numbers-checkbox" />
+							<span class="checkbox-custom"></span>
+							Include Numbers
+						</label>
+					</div>
+					<div class="parameter">
+						<label class="custom-checkbox">
+							<input type="checkbox" id="symbols-checkbox" />
+							<span class="checkbox-custom"></span>
+							Include Symbols
+						</label>
+					</div>
+				</ul>
+
+				<div class="strength-meter">
+					<p>STRENGTH</p>
+
+					<div class="measure">
+						<h4 class="strength"></h4>
+						<span class="bar" id="too-weak"></span>
+						<span class="bar" id="weak"></span>
+						<span class="bar" id="medium"></span>
+						<span class="bar" id="strong"></span>
+					</div>
+				</div>
+
+				<button class="generate-btn">
+					GENERATE
+					<img src="assets/images/icon-arrow-right.svg" alt="right-arrow" />
+				</button>
+			</div>
+		</main>
+	</body>
+</html>
