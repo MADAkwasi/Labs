@@ -1,7 +1,7 @@
 "use strict";
 
 import { Clock } from "./clock.js";
-import { addAlarm, removeAlarm } from "./function.js";
+import { addAlarm, noActiveAlarms, removeAlarm } from "./function.js";
 
 const digits = document.querySelector(".digits");
 const format = document.querySelector(".format");
@@ -44,4 +44,9 @@ alarmList.addEventListener("click", (e) => {
 		const time = removeAlarm(e.target, alarm);
 		alarms = alarms.filter((alarm) => alarm !== time);
 	}
+
+	if (alarms.length === 0 && alarmList.querySelector("div") === null)
+		noActiveAlarms(alarmList);
 });
+
+noActiveAlarms(alarmList);

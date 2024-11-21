@@ -4,12 +4,7 @@ export function renderAlarm(list, alarms) {
 	list.innerHTML = "";
 
 	const setAlarms = alarms
-		.map(
-			(alarm) =>
-				`
-		<div><p>Alarm set to ${alarm} daily</p> <button>&times;</button></div>
-		`
-		)
+		.map((alarm) => `<div><p>${alarm} daily</p> <button>&times;</button></div>`)
 		.join("");
 
 	list.insertAdjacentHTML("beforeEnd", setAlarms);
@@ -39,4 +34,13 @@ export function removeAlarm(target, audio) {
 	target.parentElement.remove();
 	audio.pause();
 	return time[0];
+}
+
+export function noActiveAlarms(alarmList) {
+	if (alarmList.querySelector("h3") === null) {
+		const text = document.createElement("h3");
+		text.textContent = "No Active Alarms";
+
+		alarmList.appendChild(text);
+	}
 }

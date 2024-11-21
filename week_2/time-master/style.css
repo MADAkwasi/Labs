@@ -104,8 +104,23 @@ input {
 	cursor: pointer;
 }
 
-ul {
-	width: 50%;
+.alarm-list {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 4%;
+	height: 20rem;
+	width: 23%;
+	text-align: center;
+	overflow: scroll;
+	overflow-x: hidden;
+	scrollbar-width: thin;
+	scrollbar-color: #3c3c3c transparent;
+}
+
+ul h3 {
+	font-size: 3rem;
+	margin-top: 5rem;
 }
 
 ul div {
@@ -117,12 +132,12 @@ ul div {
 }
 
 ul p {
-	font-size: 2rem;
+	font-size: 1.5rem;
 	margin-top: 0;
 }
 
 ul button {
-	font-size: 3rem;
+	font-size: 2.5rem;
 	cursor: pointer;
 	background-color: transparent;
 	border: none;
