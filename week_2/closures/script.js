@@ -18,7 +18,6 @@ const worker = {
 	age: 4,
 };
 
-// person.greet();
 const aboutWorker = person.greet.bind(worker, "playing keyboard");
 aboutWorker();
 
