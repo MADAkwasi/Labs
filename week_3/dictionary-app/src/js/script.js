@@ -61,12 +61,12 @@ playBtn.addEventListener("click", () => audio.play());
 
 playBtn.addEventListener(
 	"mouseover",
-	() => (playBtn.src = "../../assets/images/icon-play-hover.svg")
+	() => (playBtn.src = "./assets/images/icon-play-hover.svg")
 );
 
 playBtn.addEventListener(
 	"mouseout",
-	() => (playBtn.src = "../../assets/images/icon-play.svg")
+	() => (playBtn.src = "./assets/images/icon-play.svg")
 );
 
 toggleBtn.addEventListener("change", () => {
@@ -76,8 +76,8 @@ toggleBtn.addEventListener("change", () => {
 	document.documentElement.setAttribute("data-theme", newTheme);
 
 	newTheme === "dark"
-		? (themeImg.src = "../../assets/images/icon-moon-copy.svg")
-		: (themeImg.src = "../../assets/images/icon-moon.svg");
+		? (themeImg.src = "./assets/images/icon-moon-copy.svg")
+		: (themeImg.src = "./assets/images/icon-moon.svg");
 });
 
 fontOptions.addEventListener("change", () => {
