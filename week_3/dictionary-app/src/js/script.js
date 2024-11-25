@@ -2,10 +2,10 @@
 
 import { fetchWord } from "./api.js";
 import {
+	addEventListeners,
 	hideNotFoundError,
 	hideNullError,
 	renderBlock,
-	showNotFoundError,
 	showNullError,
 } from "./function.js";
 
@@ -23,36 +23,50 @@ const themeImg = document.querySelector(".theme-image");
 
 search.addEventListener("blur", hideNullError(search));
 
-document.addEventListener("keypress", async (e) => {
-	if (search.value.trim() === "" && e.key === "Enter") {
+addEventListeners(document, ["keypress", "click"], async (e) => {
+	if (
+		search.value.trim() === "" &&
+		(e.key === "Enter" || e.target.id === "search-icon")
+	) {
 		showNullError(search, wordContainer, errorTxt);
-		renderBlock(container, [], []);
+		renderBlock(container, []);
 		return;
 	}
 
-	if (document.activeElement === search && e.key === "Enter") {
+	if (
+		(document.activeElement === search && e.key === "Enter") ||
+		e.target.id === "search-icon"
+	) {
 		const word = search.value.trim();
 		try {
 			const data = await fetchWord(word);
 			const { phonetics, word: searchedWord } = data[0];
+			const orals = {
+				audio: "",
+				text: "",
+			};
 
-			const { audio: audioLink, text } = phonetics.find(
-				(phonetic) => phonetic.audio && phonetic.text
-			);
+			phonetics.forEach((phonetic) => {
+				if (phonetic.audio) orals.audio = phonetic.audio;
+				if (phonetic.text) orals.text = phonetic.text;
+			});
 
 			if (searchedWord) {
 				hideNotFoundError(search, wordContainer);
 				keyword.textContent = searchedWord;
-				phoneticsText.textContent = text;
-				audio.src = audioLink;
+				phoneticsText.textContent = orals.text;
+				audio.src = orals.audio;
 				audio.load();
 
 				errorTxt.classList.add("hide");
 				renderBlock(container, data);
 			}
 		} catch (err) {
-			showNotFoundError(search, wordContainer, errorTxt);
-			renderBlock(container, [], []);
+			errorTxt.innerHTML = "";
+			errorTxt.innerHTML = err.message;
+			errorTxt.classList.remove("hide");
+			wordContainer.classList.add("hide");
+			renderBlock(container, []);
 		}
 	}
 });

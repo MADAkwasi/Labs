@@ -83,22 +83,18 @@ export function hideNullError(inputField) {
 	inputField.style.outline = "";
 }
 
-export function showNullError(inputField, wordField, errorCont) {
+export function showNullError(inputField, wordField) {
 	inputField.nextElementSibling.style.display = "block";
 	inputField.style.outline = "1px solid #ff5252";
-	errorCont.classList.add("hide");
 	wordField.classList.add("hide");
-}
-
-export function showNotFoundError(inputField, wordField, errorCont) {
-	errorCont.classList.remove("hide");
-	wordField.classList.add("hide");
-	inputField.nextElementSibling.style.display = "none";
-	inputField.style.outline = "";
 }
 
 export function hideNotFoundError(inputField, wordCont) {
 	wordCont.classList.remove("hide");
 	inputField.nextElementSibling.style.display = "none";
 	inputField.style.outline = "";
+}
+
+export function addEventListeners(element, events, handler) {
+	events.forEach((event) => element.addEventListener(event, handler));
 }
