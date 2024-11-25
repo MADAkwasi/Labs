@@ -90,6 +90,11 @@ copyBtn.addEventListener("click", () => {
 		navigator.clipboard.writeText(textToCopy).then(() => {
 			isCopied.classList.remove("hide");
 		});
+
+		setTimeout(() => {
+			password.textContent = "P4$5W0rD";
+			isCopied.classList.add("hide");
+		}, 60000);
 	}
 });
 
