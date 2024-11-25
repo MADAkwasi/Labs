@@ -1,0 +1,19 @@
+:root {
+  --highlight-color: #a729f5;
+  --background-color: #f4f6fa;
+  --primary-color: #fff;
+  --correct-color: #26d782;
+  --wrong-color: #ee5454;
+  --accent-color: #f4f6fa;
+  --typography-color: #626c7f;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  padding: 5rem 20rem;
+  margin: 0;
+  box-sizing: border-box;
+}
