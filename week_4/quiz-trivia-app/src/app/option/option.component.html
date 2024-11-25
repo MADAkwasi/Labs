@@ -1,0 +1,7 @@
+@for(quiz of quizzes; track $index){
+
+<div class="option" (click)="onSelectSubject(subjectTitle)">
+  <img [src]="quiz.icon" [alt]="quiz.title" />
+  <p #subjectTitle>{{ quiz.title }}</p>
+</div>
+}

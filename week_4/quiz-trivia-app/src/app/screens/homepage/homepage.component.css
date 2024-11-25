@@ -1,0 +1,20 @@
+app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  justify-content: center;
+}
+
+app-description {
+  width: 50%;
+}
+
+app-option {
+  width: 50%;
+}

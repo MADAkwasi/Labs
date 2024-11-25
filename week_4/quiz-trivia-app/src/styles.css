@@ -5,7 +5,7 @@
   --correct-color: #26d782;
   --wrong-color: #ee5454;
   --accent-color: #f4f6fa;
-  --typography-color: #626c7f;
+  --typography-color: #313e51;
 }
 
 html {
@@ -16,4 +16,6 @@ body {
   padding: 5rem 20rem;
   margin: 0;
   box-sizing: border-box;
+  background-color: var(--background-color);
+  font-family: sans-serif;
 }
