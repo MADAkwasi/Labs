@@ -19,7 +19,7 @@ function checkTypesCount(
 
 export function showStrengthIndicator(
 	length,
-	{ includesLowercase, includesSymbols, includesNum, includesUppercase }
+	{ includeLowercase, includeSymbols, includeNum, includeUppercase }
 ) {
 	if (length === 0) return null;
 
@@ -28,10 +28,10 @@ export function showStrengthIndicator(
 	if (
 		length >= 8 &&
 		checkTypesCount(
-			includesUppercase,
-			includesLowercase,
-			includesNum,
-			includesSymbols,
+			includeUppercase,
+			includeLowercase,
+			includeNum,
+			includeSymbols,
 			3
 		)
 	) {
@@ -41,10 +41,10 @@ export function showStrengthIndicator(
 	if (
 		length >= 8 &&
 		checkTypesCount(
-			includesUppercase,
-			includesLowercase,
-			includesNum,
-			includesSymbols,
+			includeUppercase,
+			includeLowercase,
+			includeNum,
+			includeSymbols,
 			2
 		)
 	) {
@@ -54,10 +54,10 @@ export function showStrengthIndicator(
 	if (
 		length >= 8 &&
 		checkTypesCount(
-			includesUppercase,
-			includesLowercase,
-			includesNum,
-			includesSymbols,
+			includeUppercase,
+			includeLowercase,
+			includeNum,
+			includeSymbols,
 			1
 		)
 	) {

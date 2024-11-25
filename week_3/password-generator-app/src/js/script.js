@@ -22,17 +22,17 @@ let passwordLength = 0;
 let newPassword;
 
 generateBtn.addEventListener("mouseover", () => {
-	generateBtn.children[0].src = "../../assets/images/icon-arrow-right-copy.svg";
+	generateBtn.children[0].src = "assets/images/icon-arrow-right-copy.svg";
 });
 generateBtn.addEventListener("mouseout", () => {
-	generateBtn.children[0].src = "../../assets/images/icon-arrow-right.svg";
+	generateBtn.children[0].src = "assets/images/icon-arrow-right.svg";
 });
 
 copyIcon.addEventListener("mouseover", () => {
-	copyIcon.src = "../../assets/images/icon-copy-copy.svg";
+	copyIcon.src = "assets/images/icon-copy-copy.svg";
 });
 copyIcon.addEventListener("mouseout", () => {
-	copyIcon.src = "../../assets/images/icon-copy.svg";
+	copyIcon.src = "assets/images/icon-copy.svg";
 });
 
 inputField.addEventListener("click", (e) => {
