@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 7rem;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  padding: 3rem 0;
+}
+
+button {
+  padding: 2rem 0;
+  background-color: var(--highlight-color);
+  border: none;
+  border-radius: 15px;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-size: 15rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.7rem;
+}
+
+.subject {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+button {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d394fa;
+}

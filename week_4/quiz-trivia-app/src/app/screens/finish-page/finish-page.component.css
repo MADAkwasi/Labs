@@ -1,0 +1,16 @@
+app-description {
+  width: 50%;
+}
+
+main {
+  margin-top: 10rem;
+  display: flex;
+  gap: 5rem;
+}
+
+app-statistics {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
