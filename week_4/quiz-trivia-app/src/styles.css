@@ -4,8 +4,15 @@
   --primary-color: #fff;
   --correct-color: #26d782;
   --wrong-color: #ee5454;
-  --accent-color: #f4f6fa;
   --typography-color: #313e51;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
 }
 
 html {
@@ -14,8 +21,7 @@ html {
 
 body {
   padding: 5rem 20rem;
-  margin: 0;
-  box-sizing: border-box;
   background-color: var(--background-color);
   font-family: sans-serif;
+  color: var(--typography-color);
 }

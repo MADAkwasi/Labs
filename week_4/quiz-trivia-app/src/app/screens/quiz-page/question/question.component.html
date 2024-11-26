@@ -1,0 +1,15 @@
+<p>
+  Question {{ num || 1 }} of
+  {{ questions?.length }}
+</p>
+<h3>
+  {{ question || initialQuestion }}
+</h3>
+<input
+  type="range"
+  min="1"
+  [max]="questions?.length || 1"
+  [value]="rangeValue"
+  (input)="updateRangeValue($event)"
+  [style.--value]="(rangeValue / (questions?.length || 1)) * 100 + '%'"
+/>

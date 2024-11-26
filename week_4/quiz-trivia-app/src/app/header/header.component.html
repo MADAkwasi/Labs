@@ -1,5 +1,14 @@
-<div></div>
-<div class="toggle-switch">
-  <input type="checkbox" id="switch" />
-  <label for="switch"></label>
+<div class="subject">
+  @if(subject){
+  <img [src]="subject.icon" [alt]="subject.title" />
+  <h2>{{ subject.title }}</h2>
+  }
+</div>
+<div class="controls">
+  <img src="/assets/images/icon-sun.svg" alt="sun-icon" />
+  <div class="toggle-switch">
+    <input type="checkbox" id="switch" />
+    <label for="switch"></label>
+  </div>
+  <img src="/assets/images/icon-moon.svg" alt="moon-icon" />
 </div>

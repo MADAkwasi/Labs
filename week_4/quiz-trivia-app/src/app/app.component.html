@@ -1,8 +1,8 @@
+<app-header [subject]="questions"></app-header>
 @switch (screen) { @case ('home') {
 <app-homepage></app-homepage>
 } @case('active'){
-<p>Welcome</p>
-} @default {
-<app-homepage></app-homepage>
-
+<app-quiz-page></app-quiz-page>
+} @case('done'){
+<app-finish-page></app-finish-page>
 } }

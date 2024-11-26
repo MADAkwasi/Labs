@@ -1,0 +1,98 @@
+.option {
+  width: 100%;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.2);
+  font-size: 1.4rem;
+  font-weight: 600;
+  position: relative;
+}
+
+button {
+  padding: 2rem;
+  color: var(--primary-color);
+  background-color: var(--highlight-color);
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1.6rem;
+}
+
+button:hover {
+  background-color: #d394fa;
+}
+
+.selected {
+  border: 2px solid var(--highlight-color);
+}
+
+.selected-correct {
+  border: 2px solid var(--correct-color);
+}
+
+.selected-wrong {
+  border: 2px solid var(--wrong-color);
+}
+
+span {
+  background-color: var(--background-color);
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.answer-hover {
+  background-color: #f6e7ff;
+  color: var(--highlight-color);
+}
+
+.answer-selected {
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
+}
+
+.wrong-answer {
+  background-color: var(--wrong-color);
+  color: var(--primary-color);
+}
+
+.correct-answer {
+  background-color: var(--correct-color);
+  color: var(--primary-color);
+}
+
+.selected-span {
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
+}
+
+.indicators {
+  position: absolute;
+  right: 5%;
+}
+
+.warning {
+  display: flex;
+  color: var(--wrong-color);
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+  margin-top: 3rem;
+  position: absolute;
+  bottom: -20%;
+  width: 100%;
+}
+
+.warning img {
+  height: 23px;
+  width: 23px;
+}

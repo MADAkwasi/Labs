@@ -1,0 +1,22 @@
+main {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  margin-top: 10rem;
+}
+
+app-answer {
+  width: 50%;
+  position: relative;
+}
+
+app-question {
+  width: 50%;
+  position: relative;
+}
+
+app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

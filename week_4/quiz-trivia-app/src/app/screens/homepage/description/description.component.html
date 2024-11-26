@@ -1,2 +1,7 @@
-<h1>Welcome to the <span>Frontend Quiz!</span></h1>
-<p>Pick a subject to get started</p>
+<h1>
+  {{ infoText }}<span>{{ emphasisText }}</span>
+</h1>
+
+@if(showText){
+    <p>Pick a subject to get started</p>
+}

@@ -1,13 +1,7 @@
-app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 main {
   display: flex;
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 3rem;
+  margin-top: 10rem;
   justify-content: center;
 }
 

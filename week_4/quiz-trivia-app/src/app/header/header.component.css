@@ -40,3 +40,18 @@
 .toggle-switch input[type="checkbox"]:checked + label::after {
   transform: translateX(26px);
 }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.subject {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.4rem;
+}
