@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/images/favicon-32x32.png"
+		/>
+		<link rel="stylesheet" href="dist/css/style.css" />
+
+		<script type="module" src="src/js/script.js"></script>
+
+		<title>Frontend Mentor | Dictionary web app</title>
+	</head>
+	<body>
+		<main>
+			<div class="error-msg"></div>
+			<header class="header">
+				<img src="./assets/images/logo.svg" alt="logo" class="logo" />
+				<div>
+					<select>
+						<option value="sans-serif">Sans Serif</option>
+						<option value="inter">Inter</option>
+						<option value="lora">Lora</option>
+						<option value="inconsolata">Inconsolata</option>
+					</select>
+
+					<label class="switch">
+						<input type="checkbox" class="toggle-btn" />
+						<span class="slider round"></span>
+					</label>
+
+					<img
+						src="./assets/images/icon-moon.svg"
+						alt="theme-icon"
+						class="theme-image"
+					/>
+				</div>
+			</header>
+
+			<div style="position: relative">
+				<input type="text" placeholder="Enter word..." class="search" />
+				<p style="display: none">Whoops, can't be empty</p>
+				<img
+					src="./assets/images/icon-search.svg"
+					alt="search-icon"
+					id="search-icon"
+				/>
+			</div>
+
+			<div class="word-container hide">
+				<div class="word">
+					<h1></h1>
+					<p class="phonetics"></p>
+				</div>
+
+				<img
+					src="./assets/images/icon-play.svg"
+					alt="play-icon"
+					class="play-btn"
+				/>
+				<audio></audio>
+			</div>
+			<div class="definitions-container"></div>
+		</main>
+	</body>
+</html>
