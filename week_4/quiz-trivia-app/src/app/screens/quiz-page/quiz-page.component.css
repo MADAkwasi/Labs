@@ -2,7 +2,7 @@ main {
   display: flex;
   gap: 5rem;
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 app-answer {
@@ -12,11 +12,22 @@ app-answer {
 
 app-question {
   width: 50%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@media (max-width: 800px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  app-answer {
+    width: 80%;
+  }
+
+  app-question {
+    width: 80%;
+  }
 }

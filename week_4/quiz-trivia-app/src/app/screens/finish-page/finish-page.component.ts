@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { DescriptionComponent } from '../homepage/description/description.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 
@@ -12,5 +12,4 @@ import { StatisticsComponent } from './statistics/statistics.component';
 export class FinishPageComponent {
   info: string = 'Quiz completed ';
   BoldenText: string = 'You scored...';
-  
 }

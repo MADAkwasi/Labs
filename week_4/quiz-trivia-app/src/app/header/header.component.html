@@ -5,10 +5,24 @@
   }
 </div>
 <div class="controls">
-  <img src="/assets/images/icon-sun.svg" alt="sun-icon" />
+  <img
+    [src]="
+      isDarkMode
+        ? '/assets/images/icon-sun-dark.svg'
+        : '/assets/images/icon-sun.svg'
+    "
+    alt="sun-icon"
+  />
   <div class="toggle-switch">
-    <input type="checkbox" id="switch" />
+    <input type="checkbox" id="switch" (click)="toggleDarkMode()" />
     <label for="switch"></label>
   </div>
-  <img src="/assets/images/icon-moon.svg" alt="moon-icon" />
+  <img
+    [src]="
+      isDarkMode
+        ? '/assets/images/icon-moon-dark.svg'
+        : '/assets/images/icon-moon.svg'
+    "
+    alt="moon-icon"
+  />
 </div>

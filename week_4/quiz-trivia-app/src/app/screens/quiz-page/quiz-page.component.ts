@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { QuestionComponent } from './question/question.component';
 import { AnswerComponent } from './answer/answer.component';
+import { QuestionComponent } from './question/question.component';
 
 @Component({
   selector: 'app-quiz-page',
   standalone: true,
-  imports: [QuestionComponent, AnswerComponent],
+  imports: [AnswerComponent, QuestionComponent],
   templateUrl: './quiz-page.component.html',
   styleUrl: './quiz-page.component.css',
 })

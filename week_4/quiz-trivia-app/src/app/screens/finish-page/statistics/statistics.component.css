@@ -3,33 +3,30 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 7rem;
+  gap: 2rem;
   background-color: var(--primary-color);
   border-radius: 15px;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
 }
 
 button {
-  padding: 2rem 0;
-  background-color: var(--highlight-color);
+  padding: 1.5rem 0;
   border: none;
   border-radius: 15px;
-  color: var(--primary-color);
+  color: var(--button-text-color);
+  background-color: var(--highlight-color);
 }
 
 h2 {
   font-size: 15rem;
 }
 
-h3 {
-  font-size: 2rem;
-}
-
 p {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 .subject {
+  font-size: 1.7rem;
   display: flex;
   align-items: center;
   flex-direction: row;

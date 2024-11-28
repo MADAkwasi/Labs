@@ -20,12 +20,13 @@ export class AnswerComponent implements OnInit {
   letter: string[] = ['A', 'B', 'C', 'D'];
   hoverIndex: number = -1;
   selectIndex: number = -1;
-  isCorrect!: Boolean;
-  isSubmitted: Boolean = false;
-  renderWarning: Boolean = false;
+  isCorrect!: boolean;
+  isSubmitted: boolean = false;
+  renderWarning: boolean = false;
   correctAnswer!: string;
   correctAnswerIndex!: number;
   totalQuestions: number | undefined = undefined;
+  score: number = 0;
 
   constructor(private quizService: QuizService) {}
 
@@ -54,14 +55,19 @@ export class AnswerComponent implements OnInit {
         (ans) => ans === this.correctAnswer
       );
     }
+
+    this.score = this.quizService.calculateScore(this.score, this.isCorrect);
   }
 
   onNextQuestion(): void {
-    if (this.totalQuestions && this.num + 1 >= this.totalQuestions) {
-      return;
-    }
+    if (this.totalQuestions && this.num + 1 >= this.totalQuestions)
+      this.quizService.loadScreen('done');
 
-    if (this.subjectObject) {
+    if (
+      this.subjectObject &&
+      this.totalQuestions &&
+      this.num + 1 < this.totalQuestions
+    ) {
       this.num++;
       this.answers = this.subjectObject.questions[this.num].options;
       this.quizService.handleSubmitAnswer(
@@ -80,9 +86,5 @@ export class AnswerComponent implements OnInit {
     this.selectedAnswer = element.textContent;
     this.selectIndex = index;
     this.renderWarning = false;
-
-    if (this.subjectObject) {
-      console.log(this.subjectObject.questions[this.num]);
-    }
   }
 }

@@ -10,11 +10,17 @@ export class QuizService {
   private selectedSubject = new BehaviorSubject<Quiz | undefined>(undefined);
   subject$ = this.selectedSubject.asObservable();
 
+  private screenSubject = new BehaviorSubject<string>('home');
+  screen$ = this.screenSubject.asObservable();
+
   private submitAnswer = new Subject<string>();
   answerEvent$ = this.submitAnswer.asObservable();
 
   private currentIndex = new BehaviorSubject<number>(0);
   indexEvent$ = this.currentIndex.asObservable();
+
+  private score = new BehaviorSubject<number>(0);
+  score$ = this.score.asObservable();
 
   getQuizData(): Quiz[] {
     return data.quizzes;
@@ -26,6 +32,18 @@ export class QuizService {
     );
 
     this.selectedSubject.next(subjectQuestions);
+  }
+
+  calculateScore(point: number, isCorrect: boolean): number {
+    if (isCorrect) point++;
+
+    this.score.next(point);
+
+    return point;
+  }
+
+  loadScreen(screen: string): void {
+    this.screenSubject.next(screen);
   }
 
   getSubjectQuestions(): Quiz | undefined {
@@ -46,7 +64,7 @@ export class QuizService {
   isAnswerCorrect(
     question: { question: string; options: string[]; answer: string },
     selectedAnswer: string
-  ): Boolean {
+  ): boolean {
     return selectedAnswer === question.answer;
   }
 

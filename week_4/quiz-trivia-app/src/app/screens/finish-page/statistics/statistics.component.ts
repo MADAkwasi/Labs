@@ -7,14 +7,20 @@ import { Quiz } from '../../../data/quiz.model';
   standalone: true,
   imports: [],
   templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.css'
+  styleUrl: './statistics.component.css',
 })
-export class StatisticsComponent implements OnInit{
+export class StatisticsComponent implements OnInit {
   subject: Quiz | undefined = undefined;
+  totalScore!: number;
 
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.quizService.subject$.subscribe((quiz) => (this.subject = quiz));
+    this.quizService.score$.subscribe((points) => (this.totalScore = points));
+  }
+
+  handlePlayAgain() {
+    this.quizService.loadScreen('home');
   }
 }

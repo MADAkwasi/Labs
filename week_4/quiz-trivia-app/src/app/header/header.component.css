@@ -1,6 +1,6 @@
 .toggle-switch {
   position: relative;
-  width: 5rem;
+  width: 5.2rem;
   height: 2.4rem;
 }
 
@@ -54,4 +54,40 @@
   align-items: center;
   gap: 2rem;
   font-size: 1.4rem;
+}
+
+@media (max-width: 1090px) {
+  .toggle-switch {
+    width: 5.5rem;
+    height: 2.4rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .toggle-switch {
+    width: 5.8rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .subject {
+    padding-left: 5.5rem;
+    font-size: 1.2rem;
+    gap: 1rem;
+  }
+
+  .controls {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .subject {
+    padding-left: 4rem;
+  }
+
+  .controls {
+    gap: 0.5rem;
+  }
 }

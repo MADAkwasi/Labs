@@ -3,3 +3,10 @@ app-header {
   align-items: center;
   justify-content: space-between;
 }
+
+@media (max-width: 800px) {
+  app-header {
+    width: 95%;
+    margin-bottom: 5rem;
+  }
+}

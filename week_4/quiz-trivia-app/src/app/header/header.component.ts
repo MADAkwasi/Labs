@@ -10,8 +10,21 @@ import { Quiz } from '../data/quiz.model';
 })
 export class HeaderComponent implements OnInit {
   @Input() subject: Quiz | undefined = undefined;
+  isDarkMode = false;
 
   ngOnInit(): void {
-    console.log(this.subject);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      this.isDarkMode = savedTheme === 'dark-mode';
+      document.body.classList.toggle(savedTheme);
+    }
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    const theme = this.isDarkMode ? 'dark-mode' : 'light-mode';
+
+    document.body.classList.toggle(theme);
+    localStorage.setItem('theme', theme);
   }
 }
