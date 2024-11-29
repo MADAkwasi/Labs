@@ -10,6 +10,9 @@
   --option-background-color: #f4f6fa;
   --option-text-color: #626c74;
   --option-indicator-color: #fff;
+  --bg-image-desktop: url("/assets/images/background-image-light-desktop.svg");
+  --bg-image-tablet: url("/assets/images/background-image-light-tablet.svg");
+  --bg-image-mobile: url("/assets/images/background-image-light-mobile.svg");
 }
 
 .dark-mode {
@@ -21,6 +24,9 @@
   --option-background-color: #f4f6fa;
   --option-text-color: #626c74;
   --option-indicator-color: #fff;
+  --bg-image-desktop: url("/assets/images/background-image-dark-desktop.svg");
+  --bg-image-tablet: url("/assets/images/background-image-dark-tablet.svg");
+  --bg-image-mobile: url("/assets/images/background-image-dark-mobile.svg");
 }
 
 *,
@@ -37,6 +43,7 @@ html {
 
 body {
   padding: 5rem 15rem;
+  background-image: var(--bg-image-desktop);
   background-color: var(--background-color);
   font-family: sans-serif;
   color: var(--typography-color);
@@ -48,27 +55,37 @@ body {
   }
 }
 
-@media (max-width: 950px) {
-  html {
-    font-size: 50%;
-  }
-}
-
 @media (max-width: 970px) {
   body {
     padding: 5rem 10rem;
   }
 }
 
+@media (max-width: 950px) {
+  html {
+    font-size: 50%;
+  }
+}
+
 @media (max-width: 800px) {
   body {
     padding: 5rem;
+    background-image: var(--bg-image-tablet);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
   }
 }
 
 @media (max-width: 700px) {
   body {
     padding: 3rem 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    background-image: var(--bg-image-mobile);
   }
 }
 
