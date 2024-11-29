@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DescriptionComponent } from '../homepage/description/description.component';
+import { DescriptionComponent } from '../../description/description.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 
 @Component({
@@ -10,6 +10,6 @@ import { StatisticsComponent } from './statistics/statistics.component';
   styleUrl: './finish-page.component.css',
 })
 export class FinishPageComponent {
-  info: string = 'Quiz completed ';
-  BoldenText: string = 'You scored...';
+  info = 'Quiz completed ';
+  BoldenText = 'You scored...';
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DescriptionComponent } from './description/description.component';
+import { DescriptionComponent } from '../../description/description.component';
 import { OptionComponent } from '../../option/option.component';
 
 @Component({
@@ -10,6 +10,6 @@ import { OptionComponent } from '../../option/option.component';
   styleUrl: './homepage.component.css',
 })
 export class HomepageComponent {
-  info: string = 'Welcome to the ';
-  BoldenText: string = 'Frontend Quiz!';
+  info = 'Welcome to the ';
+  BoldenText = 'Frontend Quiz!';
 }

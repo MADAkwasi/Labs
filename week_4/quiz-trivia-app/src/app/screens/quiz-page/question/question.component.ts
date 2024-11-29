@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../../data/quiz.service';
+import { StorageService } from '../../../storage.service';
+import { Quiz } from '../../../data/quiz.model';
 
 @Component({
   selector: 'app-question',
@@ -9,39 +11,52 @@ import { QuizService } from '../../../data/quiz.service';
   styleUrl: './question.component.css',
 })
 export class QuestionComponent implements OnInit {
-  num: number = 1;
-  question: string = '';
+  num = 1;
+  question = '';
   initialQuestion!: string | undefined;
   questions:
     | { question: string; options: string[]; answer: string }[]
     | undefined = undefined;
-  currentQuestion: number | undefined = undefined;
-  rangeValue: number = 0;
+  rangeValue = 0;
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private quizService: QuizService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
-    this.initialQuestion =
-      this.quizService.getSubjectQuestions()?.questions[0].question;
-    this.quizService.answerEvent$.subscribe((ques) => (this.question = ques));
+    const subjectQuestions = this.quizService.getSubjectQuestions();
+    this.initialQuestion = subjectQuestions?.questions[0]?.question;
+    this.questions = subjectQuestions?.questions;
 
-    this.questions = this.quizService.getSubjectQuestions()?.questions;
+    const storedQuestions =
+      this.storageService.getData<Quiz>('selectedSubject')?.questions;
+    const storedQuestion =
+      this.storageService.getData<string>('currentQuestion');
+    const storedNumber = this.storageService.getData<number>('questionNumber');
+
+    this.questions = storedQuestions ?? this.questions;
+    this.question = storedQuestion ?? this.initialQuestion ?? '';
+    this.num = storedNumber ?? 1;
+    this.rangeValue = this.num;
+    this.quizService.handleNextQuestion(this.num - 1);
+
+    this.quizService.answerEvent$.subscribe((ques) => {
+      this.question = ques;
+      this.storageService.saveData('questionNumber', this.question);
+    });
 
     this.quizService.indexEvent$.subscribe((index) => {
       this.num = index;
+      this.storageService.saveData('questionNumber', this.num);
       this.rangeValue = index;
     });
-
-    if (this.questions)
-      this.currentQuestion =
-        this.questions.findIndex(
-          (el) => this.question || this.initialQuestion === el.question
-        ) + 1;
   }
 
   updateRangeValue(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.rangeValue = +inputElement.value;
     this.num = this.rangeValue;
+    this.storageService.saveData('questionNumber', this.num);
   }
 }

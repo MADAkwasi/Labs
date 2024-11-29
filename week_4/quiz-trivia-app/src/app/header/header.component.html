@@ -14,7 +14,12 @@
     alt="sun-icon"
   />
   <div class="toggle-switch">
-    <input type="checkbox" id="switch" (click)="toggleDarkMode()" />
+    <input
+      type="checkbox"
+      id="switch"
+      (click)="toggleDarkMode()"
+      [checked]="isDarkMode"
+    />
     <label for="switch"></label>
   </div>
   <img

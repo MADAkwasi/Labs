@@ -10,11 +10,13 @@
 }
 
 button {
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   border: none;
   border-radius: 15px;
   color: var(--button-text-color);
   background-color: var(--highlight-color);
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 h2 {
@@ -31,11 +33,6 @@ p {
   align-items: center;
   flex-direction: row;
   gap: 2rem;
-}
-
-button {
-  font-size: 2rem;
-  cursor: pointer;
 }
 
 button:hover {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AnswerComponent } from './answer/answer.component';
 import { QuestionComponent } from './question/question.component';
 
@@ -9,6 +9,4 @@ import { QuestionComponent } from './question/question.component';
   templateUrl: './quiz-page.component.html',
   styleUrl: './quiz-page.component.css',
 })
-export class QuizPageComponent {
-  questionNum: number = 0;
-}
+export class QuizPageComponent {}
