@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
     const theme = this.isDarkMode ? 'dark-mode' : 'light-mode';
-    console.log(theme);
 
     document.body.classList.remove(
       this.isDarkMode ? 'light-mode' : 'dark-mode'
