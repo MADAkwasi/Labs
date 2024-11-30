@@ -1,0 +1,322 @@
+:root {
+	--background-color: #18171f;
+	--secondary-color: #24232c;
+	--typography-color: #817d92;
+	--highlight-color: #a4ffaf;
+	--critical-color: #f64a4a;
+	--weak-color: #fb7c58;
+	--medium-color: #f8cd65;
+	--accent-color: #e6e5ea;
+}
+
+@font-face {
+	font-family: "Jet-Brains-Mono";
+	src: url("../../assets/fonts/static/JetBrainsMono-Bold.ttf")
+		format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+*,
+*::after,
+*::before {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--background-color);
+	font-family: Jet-Brains-Mono;
+	color: var(--typography-color);
+}
+
+.toast {
+	position: absolute;
+	background-color: var(--secondary-color);
+	height: 5rem;
+	width: fit-content;
+	top: -5rem;
+	padding: 2rem;
+	border-radius: 5px;
+	animation: toast-pop-up 4s ease-out;
+}
+
+.error-msg {
+	color: var(--critical-color);
+	font-size: 1.5rem;
+}
+
+@keyframes toast-pop-up {
+	0% {
+		top: -5rem;
+	}
+	1% {
+		top: 1rem;
+	}
+	99% {
+		top: 1rem;
+	}
+	100% {
+		top: -5rem;
+	}
+}
+
+main {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+}
+
+.password-container {
+	display: flex;
+	width: 52%;
+	background-color: var(--secondary-color);
+	justify-content: space-between;
+	align-items: center;
+	height: 5rem;
+	margin-bottom: 2rem;
+	padding: 2rem;
+	position: relative;
+}
+
+.password {
+	font-size: 2rem;
+	color: var(--typography-color);
+	font-weight: 600;
+	letter-spacing: 1px;
+}
+
+.copy {
+	position: absolute;
+	right: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.copy p {
+	font-size: 1.6rem;
+	color: var(--highlight-color);
+}
+
+.hide {
+	display: none;
+}
+
+.copy-icon {
+	cursor: pointer;
+}
+
+.app {
+	width: 52%;
+	background-color: var(--secondary-color);
+	padding: 2rem 2.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.3rem;
+	align-items: center;
+	padding: 1rem 0;
+}
+
+.string-length {
+	font-size: 2rem;
+	color: var(--highlight-color);
+}
+
+#length-slider {
+	width: 100%;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 5px;
+	background: var(--background-color);
+	outline: none;
+	margin: 0;
+	position: relative;
+}
+
+#length-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 17px;
+	height: 17px;
+	border-radius: 50%;
+	background-color: var(--accent-color);
+	cursor: pointer;
+	margin-top: -6px;
+	position: relative;
+	z-index: 1;
+}
+
+#length-slider::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(
+		to right,
+		var(--highlight-color) 0%,
+		var(--highlight-color) var(--progress),
+		var(--background-color) var(--progress),
+		var(--background-color) 100%
+	);
+	border-radius: 2.5px;
+}
+
+#length-slider::-moz-range-track {
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(
+		to right,
+		var(--highlight-color) 0%,
+		var(--highlight-color) var(--progress),
+		var(--background-color) var(--progress),
+		var(--background-color) 100%
+	);
+	border-radius: 2.5px;
+}
+
+#length-slider::-ms-track {
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(
+		to right,
+		var(--highlight-color) 0%,
+		var(--highlight-color) var(--progress),
+		var(--background-color) var(--progress),
+		var(--background-color) 100%
+	);
+	border-radius: 2.5px;
+}
+
+.parameter {
+	margin: 1.6rem 0;
+	display: flex;
+	align-items: center;
+	font-size: 1.1rem;
+}
+
+.custom-checkbox {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	font-size: 1.3rem;
+	user-select: none;
+}
+
+.custom-checkbox input {
+	display: none;
+}
+
+.checkbox-custom {
+	width: 1.2rem;
+	height: 1.2rem;
+	border: 1px solid var(--accent-color);
+	margin-right: 1.3rem;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+}
+
+.custom-checkbox input:checked + .checkbox-custom {
+	background-color: var(--highlight-color);
+	border-color: var(--highlight-color);
+}
+
+.checkbox-custom:after {
+	content: "";
+	position: absolute;
+	left: 2px;
+	top: 3px;
+	width: 7px;
+	height: 3px;
+	border-left: 1px solid var(--background-color);
+	border-bottom: 1px solid var(--background-color);
+	transform: rotate(-45deg);
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.custom-checkbox input:checked + .checkbox-custom:after {
+	opacity: 1;
+}
+
+.strength-meter {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 4rem;
+	background-color: var(--background-color);
+	margin: 2rem 0;
+	padding: 1rem 1.2rem;
+	font-size: 1rem;
+}
+
+.measure {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+}
+
+.strength {
+	font-size: 1.4rem;
+}
+
+.bar {
+	background-color: transparent;
+	height: 1.5rem;
+	width: 0.5rem;
+	border: 1px solid var(--typography-color);
+}
+
+.generate-btn {
+	width: 100%;
+	padding: 1.5rem 0;
+	background-color: var(--highlight-color);
+	border: 1px solid var(--highlight-color);
+	cursor: pointer;
+}
+
+.generate-btn:hover {
+	background-color: var(--secondary-color);
+	color: var(--highlight-color);
+}
+
+@media (max-width: 900px) {
+	main {
+		width: 100%;
+	}
+}
+
+@media (max-width: 650px) {
+	html {
+		font-size: 53%;
+	}
+}
+
+@media (max-width: 500px) {
+	.password-container {
+		width: 70%;
+	}
+
+	.app {
+		width: 70%;
+	}
+}
