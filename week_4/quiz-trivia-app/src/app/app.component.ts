@@ -22,7 +22,7 @@ import { StorageService } from './storage.service';
 })
 export class AppComponent implements OnInit {
   screen = 'home';
-  questions: Quiz | undefined = undefined;
+  questions!: Quiz | null;
   currentQuestion!: number;
 
   constructor(
@@ -35,13 +35,13 @@ export class AppComponent implements OnInit {
     const storedQuestions =
       this.storageService.getData<Quiz>('selectedSubject');
 
-    this.screen = storedScreen ?? 'home';
-    this.questions = storedQuestions ?? undefined;
+    this.screen = storedScreen ?? this.screen;
+    this.questions = storedQuestions ?? null;
 
-    this.quizService.subject$.subscribe((ques) => {
-      this.questions = ques;
+    this.quizService.subject$.subscribe((question) => {
+      this.questions = question ?? null;
 
-      if (ques) {
+      if (question) {
         this.screen = 'active';
         this.storageService.saveData('selectedSubject', this.questions);
         this.storageService.saveData('screen', this.screen);

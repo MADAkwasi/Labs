@@ -7,11 +7,11 @@ import { StorageService } from '../../../storage.service';
   selector: 'app-statistics',
   standalone: true,
   imports: [],
-  templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.css',
+  templateUrl: './result.component.html',
+  styleUrl: './result.component.css',
 })
-export class StatisticsComponent implements OnInit {
-  subject: Quiz | undefined = undefined;
+export class ResultComponent implements OnInit {
+  subject: Quiz | null = null;
   totalScore!: number;
   theme!: string;
 
@@ -27,13 +27,11 @@ export class StatisticsComponent implements OnInit {
     const storedScore = this.storedService.getData<number>('scorePoints');
     this.totalScore = storedScore ?? 0;
 
-    const storedSubject = this.storedService.getData<Quiz>('selectedSubject');
-    this.subject = storedSubject || undefined;
+    this.subject = this.storedService.getData<Quiz>('selectedSubject');
   }
 
   handlePlayAgain() {
     const storedTheme = this.storedService.getData<boolean>('theme');
-    console.log(storedTheme);
     this.storedService.saveData('screen', 'home');
     localStorage.clear();
     this.quizService.loadScreen('home');

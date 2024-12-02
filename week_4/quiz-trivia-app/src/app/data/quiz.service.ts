@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import data from './data.json';
-import { Quiz } from './quiz.model';
+import { QuestionData, Quiz } from './quiz.model';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  private selectedSubject = new BehaviorSubject<Quiz | undefined>(undefined);
+  private selectedSubject = new BehaviorSubject<Quiz | null>(null);
   subject$ = this.selectedSubject.asObservable();
 
   private screenSubject = new BehaviorSubject<string>('home');
@@ -31,7 +31,7 @@ export class QuizService {
       (quiz) => quiz.title === subject
     );
 
-    this.selectedSubject.next(subjectQuestions);
+    if (subjectQuestions) this.selectedSubject.next(subjectQuestions);
   }
 
   calculateScore(point: number, isCorrect: boolean): number {
@@ -46,33 +46,27 @@ export class QuizService {
     this.screenSubject.next(screen);
   }
 
-  getSubjectQuestions(): Quiz | undefined {
+  getSubjectQuestions(): Quiz | null {
     return this.selectedSubject.getValue();
   }
 
   handleSubmitAnswer(
-    questions: { question: string; options: string[]; answer: string }[],
+    questions: QuestionData[],
     curQuestionIndex: number
   ): void {
-    this.submitAnswer.next(questions[curQuestionIndex].question);
+    const currentQuestion = questions[curQuestionIndex].question;
+    this.submitAnswer.next(currentQuestion);
   }
 
   handleNextQuestion(index: number): void {
     this.currentIndex.next(index + 1);
   }
 
-  isAnswerCorrect(
-    question: { question: string; options: string[]; answer: string },
-    selectedAnswer: string
-  ): boolean {
+  isAnswerCorrect(question: QuestionData, selectedAnswer: string): boolean {
     return selectedAnswer === question.answer;
   }
 
-  getAnswer(question: {
-    question: string;
-    options: string[];
-    answer: string;
-  }): string {
+  getAnswer(question: QuestionData): string {
     return question.answer;
   }
 

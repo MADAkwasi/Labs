@@ -10,8 +10,8 @@ import { StorageService } from '../storage.service';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  @Input() subject: Quiz | undefined = undefined;
-  isDarkMode = false;
+  @Input() subject!: Quiz | null;
+  isDarkMode!: boolean;
 
   constructor(private storageService: StorageService) {}
 
@@ -22,9 +22,7 @@ export class HeaderComponent implements OnInit {
       document.body.classList.toggle(savedTheme);
     }
 
-    const storedSubject = this.storageService.getData<Quiz>('selectedSubject');
-
-    if (storedSubject) this.subject = storedSubject;
+    this.subject = this.storageService.getData<Quiz>('selectedSubject');
   }
 
   toggleDarkMode() {

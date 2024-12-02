@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { DescriptionComponent } from '../../description/description.component';
-import { StatisticsComponent } from './statistics/statistics.component';
+import { ResultComponent } from './result/result.component';
 
 @Component({
   selector: 'app-finish-page',
   standalone: true,
-  imports: [DescriptionComponent, StatisticsComponent],
+  imports: [DescriptionComponent, ResultComponent],
   templateUrl: './finish-page.component.html',
   styleUrl: './finish-page.component.css',
 })

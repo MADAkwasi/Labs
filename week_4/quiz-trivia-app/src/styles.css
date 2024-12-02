@@ -37,6 +37,7 @@
   box-sizing: content-box;
 }
 
+
 html {
   font-size: 62.5%;
 }
@@ -45,7 +46,7 @@ body {
   padding: 5rem 15rem;
   background-image: var(--bg-image-desktop);
   background-color: var(--background-color);
-  font-family: sans-serif;
+  font-family: "Rubik", sans-serif;
   color: var(--typography-color);
 }
 

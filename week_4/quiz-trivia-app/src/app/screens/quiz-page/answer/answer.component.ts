@@ -18,7 +18,7 @@ import { StorageService } from '../../../storage.service';
   styleUrl: './answer.component.css',
 })
 export class AnswerComponent implements OnInit, AfterViewInit {
-  @Input() subjectObject!: Quiz | undefined;
+  @Input() subjectObject: Quiz | null = null;
 
   num = 0;
   answers!: string[];
@@ -32,7 +32,7 @@ export class AnswerComponent implements OnInit, AfterViewInit {
   renderWarning = false;
   correctAnswer!: string;
   correctAnswerIndex!: number;
-  totalQuestions: number | undefined = undefined;
+  totalQuestions: number = 0;
   score = 0;
 
   constructor(
@@ -57,7 +57,7 @@ export class AnswerComponent implements OnInit, AfterViewInit {
     this.answers = savedAnswers ?? [];
 
     const storedSubject = this.storageService.getData<Quiz>('selectedSubject');
-    this.subjectObject = storedSubject ?? undefined;
+    this.subjectObject = storedSubject ?? null;
 
     const storedScore = this.storageService.getData<number>('scorePoints');
     this.score = storedScore ?? 0;
@@ -98,7 +98,9 @@ export class AnswerComponent implements OnInit, AfterViewInit {
         this.storageService.saveData('selectedSubject', this.subjectObject);
       });
     }
-    this.totalQuestions = this.subjectObject?.questions.length;
+    if (this.subjectObject)
+      this.totalQuestions = this.subjectObject.questions.length;
+
     if (!savedAnswers && this.subjectObject) {
       this.answers = this.subjectObject.questions[0].options;
       this.storageService.saveData('possibleAnswers', this.answers);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../../data/quiz.service';
 import { StorageService } from '../../../storage.service';
-import { Quiz } from '../../../data/quiz.model';
+import { QuestionData, Quiz } from '../../../data/quiz.model';
 
 @Component({
   selector: 'app-question',
@@ -14,9 +14,7 @@ export class QuestionComponent implements OnInit {
   num = 1;
   question = '';
   initialQuestion!: string | undefined;
-  questions:
-    | { question: string; options: string[]; answer: string }[]
-    | undefined = undefined;
+  questions!: QuestionData[] | undefined;
   rangeValue = 0;
 
   constructor(
