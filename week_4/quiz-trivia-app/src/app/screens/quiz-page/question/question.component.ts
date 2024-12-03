@@ -14,7 +14,7 @@ export class QuestionComponent implements OnInit {
   num = 1;
   question = '';
   initialQuestion!: string | undefined;
-  questions!: QuestionData[] | undefined;
+  questions!: QuestionData[];
   rangeValue = 0;
 
   constructor(
@@ -24,8 +24,11 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     const subjectQuestions = this.quizService.getSubjectQuestions();
-    this.initialQuestion = subjectQuestions?.questions[0]?.question;
-    this.questions = subjectQuestions?.questions;
+
+    if (subjectQuestions && 'questions' in subjectQuestions) {
+      this.initialQuestion = subjectQuestions?.questions[0]?.question;
+      this.questions = subjectQuestions?.questions;
+    }
 
     const storedQuestions =
       this.storageService.getData<Quiz>('selectedSubject')?.questions;

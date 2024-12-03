@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class QuizService {
-  private selectedSubject = new BehaviorSubject<Quiz | null>(null);
+  private selectedSubject = new BehaviorSubject<Quiz | {}>({});
   subject$ = this.selectedSubject.asObservable();
 
   private screenSubject = new BehaviorSubject<string>('home');
@@ -46,7 +46,7 @@ export class QuizService {
     this.screenSubject.next(screen);
   }
 
-  getSubjectQuestions(): Quiz | null {
+  getSubjectQuestions(): Quiz | {} {
     return this.selectedSubject.getValue();
   }
 

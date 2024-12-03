@@ -18,17 +18,27 @@ import { StorageService } from './storage.service';
   ],
   providers: [StorageService],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   screen = 'home';
-  questions!: Quiz | null;
+  questions!: Quiz;
   currentQuestion!: number;
+  // theme!: boolean | null;
 
   constructor(
     private quizService: QuizService,
     private storageService: StorageService
   ) {}
+
+  public isQuiz(subject: any): subject is Quiz {
+    return (
+      subject &&
+      Object.keys(subject).length > 0 &&
+      'title' in subject &&
+      'icon' in subject
+    );
+  }
 
   ngOnInit(): void {
     const storedScreen = this.storageService.getData<string>('screen');
@@ -36,12 +46,12 @@ export class AppComponent implements OnInit {
       this.storageService.getData<Quiz>('selectedSubject');
 
     this.screen = storedScreen ?? this.screen;
-    this.questions = storedQuestions ?? null;
+
+    if (this.isQuiz(storedQuestions)) this.questions = storedQuestions;
 
     this.quizService.subject$.subscribe((question) => {
-      this.questions = question ?? null;
-
-      if (question) {
+      if (question && this.isQuiz(question)) {
+        this.questions = question;
         this.screen = 'active';
         this.storageService.saveData('selectedSubject', this.questions);
         this.storageService.saveData('screen', this.screen);

@@ -12,16 +12,19 @@ import { StorageService } from '../storage.service';
 export class HeaderComponent implements OnInit {
   @Input() subject!: Quiz | null;
   isDarkMode!: boolean;
+  screen!: string;
 
   constructor(private storageService: StorageService) {}
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');
+    const storedScreen = localStorage.getItem('screen');
     if (savedTheme) {
       this.isDarkMode = savedTheme === 'dark-mode';
       document.body.classList.toggle(savedTheme);
     }
 
+    if (storedScreen) this.screen = storedScreen;
     this.subject = this.storageService.getData<Quiz>('selectedSubject');
   }
 

@@ -1,7 +1,7 @@
 export interface Quiz {
   title: string;
   icon: string;
-  questions: { question: string; options: string[]; answer: string }[];
+  questions: QuestionData[];
 }
 
 export interface QuestionData {

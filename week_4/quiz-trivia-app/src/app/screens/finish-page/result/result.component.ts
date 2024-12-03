@@ -11,7 +11,7 @@ import { StorageService } from '../../../storage.service';
   styleUrl: './result.component.css',
 })
 export class ResultComponent implements OnInit {
-  subject: Quiz | null = null;
+  subject!: Quiz | {};
   totalScore!: number;
   theme!: string;
 
@@ -20,6 +20,10 @@ export class ResultComponent implements OnInit {
     private storedService: StorageService
   ) {}
 
+  public isQuiz(subject: {} | Quiz): subject is Quiz {
+    return 'title' in subject && 'icon' in subject;
+  }
+
   ngOnInit(): void {
     this.quizService.subject$.subscribe((quiz) => (this.subject = quiz));
     this.quizService.score$.subscribe((points) => (this.totalScore = points));
@@ -27,7 +31,8 @@ export class ResultComponent implements OnInit {
     const storedScore = this.storedService.getData<number>('scorePoints');
     this.totalScore = storedScore ?? 0;
 
-    this.subject = this.storedService.getData<Quiz>('selectedSubject');
+    const storedSubject = this.storedService.getData<Quiz>('selectedSubject');
+    this.subject = storedSubject ?? {};
   }
 
   handlePlayAgain() {

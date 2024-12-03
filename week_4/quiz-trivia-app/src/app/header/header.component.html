@@ -1,5 +1,5 @@
 <div class="subject">
-  @if(subject){
+  @if(subject && screen === 'home'){
   <img [src]="subject.icon" [alt]="subject.title" />
   <h2>{{ subject.title }}</h2>
   }

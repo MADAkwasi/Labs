@@ -18,11 +18,10 @@ import { StorageService } from '../../../storage.service';
   styleUrl: './answer.component.css',
 })
 export class AnswerComponent implements OnInit, AfterViewInit {
-  @Input() subjectObject: Quiz | null = null;
+  @Input() subjectObject!: Quiz | {};
 
   num = 0;
   answers!: string[];
-  currentAnswer = this.subjectObject?.questions[this.num].answer;
   selectedAnswer: string | null = null;
   letter: string[] = ['A', 'B', 'C', 'D'];
   hoverIndex = -1;
@@ -34,6 +33,16 @@ export class AnswerComponent implements OnInit, AfterViewInit {
   correctAnswerIndex!: number;
   totalQuestions: number = 0;
   score = 0;
+
+  get currentAnswer(): string | undefined {
+    if (
+      'questions' in this.subjectObject &&
+      Array.isArray(this.subjectObject.questions)
+    ) {
+      return this.subjectObject.questions[this.num]?.answer;
+    }
+    return undefined;
+  }
 
   constructor(
     private quizService: QuizService,
@@ -57,7 +66,7 @@ export class AnswerComponent implements OnInit, AfterViewInit {
     this.answers = savedAnswers ?? [];
 
     const storedSubject = this.storageService.getData<Quiz>('selectedSubject');
-    this.subjectObject = storedSubject ?? null;
+    this.subjectObject = storedSubject ?? {};
 
     const storedScore = this.storageService.getData<number>('scorePoints');
     this.score = storedScore ?? 0;
@@ -98,10 +107,14 @@ export class AnswerComponent implements OnInit, AfterViewInit {
         this.storageService.saveData('selectedSubject', this.subjectObject);
       });
     }
-    if (this.subjectObject)
+    if (this.subjectObject && 'questions' in this.subjectObject)
       this.totalQuestions = this.subjectObject.questions.length;
 
-    if (!savedAnswers && this.subjectObject) {
+    if (
+      !savedAnswers &&
+      this.subjectObject &&
+      'questions' in this.subjectObject
+    ) {
       this.answers = this.subjectObject.questions[0].options;
       this.storageService.saveData('possibleAnswers', this.answers);
     }
@@ -130,7 +143,11 @@ export class AnswerComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    if (this.subjectObject && this.selectedAnswer) {
+    if (
+      this.subjectObject &&
+      this.selectedAnswer &&
+      'questions' in this.subjectObject
+    ) {
       this.isCorrect = this.quizService.isAnswerCorrect(
         this.subjectObject.questions[this.num],
         this.selectedAnswer
@@ -168,7 +185,8 @@ export class AnswerComponent implements OnInit, AfterViewInit {
     if (
       this.subjectObject &&
       this.totalQuestions &&
-      this.num + 1 < this.totalQuestions
+      this.num + 1 < this.totalQuestions &&
+      'questions' in this.subjectObject
     ) {
       this.num++;
       this.answers = this.subjectObject.questions[this.num].options;
