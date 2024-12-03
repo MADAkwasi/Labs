@@ -38,5 +38,8 @@ export class OptionComponent implements OnInit {
         storedSubject.questions[0].question
       );
     }
+
+    
+    this.quizService.loadScreen('active');
   }
 }

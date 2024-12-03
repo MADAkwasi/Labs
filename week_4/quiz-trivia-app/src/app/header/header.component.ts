@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Quiz } from '../data/quiz.model';
 import { StorageService } from '../storage.service';
+import { QuizService } from '../data/quiz.service';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +15,26 @@ export class HeaderComponent implements OnInit {
   isDarkMode!: boolean;
   screen!: string;
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private quizService: QuizService
+  ) {}
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');
-    const storedScreen = localStorage.getItem('screen');
+    // const storedScreen = this.storageService.getData<string>('screen');
+    // if (storedScreen) this.screen = storedScreen;
+
     if (savedTheme) {
       this.isDarkMode = savedTheme === 'dark-mode';
       document.body.classList.toggle(savedTheme);
     }
 
-    if (storedScreen) this.screen = storedScreen;
+    this.quizService.screen$.subscribe((screen) => {
+      const storedScreen = this.storageService.getData<string>('screen');
+      this.screen = storedScreen || screen;
+    });
+
     this.subject = this.storageService.getData<Quiz>('selectedSubject');
   }
 

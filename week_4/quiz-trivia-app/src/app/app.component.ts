@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   screen = 'home';
   questions!: Quiz;
   currentQuestion!: number;
-  // theme!: boolean | null;
 
   constructor(
     private quizService: QuizService,
