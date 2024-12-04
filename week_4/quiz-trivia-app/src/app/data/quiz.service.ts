@@ -7,26 +7,23 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class QuizService {
-  private selectedSubject = new BehaviorSubject<Quiz | {}>({});
-  subject$ = this.selectedSubject.asObservable();
+  private readonly selectedSubject = new BehaviorSubject<Quiz | {}>({});
+  private readonly screenSubject = new BehaviorSubject<string>('home');
+  private readonly submitAnswer = new Subject<string>();
+  private readonly currentIndex = new BehaviorSubject<number>(0);
+  private readonly score = new BehaviorSubject<number>(0);
 
-  private screenSubject = new BehaviorSubject<string>('home');
-  screen$ = this.screenSubject.asObservable();
+  public readonly subject$ = this.selectedSubject.asObservable();
+  public readonly screen$ = this.screenSubject.asObservable();
+  public readonly answerEvent$ = this.submitAnswer.asObservable();
+  public readonly indexEvent$ = this.currentIndex.asObservable();
+  public readonly score$ = this.score.asObservable();
 
-  private submitAnswer = new Subject<string>();
-  answerEvent$ = this.submitAnswer.asObservable();
-
-  private currentIndex = new BehaviorSubject<number>(0);
-  indexEvent$ = this.currentIndex.asObservable();
-
-  private score = new BehaviorSubject<number>(0);
-  score$ = this.score.asObservable();
-
-  getQuizData(): Quiz[] {
+  public getQuizData(): Quiz[] {
     return data.quizzes;
   }
 
-  loadSubjectQuestions(subject: string): void {
+  public loadSubjectQuestions(subject: string): void {
     const subjectQuestions = data.quizzes.find(
       (quiz) => quiz.title === subject
     );
@@ -34,7 +31,7 @@ export class QuizService {
     if (subjectQuestions) this.selectedSubject.next(subjectQuestions);
   }
 
-  calculateScore(point: number, isCorrect: boolean): number {
+  public calculateScore(point: number, isCorrect: boolean): number {
     if (isCorrect) point++;
 
     this.score.next(point);
@@ -42,15 +39,15 @@ export class QuizService {
     return point;
   }
 
-  loadScreen(screen: string): void {
+  public loadScreen(screen: string): void {
     this.screenSubject.next(screen);
   }
 
-  getSubjectQuestions(): Quiz | {} {
+  public getSubjectQuestions(): Quiz | {} {
     return this.selectedSubject.getValue();
   }
 
-  handleSubmitAnswer(
+  public handleSubmitAnswer(
     questions: QuestionData[],
     curQuestionIndex: number
   ): void {
@@ -58,19 +55,22 @@ export class QuizService {
     this.submitAnswer.next(currentQuestion);
   }
 
-  handleNextQuestion(index: number): void {
+  public handleNextQuestion(index: number): void {
     this.currentIndex.next(index + 1);
   }
 
-  isAnswerCorrect(question: QuestionData, selectedAnswer: string): boolean {
+  public isAnswerCorrect(
+    question: QuestionData,
+    selectedAnswer: string
+  ): boolean {
     return selectedAnswer === question.answer;
   }
 
-  getAnswer(question: QuestionData): string {
+  public getAnswer(question: QuestionData): string {
     return question.answer;
   }
 
-  getCurrentQuestion(index: number): void {
+  public getCurrentQuestion(index: number): void {
     this.currentIndex.next(index + 1);
   }
 }
