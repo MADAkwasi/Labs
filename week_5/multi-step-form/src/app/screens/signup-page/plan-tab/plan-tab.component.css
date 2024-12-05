@@ -1,5 +1,28 @@
 app-plan-card {
   display: flex;
   gap: 2.5rem;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+app-subcription-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 0;
+  background-color: var(--very-light-grey);
+  border-radius: 8px;
+  padding: 1.5rem 0;
+  gap: 1.8rem;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 60rem;
 }

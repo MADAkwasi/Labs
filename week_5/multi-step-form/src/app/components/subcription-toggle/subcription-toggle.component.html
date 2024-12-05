@@ -1,0 +1,11 @@
+<p class="rate" [ngClass]="{ 'rate--selected': !isMonthly }">Monthly</p>
+<div class="toggle-switch">
+  <input
+    type="checkbox"
+    id="switch"
+    (click)="onToggle()"
+    [checked]="isMonthly"
+  />
+  <label for="switch"></label>
+</div>
+<p class="rate" [ngClass]="{ 'rate--selected': isMonthly }">Yearly</p>
