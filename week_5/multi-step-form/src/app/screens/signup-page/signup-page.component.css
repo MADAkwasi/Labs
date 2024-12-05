@@ -1,0 +1,30 @@
+section {
+  background-color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+}
+
+app-sidebar {
+  width: 32%;
+  display: block;
+  background-image: url("/images/bg-sidebar-desktop.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  margin: 1rem;
+}
+
+::ng-deep app-personal-info-tab,
+::ng-deep app-plan-tab,
+::ng-deep app-add-ons-tab,
+::ng-deep app-summary-tab {
+  width: 68%;
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 7rem 10rem;
+}
