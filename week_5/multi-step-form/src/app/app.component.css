@@ -1,0 +1,7 @@
+::ng-deep app-signup-page {
+  display: block;
+  width: 100%;
+  background-color: var(--very-light-grey);
+  height: 100vh;
+  padding: 10rem 18rem;
+}
