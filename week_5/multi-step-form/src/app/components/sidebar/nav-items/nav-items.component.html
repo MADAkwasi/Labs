@@ -1,0 +1,14 @@
+@for(navItem of navItems; track $index){
+<a [routerLink]="navItem.link">
+  <div class="item">
+    <span class="item__number" routerLinkActive="item__number--active">{{
+      navItem.step
+    }}</span>
+    <span class="item__info">
+      <p>Step {{ navItem.step }}</p>
+      <h4>{{ navItem.name }}</h4>
+    </span>
+  </div>
+</a>
+
+}
