@@ -1,0 +1,10 @@
+@for(inputField of inputFields; track $index){
+<div class="input">
+  <label class="input__label">{{ inputField.label }}</label>
+  <input
+    class="input__field"
+    [type]="inputField.type"
+    [placeholder]="inputField.placeholder"
+  />
+</div>
+}

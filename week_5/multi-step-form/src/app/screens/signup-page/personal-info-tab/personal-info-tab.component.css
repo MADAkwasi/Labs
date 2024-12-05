@@ -1,3 +1,9 @@
-app-input-field {
-  width: 100%;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+app-button {
+  align-self: flex-end;
 }

@@ -3,13 +3,13 @@ import { TextField } from './text-field.model';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-  selector: 'app-text-field-form',
+  selector: 'app-input-text-field',
   standalone: true,
   imports: [ButtonComponent],
-  templateUrl: './text-field-form.component.html',
-  styleUrl: './text-field-form.component.css',
+  templateUrl: './input-text-field.component.html',
+  styleUrl: './input-text-field.component.css',
 })
-export class TextFieldFormComponent {
+export class InputTextFieldComponent {
   inputFields: TextField[] = [
     { label: 'Name', type: 'text', placeholder: 'e.g. Stephen King' },
     {

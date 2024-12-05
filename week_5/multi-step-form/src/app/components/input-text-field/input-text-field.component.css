@@ -1,7 +1,3 @@
-form {
-  width: 100%;
-}
-
 .input {
   display: flex;
   flex-direction: column;
@@ -28,14 +24,4 @@ form {
 
 .input__field:focus {
   outline: 1px solid var(--purple);
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 8rem;
-}
-
-button:hover {
-  background-color: var(--hover);
 }
