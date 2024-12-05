@@ -1,0 +1,5 @@
+app-plan-card {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}

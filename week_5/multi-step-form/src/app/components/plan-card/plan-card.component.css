@@ -1,0 +1,31 @@
+.card {
+  width: 16rem;
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  border: 1px solid var(--purple);
+  background-color: var(--very-light-grey);
+}
+
+.card__image {
+  margin-bottom: 4.5rem;
+  height: 5.5rem;
+  width: 5.5rem;
+}
+
+.card__name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.card__price {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--grey);
+}
