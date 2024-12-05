@@ -1,0 +1,33 @@
+<div class="subject">
+  @if(subject && screen !== 'home'){
+  <img [src]="subject.icon" [alt]="subject.title" />
+  <h2>{{ subject.title }}</h2>
+  }
+</div>
+<div class="controls">
+  <img
+    [src]="
+      isDarkMode
+        ? '/assets/images/icon-sun-dark.svg'
+        : '/assets/images/icon-sun.svg'
+    "
+    alt="sun-icon"
+  />
+  <div class="toggle-switch">
+    <input
+      type="checkbox"
+      id="switch"
+      (click)="toggleDarkMode()"
+      [checked]="isDarkMode"
+    />
+    <label for="switch"></label>
+  </div>
+  <img
+    [src]="
+      isDarkMode
+        ? '/assets/images/icon-moon-dark.svg'
+        : '/assets/images/icon-moon.svg'
+    "
+    alt="moon-icon"
+  />
+</div>
