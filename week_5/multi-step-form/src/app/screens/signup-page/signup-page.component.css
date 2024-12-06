@@ -23,7 +23,6 @@ app-sidebar {
 ::ng-deep app-summary-tab {
   width: 68%;
   display: flex;
-  display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 7rem 10rem;

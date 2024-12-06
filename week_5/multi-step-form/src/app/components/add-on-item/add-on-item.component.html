@@ -1,12 +1,17 @@
 @for(item of items; track $index){
-<div class="add-on" [ngClass]="{ 'add-on--selected': isChecked[$index] }">
+<div
+  class="add-on"
+  [ngClass]="{ 'add-on--selected': isChecked[$index] }"
+  (click)="onDivClick($index)"
+  #itemBar
+>
   <input
     type="checkbox"
     [name]="item.name.toLowerCase()"
     [id]="item.name.toLowerCase()"
     class="add-on__checkbox"
-    (change)="onCheck(checkBox, $index)"
-    #checkBox
+    [checked]="isChecked[$index]"
+    (change)="onCheckboxClick($event)"
   />
   <span class="add-on__details">
     <h4>{{ item.name }}</h4>

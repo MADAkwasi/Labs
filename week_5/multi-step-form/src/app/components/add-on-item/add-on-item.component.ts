@@ -32,7 +32,11 @@ export class AddOnItemComponent {
 
   isChecked: boolean[] = Array(this.items.length).fill(false);
 
-  onCheck(event: HTMLInputElement, index: number) {
-    this.isChecked[index] = event.checked;
+  onDivClick(index: number): void {
+    this.isChecked[index] = !this.isChecked[index];
+  }
+
+  onCheckboxClick(event: Event): void {
+    event.stopPropagation();
   }
 }

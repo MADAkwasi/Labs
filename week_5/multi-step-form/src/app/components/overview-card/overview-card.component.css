@@ -1,0 +1,43 @@
+section {
+  background-color: var(--very-light-grey);
+  padding: 2.5rem;
+  border-radius: 10px;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  color: var(--grey);
+  margin-bottom: 2rem;
+}
+
+.plan {
+  color: var(--denim);
+}
+
+.plan__name {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.plan__name a {
+  color: var(--grey);
+}
+
+hr {
+  color: red;
+  margin: 3rem 0;
+}
+
+.total {
+  margin-top: 4rem;
+}
+
+.total__price {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--purple);
+}

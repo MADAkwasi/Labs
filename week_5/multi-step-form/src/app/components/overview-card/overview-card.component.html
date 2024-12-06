@@ -1,0 +1,25 @@
+<section>
+  <div class="plan">
+    <span class="plan__name">
+      <h4>{{ overview.plan.name }} ({{ overview.plan.rate }})</h4>
+      <a routerLink="/signup/plan">Change</a>
+    </span>
+    <h4 class="plan__price">{{ overview.plan.price }}</h4>
+  </div>
+  <hr />
+  @for(addOn of overview.addOns; track $index){
+  <div class="add-on">
+    <p class="add-on__name">{{ addOn.name }}</p>
+    <p class="add-on__price">{{ addOn.price }}</p>
+  </div>
+  }
+</section>
+
+<div class="total">
+  <p class="total__info">
+    Total (per {{ overview.plan.rate === "monthly" ? "month" : "year" }})
+  </p>
+  <p class="total__price">
+    ${{ totalPrice }}{{ overview.plan.rate === "monthly" ? "/mo" : "/yr" }}
+  </p>
+</div>
