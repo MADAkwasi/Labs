@@ -14,8 +14,11 @@ export class ButtonComponent {
   @Input() color!: string;
   @Input() text!: string;
   @Input() url!: string;
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
 
-  onClick(event: Event){
-    event.preventDefault()
+  onClick(event: Event) {
+    if (this.type === 'submit') {
+      return;
+    }
   }
 }

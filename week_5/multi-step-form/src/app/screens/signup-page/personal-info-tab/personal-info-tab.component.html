@@ -1,5 +1,12 @@
 <app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
-<form>
-  <app-input-text-field></app-input-text-field>
-  <app-button text="Next Step" [url]="'/signup/plan'"></app-button>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <app-input-text-field
+    [inputFields]="inputFields"
+    [formArray]="inputFieldsArray"
+  ></app-input-text-field>
+  <app-button
+    text="Next Step"
+    [url]="'/signup/plan'"
+    type="submit"
+  ></app-button>
 </form>
