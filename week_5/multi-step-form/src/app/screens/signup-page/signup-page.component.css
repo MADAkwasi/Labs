@@ -26,4 +26,5 @@ app-sidebar {
   flex-direction: column;
   gap: 4rem;
   padding: 7rem 10rem;
+  view-transition-name: tab;
 }
