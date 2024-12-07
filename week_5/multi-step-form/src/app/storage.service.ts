@@ -1,4 +1,6 @@
-type StorageData = string | object | number | boolean;
+import { rate } from './components/plan-card/plan.model';
+
+type StorageData = string | object | number | boolean | string[];
 
 export class StorageService {
   saveData(key: string, data: unknown): void {

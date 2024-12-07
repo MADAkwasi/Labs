@@ -68,7 +68,7 @@ export class PlanTabComponent implements OnInit {
 
     this.storageService.saveData('subscriptionPlan', formValue.selectedPlan);
     this.storageService.saveData(
-      'subscripttionRate',
+      'subscriptionRate',
       formValue.subscripttionRate
     );
   }

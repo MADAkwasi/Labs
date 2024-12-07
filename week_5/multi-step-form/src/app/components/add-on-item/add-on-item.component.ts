@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddOnItem, rate } from './add-on-item.model';
 import { CommonModule } from '@angular/common';
 
@@ -7,33 +7,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './add-on-item.component.html',
-  styleUrl: './add-on-item.component.css',
+  styleUrls: ['./add-on-item.component.css'],
 })
 export class AddOnItemComponent {
-  items: AddOnItem[] = [
-    {
-      name: 'Online Service',
-      description: 'Access to multiplayer games',
-      price: { monthly: '$1/mo', yearly: '$10/yr' },
-    },
-    {
-      name: 'Larger Storage',
-      description: 'Extra 1TB of cloud save',
-      price: { monthly: '$2/mo', yearly: '$20/yr' },
-    },
-    {
-      name: 'Customizable Profile',
-      description: 'Custom theme on your profile',
-      price: { monthly: '$2/mo', yearly: '$20/yr' },
-    },
-  ];
-
-  subscriptionPlan: rate = 'monthly';
+  @Input() items: AddOnItem[] = [];
+  @Output() selectionChanged = new EventEmitter<boolean[]>();
+  @Input() subscriptionPlan!: rate;
 
   isChecked: boolean[] = Array(this.items.length).fill(false);
 
   onDivClick(index: number): void {
     this.isChecked[index] = !this.isChecked[index];
+    this.selectionChanged.emit(this.isChecked);
+    console.log(this.subscriptionPlan);
   }
 
   onCheckboxClick(event: Event): void {

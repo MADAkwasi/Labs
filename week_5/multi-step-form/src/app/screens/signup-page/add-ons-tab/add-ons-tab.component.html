@@ -1,6 +1,10 @@
 <app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
-<form>
-  <app-add-on-item></app-add-on-item>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <app-add-on-item
+    [items]="addOnItems"
+    (selectionChanged)="onSelectionChanged($event)"
+    [subscriptionPlan]="subscriptionRate"
+  ></app-add-on-item>
   <div>
     <app-button
       text="Go Back"
@@ -8,6 +12,10 @@
       backgroundColor="transparent"
       [url]="'/signup/plan'"
     ></app-button>
-    <app-button text="Next Step" [url]="'/signup/summary'"></app-button>
+    <app-button
+      text="Next Step"
+      [url]="'/signup/summary'"
+      type="submit"
+    ></app-button>
   </div>
 </form>
