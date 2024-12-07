@@ -36,7 +36,7 @@ export class PersonalInfoTabComponent implements OnInit {
     },
     { label: 'Phone Number', type: 'text', placeholder: 'e.g. +1 234 567 890' },
   ];
-  inputData!: string[];
+  inputData: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +46,10 @@ export class PersonalInfoTabComponent implements OnInit {
   ngOnInit(): void {
     const storedData = this.storageService.getData('personalInfo');
 
-    if (Array.isArray(storedData)) this.inputData = storedData;
+    this.inputData =
+      storedData && Array.isArray(storedData)
+        ? storedData
+        : new Array(this.inputFields.length).fill('');
 
     this.myForm = this.fb.group({
       textFields: this.fb.array(
@@ -59,7 +62,7 @@ export class PersonalInfoTabComponent implements OnInit {
     return this.myForm.get('textFields') as FormArray;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     console.log(this.myForm.value);
     this.storageService.saveData('personalInfo', this.myForm.value.textFields);
   }

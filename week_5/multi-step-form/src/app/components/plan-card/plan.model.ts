@@ -8,3 +8,8 @@ export interface Plan {
 }
 
 export type rate = 'monthly' | 'yearly';
+
+export interface selectedPackage {
+  name: string;
+  price: string;
+}

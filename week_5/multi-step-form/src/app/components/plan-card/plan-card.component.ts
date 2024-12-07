@@ -1,31 +1,28 @@
-import { Component } from '@angular/core';
-import { Plan, rate } from './plan.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Plan, rate, selectedPackage } from './plan.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-plan-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './plan-card.component.html',
   styleUrl: './plan-card.component.css',
 })
 export class PlanCardComponent {
-  plans: Plan[] = [
-    {
-      icon: '/images/icon-arcade.svg',
-      name: 'arcade',
-      price: { monthly: '$9/mo', yearly: '$90/yr' },
-    },
-    {
-      icon: '/images/icon-advanced.svg',
-      name: 'advanced',
-      price: { monthly: '$12/mo', yearly: '$120/yr' },
-    },
-    {
-      icon: '/images/icon-pro.svg',
-      name: 'pro',
-      price: { monthly: '$15/mo', yearly: '$150/yr' },
-    },
-  ];
+  @Output() planSelected = new EventEmitter<selectedPackage>();
+  @Input() plans!: Plan[];
+  @Input() selectedPlan!: selectedPackage;
+  @Input() subscriptionPlan: rate = 'monthly';
 
-  subscriptionPlan: rate = 'monthly';
+  onSelect(index: number): void {
+    const selectedPlanName = this.plans[index].name;
+    const selectedPlanPrice = this.plans[index].price[this.subscriptionPlan];
+    this.planSelected.emit({
+      name: selectedPlanName,
+      price: selectedPlanPrice,
+    });
+
+    console.log(this.selectedPlan);
+  }
 }

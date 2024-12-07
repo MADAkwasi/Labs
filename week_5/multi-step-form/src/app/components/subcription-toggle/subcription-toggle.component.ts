@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { rate } from '../plan-card/plan.model';
 
 @Component({
   selector: 'app-subcription-toggle',
@@ -9,9 +10,11 @@ import { Component } from '@angular/core';
   styleUrl: './subcription-toggle.component.css',
 })
 export class SubcriptionToggleComponent {
-  isMonthly!: boolean;
+  @Input() selectedRate: rate = 'monthly';
+  @Output() rateChange = new EventEmitter<rate>();
 
   onToggle() {
-    this.isMonthly = !this.isMonthly;
+    this.selectedRate = this.selectedRate === 'monthly' ? 'yearly' : 'monthly';
+    this.rateChange.emit(this.selectedRate);
   }
 }
