@@ -3,12 +3,12 @@
   <app-plan-card
     [plans]="plans"
     [selectedPlan]="myForm.get('selectedPlan')?.value"
-    [subscriptionPlan]="myForm.get('subscripttionRate')?.value"
+    [subscriptionPlan]="myForm.get('subscriptionRate')?.value"
     (planSelected)="onPlanSelected($event)"
   ></app-plan-card>
   <app-subcription-toggle
-    [selectedRate]="myForm.get('subscripttionRate')?.value"
-    (rateChange)="myForm.get('subscripttionRate')?.setValue($event)"
+    [selectedRate]="myForm.get('subscriptionRate')?.value"
+    (rateChange)="myForm.get('subscriptionRate')?.setValue($event)"
   ></app-subcription-toggle>
   <div>
     <app-button

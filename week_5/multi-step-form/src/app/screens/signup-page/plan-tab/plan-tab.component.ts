@@ -54,22 +54,21 @@ export class PlanTabComponent implements OnInit {
   ngOnInit(): void {
     const storedPlan = this.storageService.getData('subscriptionPlan') || '';
     const storedRate =
-      this.storageService.getData('subscripttionRate') || 'monthly';
+      this.storageService.getData('subscriptionRate') || 'monthly';
 
     this.myForm = this.fb.group({
       selectedPlan: [storedPlan],
-      subscripttionRate: [storedRate],
+      subscriptionRate: [storedRate],
     });
   }
 
   onSubmit(): void {
     const formValue = this.myForm.value;
-    console.log('Form Value:', formValue);
 
     this.storageService.saveData('subscriptionPlan', formValue.selectedPlan);
     this.storageService.saveData(
       'subscriptionRate',
-      formValue.subscripttionRate
+      formValue.subscriptionRate
     );
   }
 

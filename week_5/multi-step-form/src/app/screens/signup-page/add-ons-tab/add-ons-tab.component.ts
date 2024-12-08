@@ -67,9 +67,7 @@ export class AddOnsTabComponent implements OnInit {
     this.myForm = this.fb.group({
       selectedAddOns: this.fb.array(
         this.addOnItems.map((item) =>
-          this.fb.control(
-            Array.isArray(storedAddOns) && storedAddOns.includes(item.name)
-          )
+          this.fb.control(storedAddOns.includes(item.name))
         )
       ),
     });
@@ -96,8 +94,10 @@ export class AddOnsTabComponent implements OnInit {
   onSubmit(): void {
     const selectedAddOns = this.addOnItems.filter((_, i) => {
       const control = this.selectedAddOnsArray.at(i);
-      return control ? control.value : false;
+      return control && control.value === true;
     });
+
+    console.log(selectedAddOns);
 
     this.storageService.saveData(
       'addOns',

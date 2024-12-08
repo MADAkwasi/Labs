@@ -13,7 +13,7 @@ export class PlanCardComponent {
   @Output() planSelected = new EventEmitter<selectedPackage>();
   @Input() plans!: Plan[];
   @Input() selectedPlan!: selectedPackage;
-  @Input() subscriptionPlan: rate = 'monthly';
+  @Input() subscriptionPlan!: rate;
 
   onSelect(index: number): void {
     const selectedPlanName = this.plans[index].name;
@@ -22,7 +22,5 @@ export class PlanCardComponent {
       name: selectedPlanName,
       price: selectedPlanPrice,
     });
-
-    console.log(this.selectedPlan);
   }
 }

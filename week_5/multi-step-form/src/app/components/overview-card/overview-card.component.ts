@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SubscriptionOverview } from './overview-card.model';
+import { StorageService } from '../../storage.service';
+import { Package, rate } from './overview-card.model';
 
 @Component({
   selector: 'app-overview-card',
@@ -10,26 +11,29 @@ import { SubscriptionOverview } from './overview-card.model';
   styleUrl: './overview-card.component.css',
 })
 export class OverviewCardComponent implements OnInit {
-  overview: SubscriptionOverview = {
-    plan: { name: 'Arcade', rate: 'monthly', price: '$9/mo' },
-    addOns: [
-      { name: 'Online Service', price: '$1/mo' },
-      { name: 'Larger Storage', price: '$2/mo' },
-    ],
-  };
+  plan!: Package;
+  addOns!: Package[];
+  subscriptionRate!: rate;
 
   totalPrice!: number;
 
+  constructor(private storageService: StorageService) {}
+
   ngOnInit(): void {
-    const addOnsPrice = this.overview.addOns.reduce((acc, cur) => {
+    const storedPlan = this.storageService.getData<Package>('subscriptionPlan');
+    const storedAddOns = this.storageService.getData<Package[]>('addOns');
+    this.subscriptionRate =
+      this.storageService.getData<rate>('subscriptionRate') || 'monthly';
+
+    if (storedPlan) this.plan = storedPlan;
+    if (storedAddOns) this.addOns = storedAddOns;
+
+    const addOnsPrice = (this.addOns || []).reduce((acc, cur) => {
       const price = parseInt(cur.price.match(/\d+/)?.[0] || '0', 10);
       return acc + price;
     }, 0);
 
-    const planPrice = parseInt(
-      this.overview.plan.price.match(/\d+/)?.[0] || '0',
-      10
-    );
+    const planPrice = parseInt(this.plan.price.match(/\d+/)?.[0] || '0', 10);
 
     this.totalPrice = addOnsPrice + planPrice;
   }

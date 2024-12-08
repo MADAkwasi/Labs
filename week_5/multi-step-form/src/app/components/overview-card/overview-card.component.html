@@ -1,13 +1,14 @@
 <section>
   <div class="plan">
     <span class="plan__name">
-      <h4>{{ overview.plan.name }} ({{ overview.plan.rate }})</h4>
+      <h4>{{ plan.name }} ({{ subscriptionRate }})</h4>
       <a routerLink="/signup/plan">Change</a>
     </span>
-    <h4 class="plan__price">{{ overview.plan.price }}</h4>
+    <h4 class="plan__price">{{ plan.price }}</h4>
   </div>
+  @if(!!addOns.length) {
   <hr />
-  @for(addOn of overview.addOns; track $index){
+  } @for(addOn of addOns; track $index){
   <div class="add-on">
     <p class="add-on__name">{{ addOn.name }}</p>
     <p class="add-on__price">{{ addOn.price }}</p>
@@ -17,9 +18,9 @@
 
 <div class="total">
   <p class="total__info">
-    Total (per {{ overview.plan.rate === "monthly" ? "month" : "year" }})
+    Total (per {{ subscriptionRate === "monthly" ? "month" : "year" }})
   </p>
   <p class="total__price">
-    ${{ totalPrice }}{{ overview.plan.rate === "monthly" ? "/mo" : "/yr" }}
+    ${{ totalPrice }}{{ subscriptionRate === "monthly" ? "/mo" : "/yr" }}
   </p>
 </div>

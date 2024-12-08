@@ -23,12 +23,15 @@ div {
   gap: 1.5rem;
 }
 
+.plan__name h4 {
+  text-transform: capitalize;
+}
+
 .plan__name a {
   color: var(--grey);
 }
 
 hr {
-  color: red;
   margin: 3rem 0;
 }
 

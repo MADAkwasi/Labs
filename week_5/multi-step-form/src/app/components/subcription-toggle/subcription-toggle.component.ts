@@ -10,10 +10,10 @@ import { rate } from '../plan-card/plan.model';
   styleUrl: './subcription-toggle.component.css',
 })
 export class SubcriptionToggleComponent {
-  @Input() selectedRate: rate = 'monthly';
+  @Input() selectedRate!: rate;
   @Output() rateChange = new EventEmitter<rate>();
 
-  onToggle() {
+  onToggle(): void {
     this.selectedRate = this.selectedRate === 'monthly' ? 'yearly' : 'monthly';
     this.rateChange.emit(this.selectedRate);
   }

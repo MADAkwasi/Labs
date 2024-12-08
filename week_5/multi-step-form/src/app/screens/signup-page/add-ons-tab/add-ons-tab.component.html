@@ -2,7 +2,7 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <app-add-on-item
     [items]="addOnItems"
-    (selectionChanged)="onSelectionChanged($event)"
+    [selectedAddOnsArray]="selectedAddOnsArray"
     [subscriptionPlan]="subscriptionRate"
   ></app-add-on-item>
   <div>
