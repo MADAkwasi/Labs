@@ -39,6 +39,12 @@
   background-color: var(--very-light-grey);
 }
 
+.card__promo {
+  color: var(--denim);
+  font-weight: 600;
+  font-style: 2rem;
+}
+
 @media (max-width: 850px) {
   .card {
     display: flex;

@@ -26,7 +26,10 @@ div {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 50%;
+}
+
+.image {
+  width: 40%;
 }
 
 .description {
@@ -34,6 +37,7 @@ div {
   gap: 3rem;
   padding: 0 4rem;
   text-align: left;
+  width: 60%;
 }
 
 span {
@@ -41,7 +45,7 @@ span {
 }
 
 .description h2 {
-  font-size: 8rem;
+  font-size: 7rem;
 }
 
 .description p {
@@ -49,7 +53,7 @@ span {
 }
 
 img {
-  width: 80%;
+  width: 90%;
 }
 
 a {
@@ -66,4 +70,43 @@ a:hover {
   background-color: var(--very-light-grey);
   color: var(--blue);
   border: 1px solid var(--blue);
+}
+
+@media (max-width: 850px) {
+  section {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .description,
+  .image {
+    width: 100%;
+  }
+  .description {
+    margin-top: 5rem;
+  }
+  img {
+    width: 70%;
+  }
+
+  .description h2 {
+    font-size: 6rem;
+  }
+
+  span {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .description h2 {
+    font-size: 5rem;
+  }
+
+  span {
+    font-size: 2.5rem;
+  }
+
+  .description p {
+    font-size: 1.7rem;
+  }
 }

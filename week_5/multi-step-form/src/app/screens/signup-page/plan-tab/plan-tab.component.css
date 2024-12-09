@@ -24,7 +24,7 @@ div {
 form {
   display: flex;
   flex-direction: column;
-  height: 60rem;
+  height: 100%;
 }
 
 @media (max-width: 850px) {
@@ -34,7 +34,7 @@ form {
     bottom: 0;
     background-color: var(--white);
     left: 0;
-    height: 10rem;
+    height: 8rem;
     display: flex;
     align-items: center;
     padding: 0 10%;
