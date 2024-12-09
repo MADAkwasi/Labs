@@ -1,0 +1,20 @@
+@if(!isSubmitted){
+<app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
+<app-overview-card></app-overview-card>
+<div>
+  <app-button
+    text="Go Back"
+    color="var(--grey)"
+    backgroundColor="transparent"
+    [url]="'/signup/add-ons'"
+  ></app-button>
+  <app-button
+    backgroundColor="var(--purple)"
+    text="Confirm"
+    (onSubmit)="handleSubmit($event)"
+    [disabled]="!isFormValid"
+  ></app-button>
+</div>
+}@else{
+<app-wrapped-up-card></app-wrapped-up-card>
+}
