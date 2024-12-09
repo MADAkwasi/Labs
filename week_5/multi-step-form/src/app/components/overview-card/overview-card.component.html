@@ -1,10 +1,16 @@
 <section>
   <div class="plan">
     <span class="plan__name">
+      @if(this.plan){
       <h4>{{ plan.name }} ({{ subscriptionRate }})</h4>
+      }@else {
+      <h4>Please select a subscription plan</h4>
+      }
       <a routerLink="/signup/plan">Change</a>
     </span>
+    @if(this.plan){
     <h4 class="plan__price">{{ plan.price }}</h4>
+    }
   </div>
   @if(!!addOns.length) {
   <hr />
@@ -20,7 +26,11 @@
   <p class="total__info">
     Total (per {{ subscriptionRate === "monthly" ? "month" : "year" }})
   </p>
+  @if(plan){
   <p class="total__price">
     ${{ totalPrice }}{{ subscriptionRate === "monthly" ? "/mo" : "/yr" }}
   </p>
+  }@else {
+  <p class="total__price">N/A</p>
+  }
 </div>

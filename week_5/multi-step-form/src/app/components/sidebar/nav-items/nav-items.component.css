@@ -43,3 +43,13 @@ a {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+@media (max-width: 950px) {
+  .item__info p {
+    font-size: 1.5rem;
+  }
+
+  .item__info h4 {
+    font-size: 1.7rem;
+  }
+}

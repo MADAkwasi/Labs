@@ -8,3 +8,22 @@ app-nav-items {
   gap: 3.5rem;
   margin: 3rem 0;
 }
+
+@media (max-width: 850px) {
+  app-nav-items {
+    flex-direction: row;
+    gap: 8rem;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 850px) {
+  app-nav-items {
+    gap: 3.5rem;
+  }
+}

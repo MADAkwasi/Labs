@@ -7,9 +7,11 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { TextField } from '../../../components/input-text-field/text-field.model';
 import { StorageService } from '../../../storage.service';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-info-tab',
@@ -40,7 +42,8 @@ export class PersonalInfoTabComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,8 +56,21 @@ export class PersonalInfoTabComponent implements OnInit {
 
     this.myForm = this.fb.group({
       textFields: this.fb.array(
-        this.inputData.map((value) => this.fb.control(value))
+        this.inputData.map((value) =>
+          this.fb.control(value, Validators.required)
+        )
       ),
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.storageService.saveData(
+          'personalInfo',
+          this.myForm.value.textFields
+        );
+
+        this.storageService.saveData('personalInfoIsValid', this.myForm.valid);
+      }
     });
   }
 
@@ -63,7 +79,6 @@ export class PersonalInfoTabComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.myForm.value);
     this.storageService.saveData('personalInfo', this.myForm.value.textFields);
   }
 }

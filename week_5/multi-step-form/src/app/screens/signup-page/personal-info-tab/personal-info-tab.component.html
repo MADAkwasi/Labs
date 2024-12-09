@@ -4,9 +4,12 @@
     [inputFields]="inputFields"
     [formArray]="inputFieldsArray"
   ></app-input-text-field>
-  <app-button
-    text="Next Step"
-    [url]="'/signup/plan'"
-    type="submit"
-  ></app-button>
+  <div>
+    <app-button
+      text="Next Step"
+      [url]="'/signup/plan'"
+      type="submit"
+      [disabled]="!myForm.valid"
+    ></app-button>
+  </div>
 </form>

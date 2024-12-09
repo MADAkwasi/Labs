@@ -13,7 +13,9 @@
     readonly
   />
   <img [src]="plan.icon" [alt]="plan.name + '-icon'" class="card__image" />
-  <h4 class="card__name">{{ plan.name }}</h4>
-  <p class="card__price">{{ plan.price[subscriptionPlan] }}</p>
+  <span>
+    <h4 class="card__name">{{ plan.name }}</h4>
+    <p class="card__price">{{ plan.price[subscriptionPlan] }}</p>
+  </span>
 </div>
 }

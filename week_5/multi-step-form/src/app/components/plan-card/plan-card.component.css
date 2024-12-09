@@ -38,3 +38,22 @@
   border: 1px solid var(--purple);
   background-color: var(--very-light-grey);
 }
+
+@media (max-width: 850px) {
+  .card {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    gap: 3rem;
+    padding: 2rem;
+  }
+
+  .card__image {
+    margin-bottom: 0;
+    margin-left: -4rem;
+  }
+
+  .card span {
+    margin-left: -1rem;
+  }
+}

@@ -1,11 +1,15 @@
 @for(inputField of inputFields; track $index){
 <div class="input">
   <label class="input__label">{{ inputField.label }}</label>
+  @if(hasError($index)){
+  <p class="input__error-msg">This field is required</p>
+  }
   <input
     class="input__field"
     [type]="inputField.type"
     [placeholder]="inputField.placeholder"
     [formControl]="getFormControl($index)"
+    (blur)="getFormControl($index).markAsTouched()"
   />
 </div>
 }

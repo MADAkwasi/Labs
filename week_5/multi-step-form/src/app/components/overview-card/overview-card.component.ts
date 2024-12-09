@@ -12,7 +12,7 @@ import { Package, rate } from './overview-card.model';
 })
 export class OverviewCardComponent implements OnInit {
   plan!: Package;
-  addOns!: Package[];
+  addOns: Package[] = [];
   subscriptionRate!: rate;
 
   totalPrice!: number;
@@ -28,13 +28,15 @@ export class OverviewCardComponent implements OnInit {
     if (storedPlan) this.plan = storedPlan;
     if (storedAddOns) this.addOns = storedAddOns;
 
-    const addOnsPrice = (this.addOns || []).reduce((acc, cur) => {
-      const price = parseInt(cur.price.match(/\d+/)?.[0] || '0', 10);
-      return acc + price;
-    }, 0);
+    if (this.plan && this.addOns) {
+      const addOnsPrice = (this.addOns || []).reduce((acc, cur) => {
+        const price = parseInt(cur.price.match(/\d+/)?.[0] || '0', 10);
+        return acc + price;
+      }, 0);
 
-    const planPrice = parseInt(this.plan.price.match(/\d+/)?.[0] || '0', 10);
+      const planPrice = parseInt(this.plan.price.match(/\d+/)?.[0] || '0', 10);
 
-    this.totalPrice = addOnsPrice + planPrice;
+      this.totalPrice = addOnsPrice + planPrice;
+    }
   }
 }

@@ -16,4 +16,9 @@ export class InputTextFieldComponent {
   getFormControl(index: number): FormControl {
     return this.formArray.at(index) as FormControl;
   }
+
+  hasError(index: number): boolean {
+    const control = this.getFormControl(index);
+    return control.invalid && (control.touched || control.dirty);
+  }
 }

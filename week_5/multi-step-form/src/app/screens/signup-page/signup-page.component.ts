@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -9,4 +9,10 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.css',
 })
-export class SignupPageComponent {}
+export class SignupPageComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+
+  }
+}

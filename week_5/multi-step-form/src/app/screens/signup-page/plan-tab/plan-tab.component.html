@@ -21,6 +21,7 @@
       text="Next Step"
       [url]="'/signup/add-ons'"
       type="submit"
+      [disabled]="!myForm.valid"
     ></app-button>
   </div>
 </form>

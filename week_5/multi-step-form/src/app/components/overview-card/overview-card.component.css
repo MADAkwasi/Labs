@@ -29,6 +29,12 @@ div {
 
 .plan__name a {
   color: var(--grey);
+  text-decoration: underline;
+}
+
+.plan__name a:hover {
+  color: var(--blue);
+  cursor: pointer;
 }
 
 hr {

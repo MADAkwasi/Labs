@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { StorageService } from '../../../storage.service';
 import { rate } from '../../../components/plan-card/plan.model';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-ons-tab',
@@ -51,7 +52,8 @@ export class AddOnsTabComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +72,25 @@ export class AddOnsTabComponent implements OnInit {
           this.fb.control(storedAddOns.includes(item.name))
         )
       ),
+    });
+
+    this.router.events.subscribe((event) => {
+      const formValue = this.myForm.value;
+
+      if (event instanceof NavigationStart) {
+        const selectedAddOns = this.addOnItems.filter((_, i) => {
+          const control = this.selectedAddOnsArray.at(i);
+          return control && control.value === true;
+        });
+
+        this.storageService.saveData(
+          'addOns',
+          selectedAddOns.map((item) => ({
+            name: item.name,
+            price: item.price[this.subscriptionRate],
+          }))
+        );
+      }
     });
   }
 
@@ -96,8 +117,6 @@ export class AddOnsTabComponent implements OnInit {
       const control = this.selectedAddOnsArray.at(i);
       return control && control.value === true;
     });
-
-    console.log(selectedAddOns);
 
     this.storageService.saveData(
       'addOns',

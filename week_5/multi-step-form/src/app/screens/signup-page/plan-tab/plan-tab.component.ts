@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { PlanCardComponent } from '../../../components/plan-card/plan-card.component';
 import { SubcriptionToggleComponent } from '../../../components/subcription-toggle/subcription-toggle.component';
@@ -10,6 +15,7 @@ import {
   selectedPackage,
 } from '../../../components/plan-card/plan.model';
 import { StorageService } from '../../../storage.service';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan-tab',
@@ -48,7 +54,8 @@ export class PlanTabComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,8 +64,24 @@ export class PlanTabComponent implements OnInit {
       this.storageService.getData('subscriptionRate') || 'monthly';
 
     this.myForm = this.fb.group({
-      selectedPlan: [storedPlan],
+      selectedPlan: [storedPlan, Validators.required],
       subscriptionRate: [storedRate],
+    });
+
+    this.router.events.subscribe((event) => {
+      const formValue = this.myForm.value;
+
+      if (event instanceof NavigationStart) {
+        this.storageService.saveData(
+          'subscriptionPlan',
+          formValue.selectedPlan
+        );
+        this.storageService.saveData(
+          'subscriptionRate',
+          formValue.subscriptionRate
+        );
+        this.storageService.saveData('planIsValid', this.myForm.valid);
+      }
     });
   }
 

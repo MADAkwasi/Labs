@@ -72,3 +72,15 @@ body {
     transform: translateX(0);
   }
 }
+
+@media (max-width: 1400px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 550px) {
+  html {
+    font-size: 50%;
+  }
+}
