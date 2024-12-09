@@ -52,6 +52,9 @@ export class NavItemsComponent implements OnInit {
       (e) => (this.screenWidth = e.target.innerWidth)
     );
 
+    const page = this.router.url.split('/').pop();
+    if (page) this.activeUrl = page;
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         const page = event.url.split('/').pop();
