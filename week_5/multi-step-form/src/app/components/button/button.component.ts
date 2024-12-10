@@ -18,6 +18,9 @@ export class ButtonComponent {
   @Input() disabled!: boolean;
   @Output() onSubmit = new EventEmitter<boolean>();
 
+  currentUrl!: string;
+  isFormValid!: boolean;
+
   onClick(event: Event) {
     if (this.type === 'submit') {
       return;
@@ -25,7 +28,7 @@ export class ButtonComponent {
 
     if (this.type === 'button') {
       this.onSubmit.emit(true);
-      return;
+      localStorage.clear();
     }
   }
 }

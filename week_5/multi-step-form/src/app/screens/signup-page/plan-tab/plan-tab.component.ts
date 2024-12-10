@@ -35,17 +35,17 @@ export class PlanTabComponent implements OnInit {
   details = 'You have the option of monthly or yearly billing.';
   plans: Plan[] = [
     {
-      icon: '/images/icon-arcade.svg',
+      icon: 'assets/images/icon-arcade.svg',
       name: 'arcade',
       price: { monthly: '$9/mo', yearly: '$90/yr' },
     },
     {
-      icon: '/images/icon-advanced.svg',
+      icon: 'assets/images/icon-advanced.svg',
       name: 'advanced',
       price: { monthly: '$12/mo', yearly: '$120/yr' },
     },
     {
-      icon: '/images/icon-pro.svg',
+      icon: 'assets/images/icon-pro.svg',
       name: 'pro',
       price: { monthly: '$15/mo', yearly: '$150/yr' },
     },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
@@ -12,7 +12,5 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 export class SignupPageComponent implements OnInit {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

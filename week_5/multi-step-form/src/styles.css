@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Ubuntu";
-  src: url("/fonts/Ubuntu-Regular.ttf") format("truetype");
+  src: url("assets/fonts/Ubuntu-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Ubuntu";
-  src: url("/fonts/Ubuntu-Bold.ttf") format("truetype");
+  src: url("assets/fonts/Ubuntu-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -41,36 +41,6 @@ html {
 
 body {
   font-family: Ubuntu;
-}
-
-::view-transition-old(tab) {
-  animation: slide-out 300ms ease-out forwards;
-}
-
-::view-transition-new(tab) {
-  animation: slide-in 300ms ease-in forwards;
-}
-
-@keyframes slide-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 @media (max-width: 1400px) {
