@@ -1,0 +1,9 @@
+<button
+  [ngStyle]="{ 'background-color': backgroundColor, color: color }"
+  [routerLink]="url"
+  [type]="type || 'button'"
+  (click)="onClick($event)"
+  [disabled]="disabled"
+>
+  {{ text }}
+</button>
