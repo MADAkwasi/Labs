@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Quiz } from '../data/quiz.model';
 import { StorageService } from '../storage.service';
 import { QuizService } from '../data/quiz.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -17,13 +20,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private storageService: StorageService,
-    private quizService: QuizService
-  ) {}
+    private quizService: QuizService,
+  ) {
+  }
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');
-    // const storedScreen = this.storageService.getData<string>('screen');
-    // if (storedScreen) this.screen = storedScreen;
 
     if (savedTheme) {
       this.isDarkMode = savedTheme === 'dark-mode';
@@ -43,7 +45,7 @@ export class HeaderComponent implements OnInit {
     const theme = this.isDarkMode ? 'dark-mode' : 'light-mode';
 
     document.body.classList.remove(
-      this.isDarkMode ? 'light-mode' : 'dark-mode'
+      this.isDarkMode ? 'light-mode' : 'dark-mode',
     );
 
     document.body.classList.add(this.isDarkMode ? 'dark-mode' : 'light-mode');
