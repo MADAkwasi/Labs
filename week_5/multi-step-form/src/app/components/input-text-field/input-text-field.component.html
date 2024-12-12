@@ -2,7 +2,9 @@
 <div class="input">
   <label class="input__label">{{ inputField.label }}</label>
   @if(hasError($index)){
-  <p class="input__error-msg">This field is required</p>
+  <p class="input__error-msg">
+    {{ errors?.['required'] ? 'This field is required' : 'Invalid input format'}}
+  </p>
   }
   <input
     class="input__field"

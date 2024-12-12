@@ -1,4 +1,4 @@
-<app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
+<app-heading [headingText]="heading" [detailsText]="details"></app-heading>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <app-plan-card
     [plans]="plans"
@@ -14,6 +14,8 @@
     <app-button
       text="Go Back"
       color="var(--grey)"
+      hoveredColor="var(--denim)"
+      hoveredBgColor="transparent"
       backgroundColor="transparent"
       [url]="'/signup/personal-info'"
     ></app-button>

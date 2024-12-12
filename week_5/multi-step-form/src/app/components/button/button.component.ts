@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router';
 })
 export class ButtonComponent {
   @Input() backgroundColor!: string;
+  @Input() hoveredColor!: string;
+  @Input() hoveredBgColor!: string;
   @Input() color!: string;
   @Input() text!: string;
   @Input() url!: string;
@@ -20,6 +22,7 @@ export class ButtonComponent {
 
   currentUrl!: string;
   isFormValid!: boolean;
+  isHovered!: boolean;
 
   onClick(event: Event) {
     if (this.type === 'submit') {

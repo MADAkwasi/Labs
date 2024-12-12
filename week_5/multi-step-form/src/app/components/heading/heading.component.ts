@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './heading.component.css',
 })
 export class HeadingComponent {
-  @Input() headingTxt!: string;
-  @Input() detailsTxt!: string;
+  @Input() headingText!: string;
+  @Input() detailsText!: string;
 }

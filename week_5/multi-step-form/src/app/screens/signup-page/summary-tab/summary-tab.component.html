@@ -1,15 +1,18 @@
 @if(!isSubmitted){
-<app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
+<app-heading [headingText]="heading" [detailsText]="details"></app-heading>
 <app-overview-card></app-overview-card>
 <div>
   <app-button
     text="Go Back"
     color="var(--grey)"
+    hoveredColor="var(--denim)"
+    hoveredBgColor="transparent"
     backgroundColor="transparent"
     [url]="'/signup/add-ons'"
   ></app-button>
   <app-button
     backgroundColor="var(--purple)"
+    hoveredBgColor="var(--highlight)"
     text="Confirm"
     (onSubmit)="handleSubmit($event)"
     [disabled]="!isFormValid"

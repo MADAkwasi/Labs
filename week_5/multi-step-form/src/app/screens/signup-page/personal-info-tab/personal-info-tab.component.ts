@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { InputTextFieldComponent } from '../../../components/input-text-field/input-text-field.component';
-import { ButtonComponent } from '../../../components/button/button.component';
 import {
   FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { TextField } from '../../../components/input-text-field/text-field.model';
 import { StorageService } from '../../../storage.service';
 import { NavigationStart, Router } from '@angular/router';
+import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
   selector: 'app-personal-info-tab',
@@ -46,6 +47,10 @@ export class PersonalInfoTabComponent implements OnInit {
     private router: Router
   ) {}
 
+  get inputFieldsArray(): FormArray {
+    return this.myForm.get('textFields') as FormArray;
+  }
+
   ngOnInit(): void {
     const storedData = this.storageService.getData('personalInfo');
 
@@ -56,9 +61,21 @@ export class PersonalInfoTabComponent implements OnInit {
 
     this.myForm = this.fb.group({
       textFields: this.fb.array(
-        this.inputData.map((value) =>
-          this.fb.control(value, Validators.required)
-        )
+        this.inputFields.map((field, index) => {
+          const validators = [
+            Validators.required,
+            field.label === 'Email Address'
+              ? Validators.pattern(
+                  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+                )
+              : null,
+            field.label === 'Phone Number'
+              ? Validators.pattern(/^\+?\d{1,4}[\d\s-]+$/)
+              : null,
+          ].filter((validator): validator is ValidatorFn => validator !== null);
+
+          return this.fb.control(this.inputData[index], validators);
+        })
       ),
     });
 
@@ -68,14 +85,19 @@ export class PersonalInfoTabComponent implements OnInit {
           'personalInfo',
           this.myForm.value.textFields
         );
-
         this.storageService.saveData('personalInfoIsValid', this.myForm.valid);
       }
     });
   }
 
-  get inputFieldsArray(): FormArray {
-    return this.myForm.get('textFields') as FormArray;
+  getEmailValidator() {
+    return Validators.pattern(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    );
+  }
+
+  getPhoneNumberValidator() {
+    return Validators.pattern(/^\+?\d{1,4}[\d\s-]+$/);
   }
 
   onSubmit(): void {

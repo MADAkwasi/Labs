@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { TextField } from './text-field.model';
-import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input-text-field',
@@ -12,6 +17,7 @@ import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 export class InputTextFieldComponent {
   @Input() inputFields: TextField[] = [];
   @Input() formArray!: FormArray;
+  errors!: ValidationErrors | null;
 
   getFormControl(index: number): FormControl {
     return this.formArray.at(index) as FormControl;
@@ -19,6 +25,9 @@ export class InputTextFieldComponent {
 
   hasError(index: number): boolean {
     const control = this.getFormControl(index);
-    return control.invalid && (control.touched || control.dirty);
+
+    this.errors = control.errors;
+
+    return control.touched && control.invalid;
   }
 }

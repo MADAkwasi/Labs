@@ -1,4 +1,4 @@
-<app-heading [headingTxt]="heading" [detailsTxt]="details"></app-heading>
+<app-heading [headingText]="heading" [detailsText]="details"></app-heading>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <app-add-on-item
     [items]="addOnItems"
@@ -9,12 +9,15 @@
     <app-button
       text="Go Back"
       color="var(--grey)"
+      hoveredColor="var(--denim)"
+      hoveredBgColor="transparent"
       backgroundColor="transparent"
       [url]="'/signup/plan'"
     ></app-button>
     <app-button
       text="Next Step"
       [url]="'/signup/summary'"
+      hoveredBgColor="var(--hover)"
       type="submit"
     ></app-button>
   </div>
