@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HeadingComponent } from '../../../components/heading/heading.component';
-import { PlanCardComponent } from '../../../components/plan-card/plan-card.component';
-import { SubcriptionToggleComponent } from '../../../components/subcription-toggle/subcription-toggle.component';
-import { ButtonComponent } from '../../../components/button/button.component';
+import {HeadingComponent} from '../../../components/heading/heading.component';
+import {PlanCardComponent} from '../../../components/plan-card/plan-card.component';
+import {SubcriptionToggleComponent} from '../../../components/subcription-toggle/subcription-toggle.component';
+import {ButtonComponent} from '../../../components/button/button.component';
 import {
   Plan,
   rate,
   selectedPackage,
 } from '../../../components/plan-card/plan.model';
-import { StorageService } from '../../../storage.service';
-import { NavigationStart, Router } from '@angular/router';
+import {StorageService} from '../../../storage.service';
+import {NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-plan-tab',
@@ -37,31 +37,41 @@ export class PlanTabComponent implements OnInit {
     {
       icon: 'assets/images/icon-arcade.svg',
       name: 'arcade',
-      price: { monthly: '$9/mo', yearly: '$90/yr' },
+      price: {monthly: '$9/mo', yearly: '$90/yr'},
     },
     {
       icon: 'assets/images/icon-advanced.svg',
       name: 'advanced',
-      price: { monthly: '$12/mo', yearly: '$120/yr' },
+      price: {monthly: '$12/mo', yearly: '$120/yr'},
     },
     {
       icon: 'assets/images/icon-pro.svg',
       name: 'pro',
-      price: { monthly: '$15/mo', yearly: '$150/yr' },
+      price: {monthly: '$15/mo', yearly: '$150/yr'},
     },
   ];
   myForm!: FormGroup;
+  isFormValid!: boolean;
 
   constructor(
     private fb: FormBuilder,
     private storageService: StorageService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const storedPlan = this.storageService.getData('subscriptionPlan') || '';
     const storedRate =
       this.storageService.getData('subscriptionRate') || 'monthly';
+
+    const personalFormIsValid = this.storageService.getData<boolean>(
+      'personalInfoIsValid'
+    );
+    const planIsValid = this.storageService.getData<boolean>('planIsValid');
+
+    if (personalFormIsValid && planIsValid)
+      this.isFormValid = personalFormIsValid && planIsValid;
 
     this.myForm = this.fb.group({
       selectedPlan: [storedPlan, Validators.required],

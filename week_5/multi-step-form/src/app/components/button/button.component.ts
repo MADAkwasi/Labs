@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-button',
@@ -20,18 +20,16 @@ export class ButtonComponent {
   @Input() disabled!: boolean;
   @Output() onSubmit = new EventEmitter<boolean>();
 
-  currentUrl!: string;
-  isFormValid!: boolean;
   isHovered!: boolean;
 
-  onClick(event: Event) {
+  onClick() {
     if (this.type === 'submit') {
       return;
     }
 
     if (this.type === 'button') {
-      this.onSubmit.emit(true);
       localStorage.clear();
+      this.onSubmit.emit(true);
     }
   }
 }

@@ -1,14 +1,14 @@
 <button
+  (click)="onClick()"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+  [disabled]="disabled"
   [ngStyle]="{
-    'background-color': isHovered ? hoveredBgColor : backgroundColor,
-    color: isHovered ? hoveredColor : color
+    'background-color': isHovered && !disabled ? hoveredBgColor : backgroundColor,
+    color: isHovered && !disabled ? hoveredColor : color
   }"
   [routerLink]="url"
   [type]="type || 'button'"
-  (click)="onClick($event)"
-  [disabled]="disabled"
-  (mouseenter)="isHovered = true"
-  (mouseleave)="isHovered = false"
 >
   {{ text }}
 </button>

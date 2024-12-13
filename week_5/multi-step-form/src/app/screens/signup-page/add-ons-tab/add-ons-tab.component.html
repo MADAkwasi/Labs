@@ -1,5 +1,5 @@
-<app-heading [headingText]="heading" [detailsText]="details"></app-heading>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<app-heading [detailsText]="details" [headingText]="heading"></app-heading>
+<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
   <app-add-on-item
     [items]="addOnItems"
     [selectedAddOnsArray]="selectedAddOnsArray"
@@ -7,17 +7,18 @@
   ></app-add-on-item>
   <div>
     <app-button
-      text="Go Back"
-      color="var(--grey)"
-      hoveredColor="var(--denim)"
-      hoveredBgColor="transparent"
-      backgroundColor="transparent"
       [url]="'/signup/plan'"
+      backgroundColor="transparent"
+      color="var(--grey)"
+      hoveredBgColor="transparent"
+      hoveredColor="var(--denim)"
+      text="Go Back"
     ></app-button>
     <app-button
-      text="Next Step"
+      [disabled]="!isFormValid"
       [url]="'/signup/summary'"
       hoveredBgColor="var(--hover)"
+      text="Next Step"
       type="submit"
     ></app-button>
   </div>
