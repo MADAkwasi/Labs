@@ -1,0 +1,15 @@
+img {
+  transform: translateY(-5rem);
+}
+
+h4 {
+  font-size: 2.5rem;
+  color: var(--denim);
+  transform: translateY(-5rem);
+}
+
+p {
+  font-size: 1.7rem;
+  color: var(--grey);
+  transform: translateY(-5rem);
+}
