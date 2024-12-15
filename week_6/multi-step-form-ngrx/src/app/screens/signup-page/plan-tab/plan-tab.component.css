@@ -4,7 +4,7 @@ app-plan-card {
   margin: 1.5rem 0;
 }
 
-app-subcription-toggle {
+app-subscription-toggle {
   display: flex;
   justify-content: center;
   align-items: center;

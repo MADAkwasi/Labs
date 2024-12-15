@@ -1,111 +1,81 @@
-import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {HeadingComponent} from '../../../components/heading/heading.component';
-import {PlanCardComponent} from '../../../components/plan-card/plan-card.component';
-import {SubcriptionToggleComponent} from '../../../components/subcription-toggle/subcription-toggle.component';
-import {ButtonComponent} from '../../../components/button/button.component';
-import {
-  Plan,
-  rate,
-  selectedPackage,
-} from '../../../components/plan-card/plan.model';
-import {StorageService} from '../../../storage.service';
-import {NavigationStart, Router} from '@angular/router';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { PlanState } from '../../../state/reducers/plan.reducer';
+import { rate } from '../../../components/plan-card/plan.model';
+import { updateSubscriptionRate } from '../../../state/actions/plan.action';
+import { selectSubscriptionRate } from '../../../state/selectors/plan.selector';
+import { NavigationStart, Router } from '@angular/router';
+import { SubscriptionToggleComponent } from '../../../components/subscription-toggle/subscription-toggle.component';
+import { ButtonComponent } from '../../../components/button/button.component';
+import { PlanCardComponent } from '../../../components/plan-card/plan-card.component';
+import { HeadingComponent } from '../../../components/heading/heading.component';
 
 @Component({
   selector: 'app-plan-tab',
   standalone: true,
   imports: [
-    HeadingComponent,
-    PlanCardComponent,
-    SubcriptionToggleComponent,
-    ButtonComponent,
     ReactiveFormsModule,
+    SubscriptionToggleComponent,
+    ButtonComponent,
+    PlanCardComponent,
+    HeadingComponent
   ],
   templateUrl: './plan-tab.component.html',
   styleUrls: ['./plan-tab.component.css'],
 })
-export class PlanTabComponent implements OnInit {
+export class PlanTabComponent implements OnInit, OnDestroy {
   heading = 'Select your plan';
   details = 'You have the option of monthly or yearly billing.';
-  plans: Plan[] = [
-    {
-      icon: 'assets/images/icon-arcade.svg',
-      name: 'arcade',
-      price: {monthly: '$9/mo', yearly: '$90/yr'},
-    },
-    {
-      icon: 'assets/images/icon-advanced.svg',
-      name: 'advanced',
-      price: {monthly: '$12/mo', yearly: '$120/yr'},
-    },
-    {
-      icon: 'assets/images/icon-pro.svg',
-      name: 'pro',
-      price: {monthly: '$15/mo', yearly: '$150/yr'},
-    },
-  ];
   myForm!: FormGroup;
-  isFormValid!: boolean;
+  subscriptionRate$: Observable<rate>;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private store: Store<PlanState>
   ) {
+    this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
   }
 
   ngOnInit(): void {
-    const storedPlan = this.storageService.getData('subscriptionPlan') || '';
-    const storedRate =
-      this.storageService.getData('subscriptionRate') || 'monthly';
-
-    const personalFormIsValid = this.storageService.getData<boolean>(
-      'personalInfoIsValid'
-    );
-    const planIsValid = this.storageService.getData<boolean>('planIsValid');
-
-    if (personalFormIsValid && planIsValid)
-      this.isFormValid = personalFormIsValid && planIsValid;
-
+    // Initialize form group with default value
     this.myForm = this.fb.group({
-      selectedPlan: [storedPlan, Validators.required],
-      subscriptionRate: [storedRate],
+      subscriptionRate: ['monthly', Validators.required],
     });
 
-    this.router.events.subscribe((event) => {
-      const formValue = this.myForm.value;
+    // Set form value based on store subscriptionRate$
+    const subscriptionRateSubscription = this.subscriptionRate$.subscribe((rate) => {
+      if (rate) {
+        this.myForm.get('subscriptionRate')?.setValue(rate);
+      }
+    });
 
+    this.subscriptions.push(subscriptionRateSubscription);
+
+    // Dispatch the selected subscription rate on navigation
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        this.storageService.saveData(
-          'subscriptionPlan',
-          formValue.selectedPlan
-        );
-        this.storageService.saveData(
-          'subscriptionRate',
-          formValue.subscriptionRate
-        );
-        this.storageService.saveData('planIsValid', this.myForm.valid);
+        const formValue = this.myForm.value;
+        this.store.dispatch(updateSubscriptionRate({ rate: formValue.subscriptionRate }));
       }
     });
   }
 
-  onSubmit(): void {
-    const formValue = this.myForm.value;
-
-    this.storageService.saveData('subscriptionPlan', formValue.selectedPlan);
-    this.storageService.saveData(
-      'subscriptionRate',
-      formValue.subscriptionRate
-    );
+  ngOnDestroy(): void {
+    // Unsubscribe from observables
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  onPlanSelected(planName: selectedPackage): void {
-    this.myForm.get('selectedPlan')?.setValue(planName);
+  onRateChange(rate: rate): void {
+    this.myForm.get('subscriptionRate')?.setValue(rate);
+    this.store.dispatch(updateSubscriptionRate({ rate }));
+  }
+
+  onSubmit(): void {
+    // Handle form submission logic
+    console.log(this.myForm.value);
   }
 }

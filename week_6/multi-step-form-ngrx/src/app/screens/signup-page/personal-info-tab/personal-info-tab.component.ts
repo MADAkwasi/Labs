@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { updatePersonalInfo } from '../../../state/actions/personal-info.actions';
+import { updatePersonalInfo } from '../../../state/actions/personal-info.action';
 import { PersonalInfoState } from '../../../state/reducers/personal-info.reducer';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { InputTextFieldComponent } from '../../../components/input-text-field/input-text-field.component';

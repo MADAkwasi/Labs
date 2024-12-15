@@ -6,6 +6,7 @@ import { provideState, provideStore } from '@ngrx/store';
 import {personalInfoReducer} from './state/reducers/personal-info.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { metaReducers, reducers } from './state/reducers/reducers';
+import { planReducer } from './state/reducers/plan.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withViewTransitions()),
     provideStore(reducers, { metaReducers }),
     provideState({name: 'personalInfo', reducer: personalInfoReducer }),
+    provideState({ name: 'plan', reducer: planReducer }),
     provideStoreDevtools(({
        maxAge:25,
       logOnly:!isDevMode(),

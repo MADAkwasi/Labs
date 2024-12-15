@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { updatePersonalInfo } from '../actions/personal-info.actions';
+import { updatePersonalInfo } from '../actions/personal-info.action';
 
 export interface PersonalInfoState {
   name: string;

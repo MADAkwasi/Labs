@@ -5,5 +5,5 @@ export const selectPersonalInfoFeature = createFeatureSelector<PersonalInfoState
 
 export const selectPersonalInfo = createSelector(
   selectPersonalInfoFeature,
-  (state) => state.personalInfo
+  (state) => state
 );
