@@ -1,10 +1,6 @@
 <app-heading [detailsText]="details" [headingText]="heading"></app-heading>
 <form (ngSubmit)="onSubmit()" [formGroup]="myForm">
-  <app-add-on-item
-    [items]="addOnItems"
-    [selectedAddOnsArray]="selectedAddOnsArray"
-    [subscriptionPlan]="subscriptionRate"
-  ></app-add-on-item>
+  <app-add-on-item></app-add-on-item>
   <div>
     <app-button
       [url]="'/signup/plan'"

@@ -1,26 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {HeadingComponent} from '../../../components/heading/heading.component';
-import {AddOnItemComponent} from '../../../components/add-on-item/add-on-item.component';
-import {ButtonComponent} from '../../../components/button/button.component';
-import {AddOnItem} from '../../../components/add-on-item/add-on-item.model';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {StorageService} from '../../../storage.service';
-import {rate} from '../../../components/plan-card/plan.model';
-import {NavigationStart, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { FormBuilder, FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { updateSelectedAddOns } from '../../../state/actions/add-ons.action';
+import { selectSelectedAddOns } from '../../../state/selectors/add-ons.selector';
+import { selectSubscriptionRate } from '../../../state/selectors/plan.selector';
+import { rate, selectedPackage } from '../../../components/plan-card/plan.model';
+import { HeadingComponent } from '../../../components/heading/heading.component';
+import { AddOnItemComponent } from '../../../components/add-on-item/add-on-item.component';
+import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
   selector: 'app-add-ons-tab',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     HeadingComponent,
     AddOnItemComponent,
     ButtonComponent,
-    ReactiveFormsModule,
   ],
   templateUrl: './add-ons-tab.component.html',
   styleUrls: ['./add-ons-tab.component.css'],
@@ -29,111 +26,42 @@ export class AddOnsTabComponent implements OnInit {
   heading = 'Pick add-ons';
   details = 'Add-ons enhance your gaming experience';
 
-  addOnItems: AddOnItem[] = [
-    {
-      name: 'Online Service',
-      description: 'Access to multiplayer games',
-      price: {monthly: '$1/mo', yearly: '$10/yr'},
-    },
-    {
-      name: 'Larger Storage',
-      description: 'Extra 1TB of cloud save',
-      price: {monthly: '$2/mo', yearly: '$20/yr'},
-    },
-    {
-      name: 'Customizable Profile',
-      description: 'Custom theme on your profile',
-      price: {monthly: '$2/mo', yearly: '$20/yr'},
-    },
-  ];
-
+  subscriptionRate$: Observable<rate>;
+  selectedAddOns$: Observable<selectedPackage[]>;
   myForm!: FormGroup;
-  subscriptionRate!: rate;
-  isFormValid!: boolean;
 
-  constructor(
-    private fb: FormBuilder,
-    private storageService: StorageService,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder, private store: Store) {
+    this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
+    this.selectedAddOns$ = this.store.select(selectSelectedAddOns);
+  }
+
+  ngOnInit(): void {
+    // Subscribe to selectedAddOns$ to initialize the form with the selected state
+    this.selectedAddOns$.subscribe((selectedAddOns) => {
+      const formArray = selectedAddOns.map(() => this.fb.control(false));  // Initialize all add-ons as unchecked
+      this.myForm = this.fb.group({
+        selectedAddOns: this.fb.array(formArray),
+      });
+    });
   }
 
   get selectedAddOnsArray(): FormArray {
     return this.myForm.get('selectedAddOns') as FormArray;
   }
 
-  ngOnInit(): void {
-    const storedAddOns: string[] = this.storageService.getData('addOns') || [];
-    const storedRate =
-      this.storageService.getData('subscriptionRate') || 'monthly';
-
-    this.subscriptionRate =
-      storedRate === 'monthly' || storedRate === 'yearly'
-        ? storedRate
-        : 'monthly';
-
-    const personalFormIsValid = this.storageService.getData<boolean>(
-      'personalInfoIsValid'
-    );
-    const planIsValid = this.storageService.getData<boolean>('planIsValid');
-
-    if (personalFormIsValid && planIsValid)
-      this.isFormValid = personalFormIsValid && planIsValid;
-
-    this.myForm = this.fb.group({
-      selectedAddOns: this.fb.array(
-        this.addOnItems.map((item) =>
-          this.fb.control(storedAddOns.includes(item.name))
-        )
-      ),
-    });
-
-    this.router.events.subscribe((event) => {
-      const formValue = this.myForm.value;
-
-      if (event instanceof NavigationStart) {
-        const selectedAddOns = this.addOnItems.filter((_, i) => {
-          const control = this.selectedAddOnsArray.at(i);
-          return control && control.value === true;
-        });
-
-        this.storageService.saveData(
-          'addOns',
-          selectedAddOns.map((item) => ({
-            name: item.name,
-            price: item.price[this.subscriptionRate],
-          }))
-        );
-      }
-    });
-  }
-
-  onSelectionChanged(isChecked: boolean[]): void {
-    this.selectedAddOnsArray.clear();
-    isChecked.forEach((checked, i) => {
-      if (checked) {
-        this.selectedAddOnsArray.push(
-          this.fb.control({
-            name: this.addOnItems[i].name,
-            price: this.addOnItems[i].price[this.subscriptionRate],
-          })
-        );
-      }
-    });
-  }
-
   onSubmit(): void {
-    const selectedAddOns = this.addOnItems.filter((_, i) => {
-      const control = this.selectedAddOnsArray.at(i);
-      return control && control.value === true;
-    });
+    this.selectedAddOns$.subscribe((selectedAddOns) => {
+      const selectedAddOnsState = this.selectedAddOnsArray.value
+        .map((isChecked: boolean, index: number) => {
+          if (isChecked) {
+            return selectedAddOns[index];  // Get the selected add-ons based on the index
+          }
+          return null;
+        })
+        .filter(Boolean);
 
-    this.storageService.saveData(
-      'addOns',
-      selectedAddOns.map((item) => ({
-        name: item.name,
-        price: item.price[this.subscriptionRate],
-      }))
-    );
+      // Dispatch selected add-ons to the store
+      this.store.dispatch(updateSelectedAddOns({ selectedAddOns: selectedAddOnsState }));
+    });
   }
 }
