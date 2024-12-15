@@ -1,22 +1,25 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { personalInfoReducer, PersonalInfoState } from './personal-info.reducer';
-import { addOnsReducer, AddOnsState } from './add-ons.reducer';  // Import the add-ons reducer
+import { addOnsReducer, AddOnsState } from './add-ons.reducer';
+import { planReducer, PlanState } from './plan.reducer';  // Import the plan reducer
 
 export interface AppState {
   personalInfo: PersonalInfoState;
-  addOns: AddOnsState;  // Add addOns state to the AppState
+  addOns: AddOnsState;
+  plan: PlanState;  // Include the plan state
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   personalInfo: personalInfoReducer,
-  addOns: addOnsReducer,  // Add the addOns reducer to the root reducer
+  addOns: addOnsReducer,
+  plan: planReducer,  // Add plan reducer
 };
 
-// Update the metaReducers to include localStorageSync for the addOns state
+// Update metaReducers to include plan state in localStorage sync
 export function localStorageSyncReducer(reducer: any): any {
   return localStorageSync({
-    keys: ['personalInfo', 'addOns'],  // Persist both personalInfo and addOns
+    keys: ['personalInfo', 'addOns', 'plan'],  // Persist personalInfo, addOns, and plan
     rehydrate: true,
   })(reducer);
 }

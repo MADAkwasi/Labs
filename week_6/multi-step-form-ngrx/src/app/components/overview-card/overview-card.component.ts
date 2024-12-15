@@ -1,42 +1,52 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { StorageService } from '../../storage.service';
+import { selectSelectedPlan, selectSubscriptionRate } from '../../state/selectors/plan.selector';
+import { selectSelectedAddOns } from '../../state/selectors/add-ons.selector';
 import { Package, rate } from './overview-card.model';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-overview-card',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './overview-card.component.html',
   styleUrl: './overview-card.component.css',
 })
 export class OverviewCardComponent implements OnInit {
-  plan!: Package;
-  addOns: Package[] = [];
-  subscriptionRate!: rate;
-
+  plan$!: Observable<Package | null>;
+  subscriptionRate$!: Observable<rate>;
+  addOns$!: Observable<Package[]>;
   totalPrice!: number;
 
-  constructor(private storageService: StorageService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    const storedPlan = this.storageService.getData<Package>('subscriptionPlan');
-    const storedAddOns = this.storageService.getData<Package[]>('addOns');
-    this.subscriptionRate =
-      this.storageService.getData<rate>('subscriptionRate') || 'monthly';
+    // Access plan and subscription rate from the store
+    this.plan$ = this.store.select(selectSelectedPlan);
+    this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
 
-    if (storedPlan) this.plan = storedPlan;
-    if (storedAddOns) this.addOns = storedAddOns;
+    // Use the store to fetch add-ons as an observable
+    this.addOns$ = this.store.select(selectSelectedAddOns);
 
-    if (this.plan && this.addOns) {
-      const addOnsPrice = (this.addOns || []).reduce((acc, cur) => {
+    this.calculateTotalPrice()
+  }
+
+  calculateTotalPrice(): void {
+    // Calculate the total price based on the add-ons and plan
+    this.addOns$.subscribe((addOns) => {
+      let addOnsPrice = addOns.reduce((acc, cur) => {
         const price = parseInt(cur.price.match(/\d+/)?.[0] || '0', 10);
         return acc + price;
       }, 0);
 
-      const planPrice = parseInt(this.plan.price.match(/\d+/)?.[0] || '0', 10);
-
-      this.totalPrice = addOnsPrice + planPrice;
-    }
+      this.plan$.subscribe((plan) => {
+        if (plan) {
+          const planPrice = parseInt(plan.price.match(/\d+/)?.[0] || '0', 10);
+          this.totalPrice = addOnsPrice + planPrice;
+        }
+      });
+    });
   }
 }

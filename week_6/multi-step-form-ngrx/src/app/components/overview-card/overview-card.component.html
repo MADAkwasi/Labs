@@ -1,36 +1,36 @@
 <section>
   <div class="plan">
     <span class="plan__name">
-      @if(this.plan){
-      <h4>{{ plan.name }} ({{ subscriptionRate }})</h4>
+      @if(this.plan$ | async){
+        <h4>{{ (this.plan$ | async)?.name }} ({{ subscriptionRate$ | async }})</h4>
       }@else {
-      <h4>Please select a subscription plan</h4>
+        <h4>Please select a subscription plan</h4>
       }
       <a routerLink="/signup/plan">Change</a>
     </span>
-    @if(this.plan){
-    <h4 class="plan__price">{{ plan.price }}</h4>
+    @if(this.plan$ | async){
+      <h4 class="plan__price">{{ (this.plan$ | async)?.price }}</h4>
     }
   </div>
-  @if(!!addOns.length) {
-  <hr />
-  } @for(addOn of addOns; track $index){
+  @if(!!(this.addOns$ | async)?.length) {
+    <hr />
+  } @for(addOn of (this.addOns$ | async); track $index){
   <div class="add-on">
     <p class="add-on__name">{{ addOn.name }}</p>
     <p class="add-on__price">{{ addOn.price }}</p>
   </div>
-  }
+}
 </section>
 
 <div class="total">
   <p class="total__info">
-    Total (per {{ subscriptionRate === "monthly" ? "month" : "year" }})
+    Total (per {{ (subscriptionRate$ | async) === "monthly" ? "month" : "year" }})
   </p>
-  @if(plan){
-  <p class="total__price">
-    ${{ totalPrice }}{{ subscriptionRate === "monthly" ? "/mo" : "/yr" }}
-  </p>
+  @if(this.plan$ | async){
+    <p class="total__price">
+      ${{ totalPrice }}{{ (subscriptionRate$ | async) === "monthly" ? "/mo" : "/yr" }}
+    </p>
   }@else {
-  <p class="total__price">N/A</p>
+    <p class="total__price">N/A</p>
   }
 </div>
