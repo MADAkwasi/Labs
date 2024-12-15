@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { HeadingComponent } from '../../../components/heading/heading.component';
-import { InputTextFieldComponent } from '../../../components/input-text-field/input-text-field.component';
 import {
   FormArray,
   FormBuilder,
   FormGroup,
-  ReactiveFormsModule,
-  ValidatorFn,
+  ReactiveFormsModule, ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { TextField } from '../../../components/input-text-field/text-field.model';
-import { StorageService } from '../../../storage.service';
-import { NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { updatePersonalInfo } from '../../../state/actions/personal-info.actions';
+import { PersonalInfoState } from '../../../state/reducers/personal-info.reducer';
+import { HeadingComponent } from '../../../components/heading/heading.component';
+import { InputTextFieldComponent } from '../../../components/input-text-field/input-text-field.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
   selector: 'app-personal-info-tab',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     HeadingComponent,
     InputTextFieldComponent,
     ButtonComponent,
-    ReactiveFormsModule,
   ],
   templateUrl: './personal-info-tab.component.html',
   styleUrls: ['./personal-info-tab.component.css'],
@@ -30,34 +29,26 @@ export class PersonalInfoTabComponent implements OnInit {
   heading = 'Personal Info';
   details = 'Please provide your name, email address, and phone number';
   myForm!: FormGroup;
-  inputFields: TextField[] = [
-    { label: 'Name', type: 'text', placeholder: 'e.g. Stephen King',   validators: [Validators.required]},
+
+  inputFields = [
+    { label: 'Name', key: 'name', type: 'text', placeholder: 'e.g. Stephen King' },
     {
       label: 'Email Address',
+      key: 'email',
       type: 'email',
       placeholder: 'e.g. stephenking@lorem.com',
-      validators: [
-        Validators.required,
-        Validators.pattern(
-          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-        ),
-      ],
     },
-    { label: 'Phone Number',
+    {
+      label: 'Phone Number',
+      key: 'number',
       type: 'text',
       placeholder: 'e.g. +1 234 567 890',
-      validators: [
-        Validators.required,
-        Validators.pattern(/^\+?\d{1,4}[\d\s-]+$/),
-      ],
     },
   ];
-  inputData: string[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private storageService: StorageService,
-    private router: Router
+    private store: Store<{ personalInfo: PersonalInfoState }>
   ) {}
 
   get inputFieldsArray(): FormArray {
@@ -65,43 +56,49 @@ export class PersonalInfoTabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storedData = this.storageService.getData('personalInfo');
+    const initialState = this.store.select((state) => state.personalInfo);
 
-    this.inputData =
-      storedData && Array.isArray(storedData)
-        ? storedData
-        : new Array(this.inputFields.length).fill('');
+    initialState.subscribe((state) => {
+      this.myForm = this.fb.group({
+        textFields: this.fb.array(
+          this.inputFields.map((field) => {
+            const validators = [
+              Validators.required,
+              field.label === 'Email Address'
+                ? Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+                : null,
+              field.label === 'Phone Number'
+                ? Validators.pattern(/^\+?\d{1,4}[\d\s-]+$/)
+                : null,
+            ].filter((v): v is ValidatorFn => v !== null);
 
-    this.myForm = this.fb.group({
-      textFields: this.fb.array(
-        this.inputFields.map((field, index) =>
-          this.fb.control(this.inputData[index], field.validators)
+            // Retrieve initial value for the form field from the state
+            const initialValue =
+              state && field.label === 'Name'
+                ? state.name
+                : field.label === 'Email Address'
+                  ? state.email
+                  : field.label === 'Phone Number'
+                    ? state.number
+                    : '';
+
+            return this.fb.control(initialValue, validators);
+          })
         )
-      ),
+      });
+
+      this.myForm.valueChanges.subscribe((value) => {
+        const updatedState: PersonalInfoState = {
+          name: value.textFields[0],
+          email: value.textFields[1],
+          number: value.textFields[2],
+        };
+        this.store.dispatch(updatePersonalInfo({ personalInfo: updatedState }));
+      });
     });
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.storageService.saveData(
-          'personalInfo',
-          this.myForm.value.textFields
-        );
-        this.storageService.saveData('personalInfoIsValid', this.myForm.valid);
-      }
-    });
-  }
-
-  getEmailValidator() {
-    return Validators.pattern(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    );
-  }
-
-  getPhoneNumberValidator() {
-    return Validators.pattern(/^\+?\d{1,4}[\d\s-]+$/);
   }
 
   onSubmit(): void {
-    this.storageService.saveData('personalInfo', this.myForm.value.textFields);
+    console.log('Form Submitted', this.myForm.value);
   }
 }

@@ -1,14 +1,25 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideStore} from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import {personalInfoReducer} from './state/reducers/personal-info.reducer';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { metaReducers, reducers } from './state/reducers/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withViewTransitions()),
-    provideStore({personalInfo: personalInfoReducer}),
+    provideStore(reducers, { metaReducers }),
+    provideState({name: 'personalInfo', reducer: personalInfoReducer }),
+    provideStoreDevtools(({
+       maxAge:25,
+      logOnly:!isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+      connectInZone: true
+    }))
   ],
 };
