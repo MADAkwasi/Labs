@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { updatePersonalInfo } from '../../../state/actions/personal-info.action';
+import { updatePersonalInfo, updatePersonalInfoValidity } from '../../../state/actions/personal-info.action';
 import { PersonalInfoState } from '../../../state/reducers/personal-info.reducer';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { InputTextFieldComponent } from '../../../components/input-text-field/input-text-field.component';
@@ -84,7 +84,7 @@ export class PersonalInfoTabComponent implements OnInit {
 
             return this.fb.control(initialValue, validators);
           })
-        )
+        ),
       });
 
       this.myForm.valueChanges.subscribe((value) => {
@@ -92,11 +92,16 @@ export class PersonalInfoTabComponent implements OnInit {
           name: value.textFields[0],
           email: value.textFields[1],
           number: value.textFields[2],
+          isValid: this.myForm.valid, // Synchronize the validity state
         };
+
+        // Dispatch updates for the personal info and validity
         this.store.dispatch(updatePersonalInfo({ personalInfo: updatedState }));
+        this.store.dispatch(updatePersonalInfoValidity({ isValid: this.myForm.valid }));
       });
     });
   }
+
 
   onSubmit(): void {
     console.log('Form Submitted', this.myForm.value);

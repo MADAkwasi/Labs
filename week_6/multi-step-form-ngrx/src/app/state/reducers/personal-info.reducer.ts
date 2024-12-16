@@ -1,16 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
-import { updatePersonalInfo } from '../actions/personal-info.action';
+import { updatePersonalInfo, updatePersonalInfoValidity } from '../actions/personal-info.action';
 
 export interface PersonalInfoState {
   name: string;
   email: string;
   number: string;
+  isValid: boolean;
 }
 
 export const initialState: PersonalInfoState = {
   name: '',
   email: '',
   number: '',
+  isValid: false,
 };
 
 export const personalInfoReducer = createReducer(
@@ -18,5 +20,9 @@ export const personalInfoReducer = createReducer(
   on(updatePersonalInfo, (state, { personalInfo }) => ({
     ...state,
     ...personalInfo,
+  })),
+  on(updatePersonalInfoValidity, (state, { isValid }) => ({
+    ...state,
+    isValid,
   }))
 );

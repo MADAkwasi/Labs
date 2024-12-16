@@ -1,16 +1,19 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PlanState } from '../../../state/reducers/plan.reducer';
 import { rate } from '../../../components/plan-card/plan.model';
 import { updateSubscriptionRate } from '../../../state/actions/plan.action';
 import { selectSubscriptionRate } from '../../../state/selectors/plan.selector';
+import { selectPersonalInfoIsValid } from '../../../state/selectors/personal-info.selector';
 import { NavigationStart, Router } from '@angular/router';
 import { SubscriptionToggleComponent } from '../../../components/subscription-toggle/subscription-toggle.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { PlanCardComponent } from '../../../components/plan-card/plan-card.component';
 import { HeadingComponent } from '../../../components/heading/heading.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-plan-tab',
@@ -20,7 +23,8 @@ import { HeadingComponent } from '../../../components/heading/heading.component'
     SubscriptionToggleComponent,
     ButtonComponent,
     PlanCardComponent,
-    HeadingComponent
+    HeadingComponent,
+    AsyncPipe
   ],
   templateUrl: './plan-tab.component.html',
   styleUrls: ['./plan-tab.component.css'],
@@ -30,6 +34,7 @@ export class PlanTabComponent implements OnInit, OnDestroy {
   details = 'You have the option of monthly or yearly billing.';
   myForm!: FormGroup;
   subscriptionRate$: Observable<rate>;
+  isFormValid$: Observable<boolean>; // Observable for overall form validity
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -38,6 +43,12 @@ export class PlanTabComponent implements OnInit, OnDestroy {
     private store: Store<PlanState>
   ) {
     this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
+
+    // Combine local form validity with personalInfo validity
+    const personalInfoIsValid$ = this.store.select(selectPersonalInfoIsValid);
+    this.isFormValid$ = combineLatest([personalInfoIsValid$, this.localFormValidity()]).pipe(
+      map(([personalInfoValid, localFormValid]) => personalInfoValid && localFormValid)
+    );
   }
 
   ngOnInit(): void {
@@ -67,6 +78,10 @@ export class PlanTabComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Unsubscribe from observables
     this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  localFormValidity(): Observable<boolean> {
+    return this.myForm.statusChanges.pipe(map((status) => status === 'VALID'));
   }
 
   onRateChange(rate: rate): void {

@@ -15,6 +15,7 @@
       [url]="'/signup/add-ons'"
       text="Next Step"
       type="submit"
+      [disabled]="!(isFormValid$ | async)"
     ></app-button>
   </div>
 </form>

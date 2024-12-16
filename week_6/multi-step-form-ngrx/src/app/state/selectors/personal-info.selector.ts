@@ -1,9 +1,9 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { PersonalInfoState } from '../reducers/personal-info.reducer';
 
-export const selectPersonalInfoFeature = createFeatureSelector<PersonalInfoState>('personalInfo');
+export const selectPersonalInfo = (state: { personalInfo: PersonalInfoState }) => state.personalInfo;
 
-export const selectPersonalInfo = createSelector(
-  selectPersonalInfoFeature,
-  (state) => state
+export const selectPersonalInfoIsValid = createSelector(
+  selectPersonalInfo,
+  (personalInfo) => personalInfo.isValid
 );
