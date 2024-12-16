@@ -12,9 +12,10 @@
     ></app-button>
     <app-button
       [url]="'/signup/summary'"
-      hoveredBgColor="var(--hover)"
-      text="Next Step"
-      type="submit"
+      [disabled]="!formValid"
+    hoveredBgColor="var(--hover)"
+    text="Next Step"
+    type="submit"
     ></app-button>
   </div>
 </form>

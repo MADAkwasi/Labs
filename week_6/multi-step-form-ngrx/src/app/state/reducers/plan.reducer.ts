@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { updateSubscriptionPlan, updateSubscriptionRate } from '../actions/plan.action';
+import { updateSubscriptionPlan, updateSubscriptionRate, updatePlanFormValidity } from '../actions/plan.action';
 import { rate, selectedPackage } from '../../components/plan-card/plan.model';
 
 export interface PlanState {
@@ -11,7 +11,7 @@ export interface PlanState {
 export const initialState: PlanState = {
   selectedPlan: { name: '', price: '' },
   subscriptionRate: 'monthly',
-  isValid: false
+  isValid: false,
 };
 
 export const planReducer = createReducer(
@@ -23,5 +23,9 @@ export const planReducer = createReducer(
   on(updateSubscriptionRate, (state, { rate }) => ({
     ...state,
     subscriptionRate: rate,
+  })),
+  on(updatePlanFormValidity, (state, { isValid }) => ({
+    ...state,
+    isValid,
   }))
 );

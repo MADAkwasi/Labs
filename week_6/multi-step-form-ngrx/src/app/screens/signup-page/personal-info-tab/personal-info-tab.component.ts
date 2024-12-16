@@ -49,7 +49,8 @@ export class PersonalInfoTabComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<{ personalInfo: PersonalInfoState }>
-  ) {}
+  ) {
+  }
 
   get inputFieldsArray(): FormArray {
     return this.myForm.get('textFields') as FormArray;
@@ -64,6 +65,9 @@ export class PersonalInfoTabComponent implements OnInit {
           this.inputFields.map((field) => {
             const validators = [
               Validators.required,
+              field.label === 'Name'
+                ? Validators.pattern(/^[A-Za-z ]+$/)
+                : null,
               field.label === 'Email Address'
                 ? Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
                 : null,

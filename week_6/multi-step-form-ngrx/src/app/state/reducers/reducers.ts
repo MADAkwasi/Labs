@@ -10,6 +10,11 @@ export interface AppState {
   plan: PlanState;  // Include the plan state
 }
 
+export interface RootState {
+  personalInfo: PersonalInfoState;
+  plan: PlanState;
+}
+
 export const reducers: ActionReducerMap<AppState> = {
   personalInfo: personalInfoReducer,
   addOns: addOnsReducer,
