@@ -7,17 +7,17 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class QuizService {
-  private readonly selectedSubject = new BehaviorSubject<Quiz | {}>({});
-  private readonly screenSubject = new BehaviorSubject<string>('home');
-  private readonly submitAnswer = new Subject<string>();
-  private readonly currentIndex = new BehaviorSubject<number>(0);
-  private readonly score = new BehaviorSubject<number>(0);
+  private selectedSubject = new BehaviorSubject<Quiz | {}>({});
+  private screenSubject = new BehaviorSubject<string>('home');
+  private submitAnswer = new Subject<string>();
+  private currentIndex = new BehaviorSubject<number>(0);
+  public score = new BehaviorSubject<number>(0);
 
-  public readonly subject$ = this.selectedSubject.asObservable();
-  public readonly screen$ = this.screenSubject.asObservable();
-  public readonly answerEvent$ = this.submitAnswer.asObservable();
-  public readonly indexEvent$ = this.currentIndex.asObservable();
-  public readonly score$ = this.score.asObservable();
+  public subject$ = this.selectedSubject.asObservable();
+  public screen$ = this.screenSubject.asObservable();
+  public answerEvent$ = this.submitAnswer.asObservable();
+  public indexEvent$ = this.currentIndex.asObservable();
+  public score$ = this.score.asObservable();
 
   public getQuizData(): Quiz[] {
     return data.quizzes;
