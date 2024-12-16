@@ -64,6 +64,9 @@ export class PersonalInfoTabComponent implements OnInit {
         this.inputFields.map((field, index) => {
           const validators = [
             Validators.required,
+            field.label === 'Name'
+              ? Validators.pattern(/^[A-Za-z ]+$/) // Alphabet-only with spaces
+              : null,
             field.label === 'Email Address'
               ? Validators.pattern(
                   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
