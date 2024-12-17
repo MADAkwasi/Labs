@@ -14,7 +14,6 @@ import { rate } from '../plan-card/plan.model';
   templateUrl: './subscription-toggle.component.html',
   styleUrls: ['./subscription-toggle.component.css'],
 })
-
 export class SubscriptionToggleComponent implements OnInit, OnDestroy {
   selectedRate: rate = 'monthly';
   private subscriptions: Subscription[] = [];
@@ -41,7 +40,8 @@ export class SubscriptionToggleComponent implements OnInit, OnDestroy {
   }
 
   onToggle(): void {
-    const newRate: rate = this.selectedRate === 'monthly' ? 'yearly' : 'monthly';
+    const newRate: rate =
+      this.selectedRate === 'monthly' ? 'yearly' : 'monthly';
     this.store.dispatch(updateSubscriptionRate({ rate: newRate }));
   }
 }

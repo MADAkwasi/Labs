@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+<form [formGroup]="myForm">
   <app-plan-card></app-plan-card>
   <app-subscription-toggle></app-subscription-toggle>
   <div>
@@ -8,13 +8,11 @@
       backgroundColor="transparent"
       color="var(--grey)"
       hoveredBgColor="transparent"
-      hoveredColor="var(--denim)"
-    ></app-button>
+      hoveredColor="var(--denim)"></app-button>
     <app-button
       [url]="'/signup/add-ons'"
       text="Next Step"
       type="submit"
-      [disabled]="!(isFormValid$ | async)"
-    ></app-button>
+      [disabled]="!(isFormValid$ | async)"></app-button>
   </div>
 </form>

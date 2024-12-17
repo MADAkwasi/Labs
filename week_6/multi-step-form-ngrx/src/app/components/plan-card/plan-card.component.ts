@@ -3,7 +3,10 @@ import { Plan, rate, selectedPackage } from './plan.model';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { PlanState } from '../../state/reducers/plan.reducer';
-import { selectSelectedPlan, selectSubscriptionRate } from '../../state/selectors/plan.selector';
+import {
+  selectSelectedPlan,
+  selectSubscriptionRate,
+} from '../../state/selectors/plan.selector';
 import { updateSubscriptionPlan } from '../../state/actions/plan.action';
 
 @Component({
@@ -39,7 +42,7 @@ export class PlanCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(selectSubscriptionRate).subscribe((rate: rate) => {
-      this.subscriptionRate = rate ?? 'monthly'; // default to 'monthly' if null
+      this.subscriptionRate = rate ?? 'monthly';
     });
 
     this.store.select(selectSelectedPlan).subscribe((plan: selectedPackage) => {
@@ -48,7 +51,6 @@ export class PlanCardComponent implements OnInit {
       }
     });
   }
-
 
   onSelect(plan: Plan): void {
     const selectedPlan: selectedPackage = {

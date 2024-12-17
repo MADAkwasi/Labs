@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { updateSubscriptionPlan, updateSubscriptionRate, updatePlanFormValidity } from '../actions/plan.action';
+import {
+  updateSubscriptionPlan,
+  updateSubscriptionRate,
+  updatePlanFormValidity,
+} from '../actions/plan.action';
 import { rate, selectedPackage } from '../../components/plan-card/plan.model';
 
 export interface PlanState {

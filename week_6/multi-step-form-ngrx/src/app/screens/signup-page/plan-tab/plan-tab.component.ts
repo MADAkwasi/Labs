@@ -1,12 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlanState } from '../../../state/reducers/plan.reducer';
 import { rate } from '../../../components/plan-card/plan.model';
-import { updateSubscriptionRate, updatePlanFormValidity } from '../../../state/actions/plan.action';
-import { selectPlanIsValid, selectSubscriptionRate } from '../../../state/selectors/plan.selector';
+import {
+  updateSubscriptionRate,
+  updatePlanFormValidity,
+} from '../../../state/actions/plan.action';
+import {
+  selectPlanIsValid,
+  selectSubscriptionRate,
+} from '../../../state/selectors/plan.selector';
 import { selectPersonalInfoValid } from '../../../state/selectors/personal-info.selector';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { ButtonComponent } from '../../../components/button/button.component';
@@ -18,7 +29,14 @@ import { RootState } from '../../../state/reducers/reducers';
 @Component({
   selector: 'app-plan-tab',
   standalone: true,
-  imports: [ReactiveFormsModule, HeadingComponent, ButtonComponent, PlanCardComponent, AsyncPipe, SubscriptionToggleComponent],
+  imports: [
+    ReactiveFormsModule,
+    HeadingComponent,
+    ButtonComponent,
+    PlanCardComponent,
+    AsyncPipe,
+    SubscriptionToggleComponent,
+  ],
   templateUrl: './plan-tab.component.html',
   styleUrls: ['./plan-tab.component.css'],
 })
@@ -46,15 +64,19 @@ export class PlanTabComponent implements OnInit, OnDestroy {
       map(([personalInfoValid, planValid]) => personalInfoValid && planValid)
     );
 
-    const subscriptionRateSubscription = this.subscriptionRate$.subscribe((rate) => {
-      if (rate) {
-        this.myForm.get('subscriptionRate')?.setValue(rate);
+    const subscriptionRateSubscription = this.subscriptionRate$.subscribe(
+      (rate) => {
+        if (rate) {
+          this.myForm.get('subscriptionRate')?.setValue(rate);
+        }
       }
-    });
+    );
 
     this.myForm.valueChanges.subscribe((value) => {
       const isValid = this.myForm.valid;
-      this.store.dispatch(updateSubscriptionRate({ rate: value.subscriptionRate }));
+      this.store.dispatch(
+        updateSubscriptionRate({ rate: value.subscriptionRate })
+      );
       this.store.dispatch(updatePlanFormValidity({ isValid }));
     });
 
@@ -68,9 +90,5 @@ export class PlanTabComponent implements OnInit, OnDestroy {
   onRateChange(rate: rate): void {
     this.myForm.get('subscriptionRate')?.setValue(rate);
     this.store.dispatch(updateSubscriptionRate({ rate }));
-  }
-
-  onSubmit(){
-
   }
 }

@@ -11,7 +11,6 @@
     [type]="inputField.type"
     [placeholder]="inputField.placeholder"
     [formControl]="getFormControl($index)"
-    (blur)="getFormControl($index).markAsTouched()"
-  />
+    (blur)="getFormControl($index).markAsTouched()" />
 </div>
 }

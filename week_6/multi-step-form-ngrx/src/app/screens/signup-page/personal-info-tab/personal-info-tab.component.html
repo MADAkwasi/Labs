@@ -1,5 +1,5 @@
 <app-heading [headingText]="heading" [detailsText]="details"></app-heading>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="myForm">
   <app-input-text-field></app-input-text-field>
   <div>
     <app-button
@@ -7,7 +7,6 @@
       [url]="'/signup/plan'"
       hoveredBgColor="var(--hover)"
       type="submit"
-      [disabled]="!myForm.valid"
-    ></app-button>
+      [disabled]="!myForm.valid"></app-button>
   </div>
 </form>

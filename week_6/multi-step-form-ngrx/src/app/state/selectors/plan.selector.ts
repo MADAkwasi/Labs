@@ -15,5 +15,5 @@ export const selectSubscriptionRate = createSelector(
 
 export const selectPlanIsValid = createSelector(
   getPlanState,
-  (state: PlanState) => state.isValid // Ensure this is a boolean value
+  (state: PlanState) => state.isValid
 );
