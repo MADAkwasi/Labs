@@ -1,0 +1,10 @@
+h1 {
+  color: var(--denim);
+  font-size: 3rem;
+  margin-bottom: 1.3rem;
+}
+
+p {
+  color: var(--grey);
+  font-size: 1.6rem;
+}
