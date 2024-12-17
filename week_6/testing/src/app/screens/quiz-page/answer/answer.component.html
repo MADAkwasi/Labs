@@ -1,0 +1,46 @@
+@for(answer of answers; track $index){
+
+<div
+  class="option"
+  (click)="!isSubmitted && onSelectAnswer(answerElement, $index)"
+  [ngClass]="{
+    selected: selectedAnswer === answerElement.textContent,
+    'selected-correct': isCorrect && isSubmitted && selectIndex === $index,
+    'selected-wrong': !isCorrect && isSubmitted && selectIndex === $index
+  }"
+  (mouseover)="hoverIndex = $index"
+  (mouseout)="hoverIndex = -1"
+>
+  <span class="collective">
+    <span
+      class="answer"
+      [ngClass]="{
+        'answer-hover': hoverIndex === $index,
+        'wrong-answer': !isCorrect && selectIndex === $index && isSubmitted,
+        'correct-answer': isCorrect && selectIndex === $index && isSubmitted,
+        'answer-selected':
+          selectedAnswer === answerElement.textContent && !isSubmitted
+      }"
+      >{{ letter[$index] }}</span
+    >
+    <p #answerElement>{{ answer }}</p>
+  </span>
+
+  @if(isSubmitted && correctAnswerIndex === $index){
+  <img class="indicators" src="/assets/images/icon-correct.svg" alt="correct" />
+  }@else if (isSubmitted && !isCorrect && selectIndex === $index) {
+  <img class="indicators" src="/assets/images/icon-wrong.svg" alt="wrong" />
+  }
+</div>
+}
+
+<button (click)="isSubmitted ? onNextQuestion() : onSubmitAnswer()">
+  {{ isSubmitted ? "Next Question" : "Submit Answer" }}
+</button>
+
+@if(renderWarning){
+<div class="warning">
+  <img src="/assets/images/icon-wrong.svg" alt="wrong" />
+  <p>Please select an answer</p>
+</div>
+}
