@@ -1,0 +1,58 @@
+app-plan-card {
+  display: flex;
+  gap: 5%;
+  margin: 1.5rem 0;
+}
+
+app-subscription-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem 0;
+  background-color: var(--very-light-grey);
+  border-radius: 8px;
+  padding: 1.5rem 0;
+  gap: 1.8rem;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (max-width: 850px) {
+  div {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--white);
+    left: 0;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+  }
+
+  app-plan-card {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  app-subcription-toggle {
+    margin-top: 2rem;
+    margin-bottom: 0;
+  }
+}

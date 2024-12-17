@@ -1,0 +1,21 @@
+img {
+  width: 50rem;
+  height: 50rem;
+}
+
+a {
+  padding: 2rem 3rem;
+  background-color: var(--blue);
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: var(--very-light-grey);
+  transition: 0.3s all;
+  border: 1px solid var(--blue);
+  margin-top: 3rem;
+}
+
+a:hover {
+  background-color: var(--very-light-grey);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}

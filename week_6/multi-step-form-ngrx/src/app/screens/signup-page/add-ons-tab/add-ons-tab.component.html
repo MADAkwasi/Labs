@@ -1,0 +1,21 @@
+<app-heading [detailsText]="details" [headingText]="heading"></app-heading>
+<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+  <app-add-on-item></app-add-on-item>
+  <div>
+    <app-button
+      [url]="'/signup/plan'"
+      backgroundColor="transparent"
+      color="var(--grey)"
+      hoveredBgColor="transparent"
+      hoveredColor="var(--denim)"
+      text="Go Back"
+    ></app-button>
+    <app-button
+      [url]="'/signup/summary'"
+      [disabled]="!formValid"
+    hoveredBgColor="var(--hover)"
+    text="Next Step"
+    type="submit"
+    ></app-button>
+  </div>
+</form>
