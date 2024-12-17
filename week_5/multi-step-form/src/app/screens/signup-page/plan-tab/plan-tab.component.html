@@ -1,0 +1,29 @@
+<app-heading [detailsText]="details" [headingText]="heading"></app-heading>
+<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+  <app-plan-card
+    (planSelected)="onPlanSelected($event)"
+    [plans]="plans"
+    [selectedPlan]="myForm.get('selectedPlan')?.value"
+    [subscriptionPlan]="myForm.get('subscriptionRate')?.value"
+  ></app-plan-card>
+  <app-subcription-toggle
+    (rateChange)="myForm.get('subscriptionRate')?.setValue($event)"
+    [selectedRate]="myForm.get('subscriptionRate')?.value"
+  ></app-subcription-toggle>
+  <div>
+    <app-button
+      [url]="'/signup/personal-info'"
+      backgroundColor="transparent"
+      color="var(--grey)"
+      hoveredBgColor="transparent"
+      hoveredColor="var(--denim)"
+      text="Go Back"
+    ></app-button>
+    <app-button
+      [disabled]="!isFormValid"
+      [url]="'/signup/add-ons'"
+      text="Next Step"
+      type="submit"
+    ></app-button>
+  </div>
+</form>
