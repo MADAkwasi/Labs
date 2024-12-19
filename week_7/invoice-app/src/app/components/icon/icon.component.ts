@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './icon.component.html',
-  styleUrl: './icon.component.css'
+  styleUrl: './icon.component.css',
 })
 export class IconComponent {
-
+  @Input() imgSrc!: string;
+  @Input() altText!: string;
+  @Input() width!: number;
+  @Input() height!: number;
 }

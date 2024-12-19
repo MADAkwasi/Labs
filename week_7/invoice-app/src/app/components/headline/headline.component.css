@@ -1,0 +1,14 @@
+img {
+  width: 50%;
+  height: 50%;
+}
+
+app-icon {
+  width: 3.3rem;
+  height: 3.3rem;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Ubuntu";
+  src: url("/assets/fonts/LeagueSpartan-VariableFont_wght.ttf")
+    format("truetype");
+}
+
+:root {
+  --tertiary-color: #7c5dfa;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "League Spartan", sans-serif;
+}

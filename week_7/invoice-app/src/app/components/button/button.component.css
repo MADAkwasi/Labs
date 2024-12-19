@@ -1,0 +1,12 @@
+button {
+  padding: 1rem 1rem;
+  background-color: var(--tertiary-color);
+  border: none;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+}
