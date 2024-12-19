@@ -1,0 +1,5 @@
+::ng-deep app-invoices {
+  display: block;
+  width: 60vw;
+  padding-top: 10rem;
+}
