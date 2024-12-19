@@ -1,1 +1,10 @@
-<img [src]="imgSrc" [alt]="altText" he [height]="height" [width]="width"/>
+<img
+  [src]="imgSrc"
+  [alt]="altText"
+  [height]="height"
+  [width]="width"
+  [ngStyle]="{
+    transform: 'rotate(' + rotate + ')',
+    cursor: isInteractive ? 'pointer' : ''
+  }"
+/>

@@ -1,5 +1,21 @@
 ::ng-deep app-invoices {
-  display: block;
-  width: 60vw;
+  display: flex;
+  width: 94dvw;
   padding-top: 10rem;
+  justify-content: center;
+}
+
+main {
+  width: 100vw;
+  display: flex;
+}
+
+app-sidebar {
+  width: 6dvw;
+  height: 100dvh;
+  background-color: var(--siderbar-color);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  overflow: hidden;
+  position: relative;
 }

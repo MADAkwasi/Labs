@@ -33,6 +33,7 @@ app-icon {
   flex-direction: column;
   gap: 1.5rem;
   color: var(--filter-typography-color);
+  transition: 0.3s all;
 }
 
 .filter-options label {

@@ -1,4 +1,4 @@
-<div class="filter-dropdown">
+<div class="filter-dropdown" (click)="toggleDropdown()">
   <div class="filter-display">
     <span>
       Filter by status
@@ -7,10 +7,14 @@
         altText="down-arrow"
         [height]="9"
         [width]="14"
+        [rotate]="isOpened ? '180deg' : '0deg'"
       ></app-icon>
     </span>
   </div>
-  <div class="filter-options">
+  <div
+    class="filter-options"
+    [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
+  >
     <label>
       <input type="checkbox" value="Draft" />
       <span>Draft</span>

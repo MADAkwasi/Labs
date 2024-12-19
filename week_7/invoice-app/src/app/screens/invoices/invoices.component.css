@@ -1,3 +1,7 @@
+section {
+  width: 70%;
+}
+
 app-headline {
   display: flex;
   justify-content: space-between;

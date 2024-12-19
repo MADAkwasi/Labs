@@ -13,4 +13,6 @@ export class IconComponent {
   @Input() altText!: string;
   @Input() width!: number;
   @Input() height!: number;
+  @Input() rotate!: string;
+  @Input() isInteractive = true;
 }
