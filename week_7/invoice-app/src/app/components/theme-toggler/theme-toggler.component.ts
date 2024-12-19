@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './theme-toggler.component.html',
-  styleUrl: './theme-toggler.component.css'
+  styleUrl: './theme-toggler.component.css',
 })
-export class ThemeTogglerComponent {
-
-}
+export class ThemeTogglerComponent {}

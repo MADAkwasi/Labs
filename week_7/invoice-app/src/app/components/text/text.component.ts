@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-text',
-  standalone: true,
   imports: [],
+  standalone: true,
   templateUrl: './text.component.html',
-  styleUrl: './text.component.css'
+  styleUrl: './text.component.css',
 })
-export class TextComponent {
-
-}
+export class TextComponent {}
