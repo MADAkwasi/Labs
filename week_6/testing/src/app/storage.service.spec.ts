@@ -1,6 +1,6 @@
 import { StorageService } from './storage.service'; // Adjust the import path as needed
 
-describe('StorageService', () => {
+describe('S-torageService', () => {
   let storageService: StorageService;
 
   beforeEach(() => {
@@ -104,7 +104,7 @@ describe('StorageService', () => {
 
       const result = storageService.getData<string>(key);
 
-      expect(result).toBe(value); // In your method, this should return the value as is when JSON parsing fails.
+      expect(result).toBe(value);
     });
   });
 });

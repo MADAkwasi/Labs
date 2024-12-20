@@ -24,7 +24,7 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Switches between light and dark mode', () => {
+  it('switches between light and dark mode', () => {
     const toggleBtn = fixture.debugElement.query(By.css('input')).nativeElement;
     const body = document.body;
 
