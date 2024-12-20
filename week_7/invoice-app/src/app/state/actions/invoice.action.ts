@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Invoice, invoiceStatus } from '../../data/model';
+import { Invoice, invoiceStatus } from '../../../assets/data/model';
 
 export const invoiceActions = createActionGroup({
   source: 'Invoice Component',

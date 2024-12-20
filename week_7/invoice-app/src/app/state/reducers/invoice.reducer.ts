@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Invoice } from '../../data/model';
+import { Invoice } from '../../../assets/data/model';
 import { invoiceActions } from '../actions/invoice.action';
 
 export interface InvoiceState {

@@ -1,31 +1,28 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { inject, Injectable } from '@angular/core';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { invoiceActions } from '../actions/invoice.action';
-import { switchMap, map, catchError, of } from 'rxjs';
-import { Invoice } from '../../data/model';
+import { switchMap, map, catchError, of, tap } from 'rxjs';
+import { InvoiceService } from '../../invoice.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceEffect {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly http: HttpClient
-  ) {}
+  private readonly actions$ = inject(Actions);
+  private readonly invoiceService = inject(InvoiceService);
 
-  loadInvoices$ = createEffect(() => {
-    const { loadInvoices, loadInvoicesFailure, loadInvoicesSuccess } =
-      invoiceActions;
-
-    return this.actions$.pipe(
-      ofType(loadInvoices),
+  loadInvoices$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.loadInvoices),
       switchMap(() =>
-        this.http.get<Invoice[]>('./../../data/data.json').pipe(
-          map((invoices) => loadInvoicesSuccess({ invoices })),
-          catchError((error) => of(loadInvoicesFailure({ error })))
+        this.invoiceService.loadInvoices().pipe(
+          tap(console.log),
+          map((invoices) => invoiceActions.loadInvoicesSuccess({ invoices })),
+          catchError((error) =>
+            of(invoiceActions.loadInvoicesFailure({ error }))
+          )
         )
       )
-    );
-  });
+    )
+  );
 }
