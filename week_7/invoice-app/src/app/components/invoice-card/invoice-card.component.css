@@ -1,0 +1,68 @@
+div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  padding: 3rem 1rem;
+  border-radius: 8px;
+}
+
+p {
+  display: inline;
+  color: var(--tertiary-color);
+}
+
+.paid {
+  background-color: var(--paid-bg);
+  color: var(--paid);
+}
+
+.draft {
+  background-color: var(--draft-bg);
+  color: var(--draft);
+}
+
+.pending {
+  background-color: var(--pending-bg);
+  color: var(--pending);
+}
+
+app-badge {
+  border-radius: 8px;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  width: 10rem;
+  text-align: center;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+span {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.left {
+  text-align: left;
+  width: 60%;
+}
+
+.right {
+  text-align: right;
+  width: 40%;
+  gap: 3rem;
+}
+
+.dot {
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  margin-right: 0.6rem;
+}
+
+app-text {
+  width: 13rem;
+}

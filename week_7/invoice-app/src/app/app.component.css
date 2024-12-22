@@ -1,18 +1,19 @@
 ::ng-deep app-invoices {
   display: flex;
-  width: 94dvw;
+  width: 94vw;
   padding-top: 10rem;
   justify-content: center;
+  background-color: var(--light-bg);
 }
 
 main {
   width: 100vw;
   display: flex;
+  overflow: hidden;
 }
 
 app-sidebar {
-  width: 6dvw;
-  height: 100dvh;
+  width: 6vw;
   background-color: var(--siderbar-color);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;

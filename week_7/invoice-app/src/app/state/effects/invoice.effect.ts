@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { invoiceActions } from '../actions/invoice.action';
-import { switchMap, map, catchError, of, tap } from 'rxjs';
+import { switchMap, map, catchError, of } from 'rxjs';
 import { InvoiceService } from '../../invoice.service';
 
 @Injectable({
@@ -16,7 +16,6 @@ export class InvoiceEffect {
       ofType(invoiceActions.loadInvoices),
       switchMap(() =>
         this.invoiceService.loadInvoices().pipe(
-          tap(console.log),
           map((invoices) => invoiceActions.loadInvoicesSuccess({ invoices })),
           catchError((error) =>
             of(invoiceActions.loadInvoicesFailure({ error }))

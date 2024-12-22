@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
@@ -15,4 +15,9 @@ export class IconComponent {
   @Input() height!: number;
   @Input() rotate!: string;
   @Input() isInteractive = true;
+  @Output() onClick = new EventEmitter();
+
+  handleClick() {
+    this.onClick.emit();
+  }
 }

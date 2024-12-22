@@ -24,7 +24,7 @@ app-icon {
 }
 
 .title h1 {
-  color: var(--text-secondary-color);
+  color: var(--base-black);
 }
 
 .title p {

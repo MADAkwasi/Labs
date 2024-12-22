@@ -5,12 +5,23 @@
 }
 
 :root {
-  --tertiary-color: #7c5dfa;
-  --text-secondary-color: #0c0e16;
+  --primary-color: #7c5dfa;
+  --base-black: #0c0e16;
   --text-primary-color: #888eb0;
-  --accent-color: #dfe3fa;
-  --filter-typography-color: #1e2139;
+  --grey: #dfe3fa;
+  --secondary-color: #1e2139;
   --siderbar-color: #373b53;
+  --light-bg: #f8f8fb;
+  --dark-bg: #141625;
+  --error: #ec5757;
+  --tertiary-color: #7e88c3;
+  --white: #fff;
+  --paid: #33d69f;
+  --paid-bg: #33d6a02e;
+  --draft: #373b53;
+  --draft-bg: #373b532e;
+  --pending: #ff8f00;
+  --pending-bg: #ff910017;
 }
 
 *,
@@ -32,4 +43,5 @@ body {
   width: 100vw;
   color: var(--text-primary-color);
   letter-spacing: 0.5px;
+  overflow-x: hidden;
 }

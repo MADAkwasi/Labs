@@ -3,7 +3,7 @@
   display: inline-block;
   width: 16rem;
   cursor: pointer;
-  color: var(--text-secondary-color);
+  color: var(--base-black);
   font-size: 1.2rem;
 }
 
@@ -32,7 +32,7 @@ app-icon {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: var(--filter-typography-color);
+  color: var(--secondary-color);
   transition: 0.3s all;
 }
 
@@ -54,16 +54,16 @@ app-icon {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  background-color: var(--accent-color);
+  background-color: var(--grey);
 }
 
 .filter-options input[type="checkbox"]:hover {
-  border: 1px solid #7c5dfa;
+  border: 1px solid var(--primary-color);
 }
 
 .filter-options input[type="checkbox"]:checked {
-  background-color: #7c5dfa;
-  border-color: #7c5dfa;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .filter-options input[type="checkbox"]:checked::after {

@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-text',
-  imports: [],
+  imports: [CommonModule],
   standalone: true,
   templateUrl: './text.component.html',
   styleUrl: './text.component.css',
 })
-export class TextComponent {}
+export class TextComponent {
+  @Input() type = 'normal';
+  @Input() size!: string;
+  @Input() color!: string;
+}
