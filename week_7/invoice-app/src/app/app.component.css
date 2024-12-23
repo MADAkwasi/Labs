@@ -14,7 +14,6 @@
 main {
   width: 100vw;
   display: flex;
-  overflow: hidden;
 }
 
 app-sidebar {

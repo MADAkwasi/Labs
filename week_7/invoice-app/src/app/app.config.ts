@@ -12,6 +12,7 @@ import { invoiceReducer } from './state/reducers/invoice.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 import { InvoiceEffect } from './state/effects/invoice.effect';
+import { interactionsReducer } from './state/reducers/interactions.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(),
     provideState({ name: 'invoices', reducer: invoiceReducer }),
+    provideState({ name: 'interactions', reducer: interactionsReducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([InvoiceEffect]),
     provideHttpClient(),

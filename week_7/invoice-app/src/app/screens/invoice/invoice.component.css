@@ -4,6 +4,7 @@ section {
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
+  position: relative;
 }
 
 app-icon {
@@ -122,4 +123,18 @@ p {
 
 .grid-row app-text:first-child {
   text-align: left;
+}
+
+app-delete-card {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  z-index: 3;
+  border-radius: 8px;
 }

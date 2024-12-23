@@ -8,6 +8,8 @@
         : '',
     color: color ? color : ''
   }"
+  (click)="handleClick()"
+  [disabled]="disabled"
 >
   <ng-content></ng-content>
 </button>

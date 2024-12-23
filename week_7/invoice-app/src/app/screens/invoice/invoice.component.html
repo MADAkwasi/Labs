@@ -18,8 +18,14 @@
 
     <span>
       <app-button color="var(--edit-text-color)" type="edit">Edit</app-button>
-      <app-button type="delete">Delete</app-button>
-      <app-button>Mark as Paid</app-button>
+      <app-button type="delete" (onClick)="onClickDeleteBtn()"
+        >Delete</app-button
+      >
+      <app-button
+        [disabled]="invoice()?.status === 'draft'"
+        (onClick)="onChangeStatus(invoice()?.status)"
+        >Mark as Paid</app-button
+      >
     </span>
   </div>
 
@@ -137,4 +143,10 @@
       }}</app-text>
     </div>
   </div>
+  @if(wantsToDelete()){
+  <app-delete-card></app-delete-card>
+  }
 </section>
+@if(wantsToDelete()){
+<app-dialog></app-dialog>
+}
