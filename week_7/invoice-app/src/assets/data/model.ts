@@ -8,7 +8,7 @@ export interface Invoice {
   clientEmail: string;
   status: invoiceStatus;
   senderAddress: Address;
-  clientAdrress: Address;
+  clientAddress: Address;
   items: Item[];
   total: number;
 }

@@ -1,3 +1,13 @@
-<button>
+<button
+  [ngStyle]="{
+    backgroundColor:
+      type === 'delete'
+        ? 'var(--delete)'
+        : type === 'edit'
+        ? 'var(--edit)'
+        : '',
+    color: color ? color : ''
+  }"
+>
   <ng-content></ng-content>
 </button>

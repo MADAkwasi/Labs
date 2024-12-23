@@ -1,0 +1,125 @@
+section {
+  width: 70%;
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+app-icon {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.header {
+  display: flex;
+  background-color: var(--white);
+  justify-content: space-between;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.header span {
+  gap: 1.5rem;
+}
+
+span {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.content {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 3rem 5rem;
+  flex-direction: column;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.details {
+  margin: 2rem 0;
+  display: flex;
+  width: 100%;
+  gap: 7rem;
+}
+
+.item {
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.address {
+  flex-direction: column;
+  text-align: right;
+}
+
+p {
+  display: inline-block;
+  color: var(--text-primary-color);
+}
+
+.date,
+.date__created,
+.date__due {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.details app-text,
+.description app-text {
+  width: 15rem;
+}
+
+.client {
+  flex-direction: column;
+}
+
+.email {
+  flex-direction: column;
+}
+
+.quantitative {
+  padding: 2.5rem 3rem;
+  background-color: var(--item-summary-bg);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top: 3.5rem;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--total-bg);
+  height: 7rem;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 0 3rem;
+}
+
+.grid-item {
+  margin-top: 3rem;
+}
+
+.grid-row app-text {
+  text-align: right;
+}
+
+.grid-row app-text:first-child {
+  text-align: left;
+}

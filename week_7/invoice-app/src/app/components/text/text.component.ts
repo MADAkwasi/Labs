@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './text.component.css',
 })
 export class TextComponent {
-  @Input() type = 'normal';
+  @Input() type: 'normal' | 'emphasis' = 'normal';
   @Input() size!: string;
   @Input() color!: string;
 }

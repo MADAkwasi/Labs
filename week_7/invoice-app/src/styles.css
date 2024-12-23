@@ -8,6 +8,7 @@
   --primary-color: #7c5dfa;
   --base-black: #0c0e16;
   --text-primary-color: #888eb0;
+  --text-secondary-color: #858bb2;
   --grey: #dfe3fa;
   --secondary-color: #1e2139;
   --siderbar-color: #373b53;
@@ -22,6 +23,11 @@
   --draft-bg: #373b532e;
   --pending: #ff8f00;
   --pending-bg: #ff910017;
+  --edit: #f9fafe;
+  --edit-text-color: #7e88c3;
+  --delete: #ec5757;
+  --item-summary-bg: #f9fafe;
+  --total-bg: #373b53;
 }
 
 *,

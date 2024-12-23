@@ -1,9 +1,14 @@
-::ng-deep app-invoices {
+::ng-deep app-invoices,
+::ng-deep app-invoice {
   display: flex;
   width: 94vw;
   padding-top: 10rem;
   justify-content: center;
   background-color: var(--light-bg);
+}
+
+::ng-deep app-invoice {
+  padding-top: 5rem;
 }
 
 main {
