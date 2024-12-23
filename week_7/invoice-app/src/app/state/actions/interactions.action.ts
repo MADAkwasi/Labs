@@ -5,5 +5,7 @@ export const interactionsActions = createActionGroup({
   events: {
     handleDelete: emptyProps(),
     cancelDelete: emptyProps(),
+    openForm: emptyProps(),
+    closeForm: emptyProps(),
   },
 });

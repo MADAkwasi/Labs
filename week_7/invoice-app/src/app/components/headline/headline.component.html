@@ -1,6 +1,12 @@
 <span class="title">
-  <h1>Invoices</h1>
-  <p>There are {{ invoices().length }} total invoices</p>
+  <app-text type="emphasis" size="4rem">Invoices</app-text>
+  @if(!!invoices().length){
+  <app-text size="1.3rem"
+    >There are {{ invoices().length }} total invoices</app-text
+  >
+  }@else {
+  <app-text>No invoices</app-text>
+  }
 </span>
 
 <span class="actions">

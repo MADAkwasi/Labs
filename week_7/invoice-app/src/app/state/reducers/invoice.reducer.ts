@@ -29,14 +29,19 @@ export const invoiceReducer = createReducer(
 
   on(loadInvoices, (state) => ({
     ...state,
-    isLoading: true,
+    isLoading: state.invoices.length === 0,
     error: null,
   })),
 
   on(loadInvoicesSuccess, (state, { invoices }) => ({
     ...state,
-    invoices,
     isLoading: false,
+    invoices: [
+      ...state.invoices.filter((inv) =>
+        invoices.every((newInv) => newInv.id !== inv.id)
+      ),
+      ...invoices,
+    ],
   })),
 
   on(loadInvoicesFailure, (state, { error }) => ({

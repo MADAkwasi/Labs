@@ -4,11 +4,12 @@ import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
 import { Store } from '@ngrx/store';
 import { selectAllInvoices } from '../../state/selectors/invoice.selector';
+import { TextComponent } from "../text/text.component";
 
 @Component({
   selector: 'app-headline',
   standalone: true,
-  imports: [ButtonComponent, IconComponent, FilterComponent],
+  imports: [ButtonComponent, IconComponent, FilterComponent, TextComponent],
   templateUrl: './headline.component.html',
   styleUrl: './headline.component.css',
 })
