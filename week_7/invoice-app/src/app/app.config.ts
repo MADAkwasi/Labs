@@ -13,12 +13,16 @@ import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 import { InvoiceEffect } from './state/effects/invoice.effect';
 import { interactionsReducer } from './state/reducers/interactions.reducer';
+import {
+  reducers,
+  metaReducers,
+} from './state/reducers/local-storage-sync.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore(),
+    provideStore(reducers, { metaReducers }),
     provideState({ name: 'invoices', reducer: invoiceReducer }),
     provideState({ name: 'interactions', reducer: interactionsReducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

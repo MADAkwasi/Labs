@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { selectLoadingState } from '../../state/selectors/invoice.selector';
 import { InvoiceCardComponent } from '../../components/invoice-card/invoice-card.component';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 @Component({
   selector: 'app-invoices',
