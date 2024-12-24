@@ -1,0 +1,125 @@
+<app-text type="emphasis" size="2.1rem">New Invoice</app-text>
+<form>
+  <section class="sender-address">
+    <app-text color="var(--primary-color)" size="1.2rem">Bill From</app-text>
+    <div class="input-field">
+      <label>Street Address</label>
+      <input type="text" />
+    </div>
+    <div class="address">
+      <div class="input-field">
+        <label>City</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label>Post Code</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label>Country</label>
+        <input type="text" />
+      </div>
+    </div>
+  </section>
+
+  <section class="client-address">
+    <app-text color="var(--primary-color)" size="1.2rem">Bill To</app-text>
+    <div>
+      <div class="input-field">
+        <label>Client's Name</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label placeholder="e.g. email@example.com">Client's Email</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label>Street Address</label>
+        <input type="text" />
+      </div>
+    </div>
+
+    <div class="address">
+      <div class="input-field">
+        <label>City</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label>Post Code</label>
+        <input type="text" />
+      </div>
+      <div class="input-field">
+        <label>Country</label>
+        <input type="text" />
+      </div>
+    </div>
+
+    <div class="dates">
+      <div class="input-field">
+        <label>Invoice Date</label>
+        <input type="date" />
+      </div>
+
+      <div class="input-field">
+        <label>Payment Terms</label>
+        <div class="filter-dropdown" (click)="toggleDropdown()">
+          <div class="filter-display">
+            <span>
+              <app-text type="emphasis" size="1.3rem">Next 30 days</app-text>
+              <app-icon
+                imgSrc="/assets/images/icon-arrow-down.svg"
+                altText="down-arrow"
+                [height]="9"
+                [width]="14"
+                [rotate]="isOpened ? '180deg' : '0deg'"
+              ></app-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-field">
+      <label>Project Description</label>
+      <input type="text" placeholder="e.g. Graphic Design Service" />
+    </div>
+
+    <div class="items">
+      <app-text size="2rem" type="emphasis" color="var(--accent-1)"
+        >Item List</app-text
+      >
+      <div class="grid-row">
+        <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
+          >Item Name</app-text
+        >
+        <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
+          >QTY.</app-text
+        >
+        <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
+          >Price</app-text
+        >
+        <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
+          >Total</app-text
+        >
+      </div>
+
+      <app-button type="add" color="var(--tertiary-color)"
+        >+ Add New Item</app-button
+      >
+    </div>
+  </section>
+</form>
+
+<footer>
+  <app-button
+    (onClick)="handleDiscard()"
+    type="edit"
+    color="var(--tertiary-color)"
+    >Discard</app-button
+  >
+
+  <span>
+    <app-button type="draft">Save as Draft</app-button>
+    <app-button>Save & Send</app-button>
+  </span>
+</footer>

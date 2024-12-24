@@ -11,3 +11,14 @@ button {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.addBtn {
+  width: 100%;
+  background-color: var(--item-summary-bg);
+  padding: 1.5rem 0;
+}
+
+.draft {
+  background-color: var(--sidebar-color);
+  color: var(--text-primary-color);
+}

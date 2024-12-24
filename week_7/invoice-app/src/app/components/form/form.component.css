@@ -1,0 +1,111 @@
+form {
+  margin-top: 5rem;
+}
+
+.input-field {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 2.5rem;
+}
+
+footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer span {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.sender-address {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin-bottom: 4rem;
+}
+
+.address {
+  display: flex;
+  gap: 5%;
+}
+
+.address .input-field {
+  width: 30%;
+}
+
+.dates {
+  display: flex;
+  gap: 10%;
+}
+
+.dates .input-field {
+  width: 45%;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.items {
+  margin: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  border: 1px solid var(--tertiary-color);
+  border-radius: 6px;
+  outline: none;
+}
+
+input:active,
+input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+input[type="date"] {
+  padding: 1rem;
+  border: 1px solid var(--tertiary-color);
+  border-radius: 6px;
+  outline: none;
+}
+
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  color: var(--base-black);
+  font-size: 1.2rem;
+  margin-top: auto;
+  border: 1px solid var(--tertiary-color);
+  border-radius: 6px;
+  padding: 2px 0;
+}
+
+app-icon {
+  margin-left: 1rem;
+}
+
+.filter-display {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  user-select: none;
+}
+
+.filter-display span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

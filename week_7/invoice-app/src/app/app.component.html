@@ -1,4 +1,10 @@
-<main>
+<main #main>
   <app-sidebar></app-sidebar>
+  @if(isFormActive()){
+  <app-form #appForm></app-form>
+  }
   <router-outlet></router-outlet>
 </main>
+@if(isFormActive()){
+<app-dialog [height]="formHeight"></app-dialog>
+}

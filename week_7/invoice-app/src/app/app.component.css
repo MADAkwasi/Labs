@@ -18,9 +18,36 @@ main {
 
 app-sidebar {
   width: 12rem;
-  background-color: var(--siderbar-color);
+  background-color: var(--sidebar-color);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   overflow: hidden;
   position: relative;
+  z-index: 5;
+}
+
+app-form {
+  position: absolute;
+  top: 0;
+  left: 10rem;
+  background-color: var(--white);
+  width: 45%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transform: translateX(-50rem);
+  transition: transform 0.5s;
+  animation: slidein 0.5s forwards;
+  z-index: 4;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-50rem);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

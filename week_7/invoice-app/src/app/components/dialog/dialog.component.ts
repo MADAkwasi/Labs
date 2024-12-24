@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
 })
-export class DialogComponent {}
+export class DialogComponent {
+  @Input() height!: number;
+}

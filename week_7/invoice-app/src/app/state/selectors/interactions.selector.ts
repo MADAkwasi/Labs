@@ -8,3 +8,8 @@ export const selectDeleteState = createSelector(
   selectInteractionState,
   (state: InteractionsState) => state.wantsToDelete
 );
+
+export const selectFormState = createSelector(
+  selectInteractionState,
+  (state: InteractionsState) => state.isFormActive
+);

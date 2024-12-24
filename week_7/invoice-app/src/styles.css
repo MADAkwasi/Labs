@@ -11,7 +11,7 @@
   --text-secondary-color: #858bb2;
   --grey: #dfe3fa;
   --secondary-color: #1e2139;
-  --siderbar-color: #373b53;
+  --sidebar-color: #373b53;
   --light-bg: #f8f8fb;
   --dark-bg: #141625;
   --error: #ec5757;
@@ -28,6 +28,7 @@
   --delete: #ec5757;
   --item-summary-bg: #f9fafe;
   --total-bg: #373b53;
+  --accent-1: #777f98;
 }
 
 *,

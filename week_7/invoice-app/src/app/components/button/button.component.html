@@ -8,6 +8,7 @@
         : '',
     color: color ? color : ''
   }"
+  [ngClass]="{ addBtn: type === 'add', draft: type === 'draft' }"
   (click)="handleClick()"
   [disabled]="disabled"
 >

@@ -4,7 +4,8 @@ import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
 import { Store } from '@ngrx/store';
 import { selectAllInvoices } from '../../state/selectors/invoice.selector';
-import { TextComponent } from "../text/text.component";
+import { TextComponent } from '../text/text.component';
+import { interactionsActions } from '../../state/actions/interactions.action';
 
 @Component({
   selector: 'app-headline',
@@ -16,4 +17,8 @@ import { TextComponent } from "../text/text.component";
 export class HeadlineComponent {
   private readonly store = inject(Store);
   invoices = this.store.selectSignal(selectAllInvoices);
+
+  openForm() {
+    this.store.dispatch(interactionsActions.openForm());
+  }
 }
