@@ -61,7 +61,7 @@ footer span {
   gap: 2rem;
 }
 
-input[type="text"] {
+input {
   padding: 1rem;
   border: 1px solid var(--tertiary-color);
   border-radius: 6px;
@@ -73,14 +73,7 @@ input:focus {
   outline: 1px solid var(--primary-color);
 }
 
-input[type="date"] {
-  padding: 1rem;
-  border: 1px solid var(--tertiary-color);
-  border-radius: 6px;
-  outline: none;
-}
-
-.filter-dropdown {
+.due-date-dropdown {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -97,15 +90,89 @@ app-icon {
   margin-left: 1rem;
 }
 
-.filter-display {
+.due-date-display {
   padding: 10px;
   border-radius: 4px;
   text-align: center;
   user-select: none;
 }
 
-.filter-display span {
+.due-date-display span {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.due-date-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 1rem;
+  border: none;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: var(--secondary-color);
+  transition: 0.3s all;
+}
+
+.due-date-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.5rem 0;
+}
+
+label p {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.due-date-options label:hover p {
+  color: var(--primary-color);
+}
+
+hr {
+  border: 1px solid var(--tertiary-color);
+  opacity: 0.1;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+}
+
+input[type="radio"]:checked + p {
+  color: var(--primary-color);
+}
+
+.grid-row-input {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 5%;
+}
+
+.grid-row-input input {
+  width: 100%;
+}
+
+.grid-row-input span {
+  display: flex;
+  align-items: center;
+}
+
+#total {
+  border: none;
+  background-color: transparent;
+  padding-left: 0;
+}
+
+app-text {
+  color: red;
 }

@@ -1,25 +1,27 @@
 <app-text type="emphasis" size="2.1rem">New Invoice</app-text>
-<form>
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
   <section class="sender-address">
     <app-text color="var(--primary-color)" size="1.2rem">Bill From</app-text>
-    <div class="input-field">
-      <label>Street Address</label>
-      <input type="text" />
-    </div>
-    <div class="address">
+    <ng-container formGroupName="senderAddress">
       <div class="input-field">
-        <label>City</label>
-        <input type="text" />
+        <label>Street Address</label>
+        <input type="text" formControlName="street" />
       </div>
-      <div class="input-field">
-        <label>Post Code</label>
-        <input type="text" />
+      <div class="address">
+        <div class="input-field">
+          <label>City</label>
+          <input type="text" formControlName="city" />
+        </div>
+        <div class="input-field">
+          <label>Post Code</label>
+          <input type="text" formControlName="postCode" />
+        </div>
+        <div class="input-field">
+          <label>Country</label>
+          <input type="text" formControlName="country" />
+        </div>
       </div>
-      <div class="input-field">
-        <label>Country</label>
-        <input type="text" />
-      </div>
-    </div>
+    </ng-container>
   </section>
 
   <section class="client-address">
@@ -27,45 +29,54 @@
     <div>
       <div class="input-field">
         <label>Client's Name</label>
-        <input type="text" />
+        <input type="text" formControlName="clientName" />
       </div>
       <div class="input-field">
         <label placeholder="e.g. email@example.com">Client's Email</label>
-        <input type="text" />
+        <input type="text" formControlName="clientEmail" />
       </div>
-      <div class="input-field">
-        <label>Street Address</label>
-        <input type="text" />
-      </div>
+
+      <ng-container formGroupName="clientAddress">
+        <div class="input-field">
+          <label>Street Address</label>
+          <input type="text" formControlName="street" />
+        </div>
+      </ng-container>
     </div>
 
     <div class="address">
-      <div class="input-field">
-        <label>City</label>
-        <input type="text" />
-      </div>
-      <div class="input-field">
-        <label>Post Code</label>
-        <input type="text" />
-      </div>
-      <div class="input-field">
-        <label>Country</label>
-        <input type="text" />
-      </div>
+      <ng-container formGroupName="clientAddress">
+        <div class="input-field">
+          <label>City</label>
+          <input type="text" formControlName="city" />
+        </div>
+        <div class="input-field">
+          <label>Post Code</label>
+          <input type="text" formControlName="postCode" />
+        </div>
+        <div class="input-field">
+          <label>Country</label>
+          <input type="text" formControlName="country" />
+        </div>
+      </ng-container>
     </div>
 
     <div class="dates">
       <div class="input-field">
         <label>Invoice Date</label>
-        <input type="date" />
+        <input type="date" formControlName="createdAt" [disabled]="true" />
       </div>
 
       <div class="input-field">
         <label>Payment Terms</label>
-        <div class="filter-dropdown" (click)="toggleDropdown()">
-          <div class="filter-display">
+        <div class="due-date-dropdown" (click)="toggleDropdown()">
+          <div class="due-date-display">
             <span>
-              <app-text type="emphasis" size="1.3rem">Next 30 days</app-text>
+              <app-text type="emphasis" size="1.3rem">{{
+                paymentTerms() === 1
+                  ? "Next 1 day"
+                  : "Next " + paymentTerms() + " days"
+              }}</app-text>
               <app-icon
                 imgSrc="/assets/images/icon-arrow-down.svg"
                 altText="down-arrow"
@@ -75,13 +86,62 @@
               ></app-icon>
             </span>
           </div>
+
+          <div
+            class="due-date-options"
+            [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
+          >
+            <label>
+              <input
+                type="radio"
+                value="1"
+                name="paymentTerms"
+                formControlName="paymentTerms"
+              />
+              <p type="emphasis" size="1.3rem">Next 1 day</p>
+            </label>
+            <hr />
+            <label>
+              <input
+                type="radio"
+                value="7"
+                name="paymentTerms"
+                formControlName="paymentTerms"
+              />
+              <p type="emphasis" size="1.3rem">Next 7 days</p>
+            </label>
+            <hr />
+            <label>
+              <input
+                type="radio"
+                value="14"
+                name="paymentTerms"
+                formControlName="paymentTerms"
+              />
+              <p type="emphasis" size="1.3rem">Next 14 days</p>
+            </label>
+            <hr />
+            <label>
+              <input
+                type="radio"
+                value="30"
+                name="paymentTerms"
+                formControlName="paymentTerms"
+              />
+              <p type="emphasis" size="1.3rem">Next 30 days</p>
+            </label>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="input-field">
       <label>Project Description</label>
-      <input type="text" placeholder="e.g. Graphic Design Service" />
+      <input
+        type="text"
+        placeholder="e.g. Graphic Design Service"
+        formControlName="description"
+      />
     </div>
 
     <div class="items">
@@ -103,7 +163,41 @@
         >
       </div>
 
-      <app-button type="add" color="var(--tertiary-color)"
+      <ng-container formArrayName="items">
+        @for(item of itemsArray(); track $index){
+        <div class="grid-row-input" [formGroupName]="$index">
+          <input type="text" formControlName="name" />
+          <input
+            type="number"
+            formControlName="quantity"
+            min="1"
+            (input)="updateTotal($index)"
+          />
+          <input
+            type="number"
+            formControlName="price"
+            min="0"
+            (input)="updateTotal($index)"
+          />
+          <span>
+            <input id="total" type="number" formControlName="total" />
+            <app-icon
+              imgSrc="/assets/images/icon-delete.svg"
+              altText="trash-can"
+              [height]="14"
+              [width]="14"
+              [isInteractive]="true"
+              (onClick)="handleDeleteItem()"
+            ></app-icon>
+          </span>
+        </div>
+        }
+      </ng-container>
+
+      <app-button
+        type="add"
+        color="var(--tertiary-color)"
+        (onClick)="handleAddItem()"
         >+ Add New Item</app-button
       >
     </div>
@@ -120,6 +214,6 @@
 
   <span>
     <app-button type="draft">Save as Draft</app-button>
-    <app-button>Save & Send</app-button>
+    <app-button (onClick)="handleSend()">Save & Send</app-button>
   </span>
 </footer>

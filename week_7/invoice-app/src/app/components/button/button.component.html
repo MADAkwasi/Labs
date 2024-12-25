@@ -9,7 +9,7 @@
     color: color ? color : ''
   }"
   [ngClass]="{ addBtn: type === 'add', draft: type === 'draft' }"
-  (click)="handleClick()"
+  (click)="handleClick($event)"
   [disabled]="disabled"
 >
   <ng-content></ng-content>

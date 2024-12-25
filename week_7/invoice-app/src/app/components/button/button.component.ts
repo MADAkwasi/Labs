@@ -14,7 +14,8 @@ export class ButtonComponent {
   @Input() disabled!: boolean;
   @Output() onClick = new EventEmitter();
 
-  handleClick() {
+  handleClick(event: Event) {
+    event.preventDefault();
     this.onClick.emit();
   }
 }
