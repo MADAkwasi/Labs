@@ -13,6 +13,7 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { selectDeleteState } from '../../state/selectors/interactions.selector';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { invoiceStatus } from '../../../assets/data/model';
+import { InvoiceService } from '../../invoice.service';
 
 @Component({
   selector: 'app-invoice',
@@ -35,6 +36,7 @@ export class InvoiceComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
+  private readonly invoiceService = inject(InvoiceService);
   invoices = this.store.selectSignal(selectAllInvoices);
   idSignal = signal<string | null>(null);
   invoice = computed(() =>
@@ -44,6 +46,7 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     const { id } = this.activatedRoute.snapshot.params;
+    this.store.dispatch(invoiceActions.setActiveInvoice({ invoiceId: id }));
     this.idSignal.set(id);
 
     if (!this.invoices() || this.invoices().length === 0) {
@@ -53,6 +56,10 @@ export class InvoiceComponent implements OnInit {
 
   handleNaviagteBack(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  handleEditInvoice(): void {
+    this.store.dispatch(interactionsActions.editForm());
   }
 
   onClickDeleteBtn(): void {

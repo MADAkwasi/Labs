@@ -176,3 +176,8 @@ input[type="radio"]:checked + p {
 app-text {
   color: red;
 }
+
+app-text p {
+  display: inline-block;
+  color: var(--tertiary-color);
+}

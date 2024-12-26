@@ -8,6 +8,8 @@ export const invoiceActions = createActionGroup({
     loadInvoicesSuccess: props<{ invoices: Invoice[] }>(),
     loadInvoicesFailure: props<{ error: any }>(),
 
+    setActiveInvoice: props<{ invoiceId: string }>(),
+    addItem: emptyProps(),
     addInvoice: props<{ invoice: Invoice }>(),
     updateInvoice: props<{ invoice: Invoice }>(),
     deleteInvoice: props<{ invoiceId: string }>(),

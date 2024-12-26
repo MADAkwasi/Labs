@@ -4,11 +4,13 @@ import { interactionsActions } from '../actions/interactions.action';
 export interface InteractionsState {
   wantsToDelete: boolean;
   isFormActive: boolean;
+  isEditing: boolean;
 }
 
 const initialState: InteractionsState = {
   wantsToDelete: false,
   isFormActive: false,
+  isEditing: false,
 };
 
 export const interactionsReducer = createReducer(
@@ -32,5 +34,12 @@ export const interactionsReducer = createReducer(
   on(interactionsActions.closeForm, (state) => ({
     ...state,
     isFormActive: false,
+    isEditing: false,
+  })),
+
+  on(interactionsActions.editForm, (state) => ({
+    ...state,
+    isFormActive: true,
+    isEditing: true,
   }))
 );

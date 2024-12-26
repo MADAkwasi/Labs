@@ -18,3 +18,8 @@ export const selectError = createSelector(
   selectInvoiceState,
   (state: InvoiceState) => state.error
 );
+
+export const selectActiveInvoice = createSelector(
+  selectInvoiceState,
+  (state: InvoiceState) => state.activeInvoice
+);

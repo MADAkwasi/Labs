@@ -18,10 +18,12 @@ import { ButtonComponent } from '../button/button.component';
 import { Store } from '@ngrx/store';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { IconComponent } from '../icon/icon.component';
-import { Item } from '../../../assets/data/model';
+import { Invoice, Item } from '../../../assets/data/model';
 import { CommonModule } from '@angular/common';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { addDays } from 'date-fns';
+import { selectActiveInvoice } from '../../state/selectors/invoice.selector';
+import { selectEditState } from '../../state/selectors/interactions.selector';
 
 @Component({
   selector: 'app-form',
@@ -42,6 +44,8 @@ export class FormComponent implements OnInit {
   isOpened!: boolean;
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
+  selectedInvoice = this.store.selectSignal(selectActiveInvoice);
+  isEditingForm = this.store.selectSignal(selectEditState);
   paymentDue = computed(() => {
     const createdAt = this.invoiceForm?.get('createdAt')?.value || new Date();
     return addDays(new Date(createdAt), this.paymentTerms());
@@ -82,11 +86,14 @@ export class FormComponent implements OnInit {
       total: [{ value: 0 }],
     });
 
-    this.calulatePaymentDueDate();
+    this.calculatePaymentDueDate();
 
     this.setupItemTotalCalculation();
 
     this.setupPaymentTermsSync();
+
+    if (this.isEditingForm())
+      this.populateForm(this.selectedInvoice() as Invoice);
   }
 
   createItem(): FormGroup {
@@ -113,12 +120,33 @@ export class FormComponent implements OnInit {
     return `${randomLetters}${randomDigits}`;
   }
 
-  addItem(): void {
-    this.items.push(this.createItem());
-  }
+  // addItem(): void {
+  //   this.items.push(this.createItem());
+  // }
 
-  removeItem(index: number): void {
-    this.items.removeAt(index);
+  // removeItem(index: number): void {
+  //   this.items.removeAt(index);
+  // }
+
+  populateForm(invoice: Invoice) {
+    this.invoiceForm.patchValue(invoice);
+
+    const itemsControl = this.invoiceForm.get('items') as FormArray;
+    if (itemsControl && invoice.items) {
+      invoice.items.forEach((item, i) => {
+        if (i !== 0)
+          return itemsControl.push(
+            this.fb.group({
+              name: [item.name],
+              quantity: [item.quantity],
+              price: [item.price],
+              total: [item.total],
+            })
+          );
+      });
+    }
+
+    console.log(itemsControl);
   }
 
   setupItemTotalCalculation(): void {
@@ -174,7 +202,7 @@ export class FormComponent implements OnInit {
       ?.setValue(paymentDueDate, { emitEvent: false });
   }
 
-  calulatePaymentDueDate() {
+  calculatePaymentDueDate() {
     this.invoiceForm
       .get('paymentTerms')
       ?.valueChanges.subscribe((terms: number) => {
@@ -214,11 +242,24 @@ export class FormComponent implements OnInit {
 
   handleDiscard(): void {
     this.store.dispatch(interactionsActions.closeForm());
+    this.invoiceForm.reset();
   }
 
   handleAddItem(): void {
+    if (this.isEditingForm()) this.store.dispatch(invoiceActions.addItem());
+
     this.itemsCount.update((count) => count + 1);
     this.items.push(this.createItem());
+  }
+
+  handleDraft(): void {
+    this.invoiceForm.get('status')?.setValue('draft', { emitEvent: false });
+    this.items.removeAt(this.items.length - 1);
+    this.store.dispatch(
+      invoiceActions.addInvoice({ invoice: this.invoiceForm.getRawValue() })
+    );
+    this.invoiceForm.reset();
+    this.store.dispatch(interactionsActions.closeForm());
   }
 
   handleSend(): void {
@@ -227,7 +268,6 @@ export class FormComponent implements OnInit {
     this.store.dispatch(
       invoiceActions.addInvoice({ invoice: this.invoiceForm.getRawValue() })
     );
-    console.log(this);
     this.invoiceForm.reset();
     this.itemsCount.set(0);
     this.items.clear();

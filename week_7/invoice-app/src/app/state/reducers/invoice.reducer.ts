@@ -4,12 +4,14 @@ import { invoiceActions } from '../actions/invoice.action';
 
 export interface InvoiceState {
   invoices: Invoice[];
+  activeInvoice: Invoice | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialInvoiceState: InvoiceState = {
   invoices: [],
+  activeInvoice: null,
   isLoading: false,
   error: null,
 };
@@ -22,6 +24,8 @@ const {
   updateInvoice,
   updateInvoiceStatus,
   addInvoice,
+  setActiveInvoice,
+  addItem,
 } = invoiceActions;
 
 export const invoiceReducer = createReducer(
@@ -50,6 +54,13 @@ export const invoiceReducer = createReducer(
     error,
   })),
 
+  on(setActiveInvoice, (state, { invoiceId }) => ({
+    ...state,
+    activeInvoice: state.invoices.find(
+      (inv) => inv.id === invoiceId
+    ) as Invoice,
+  })),
+
   on(addInvoice, (state, { invoice }) => ({
     ...state,
     invoices: [...state.invoices, invoice],
@@ -72,5 +83,27 @@ export const invoiceReducer = createReducer(
     invoices: state.invoices.map((inv) =>
       inv.id === invoiceId ? { ...inv, status } : inv
     ),
-  }))
+  })),
+
+  on(addItem, (state) => {
+    if (!state.activeInvoice) {
+      return state;
+    }
+
+    return {
+      ...state,
+      activeInvoice: {
+        ...state.activeInvoice,
+        items: [
+          ...(state.activeInvoice.items || []),
+          {
+            name: '',
+            quantity: 1,
+            price: 0,
+            total: 0,
+          },
+        ],
+      },
+    };
+  })
 );

@@ -17,7 +17,12 @@
     </span>
 
     <span>
-      <app-button color="var(--edit-text-color)" type="edit">Edit</app-button>
+      <app-button
+        color="var(--edit-text-color)"
+        type="edit"
+        (onClick)="handleEditInvoice()"
+        >Edit</app-button
+      >
       <app-button type="delete" (onClick)="onClickDeleteBtn()"
         >Delete</app-button
       >

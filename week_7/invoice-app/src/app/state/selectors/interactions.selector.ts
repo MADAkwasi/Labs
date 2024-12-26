@@ -13,3 +13,8 @@ export const selectFormState = createSelector(
   selectInteractionState,
   (state: InteractionsState) => state.isFormActive
 );
+
+export const selectEditState = createSelector(
+  selectInteractionState,
+  (state: InteractionsState) => state.isEditing
+);
