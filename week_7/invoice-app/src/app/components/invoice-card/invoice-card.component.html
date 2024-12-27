@@ -1,5 +1,5 @@
 @for(invoice of invoices(); track $index){
-<div>
+<div (click)="handleNavigate(invoice.id)">
   <span class="left">
     <app-text type="emphasis">
       <p>#</p>{{ invoice.id }}

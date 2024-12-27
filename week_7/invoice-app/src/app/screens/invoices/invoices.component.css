@@ -36,3 +36,9 @@ div {
 app-icon {
   margin-bottom: 2rem;
 }
+
+@media (max-width: 1300px) {
+  section {
+    width: 80%;
+  }
+}

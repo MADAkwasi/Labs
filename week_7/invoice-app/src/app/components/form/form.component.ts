@@ -45,6 +45,7 @@ export class FormComponent implements OnInit {
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
   selectedInvoice = this.store.selectSignal(selectActiveInvoice);
+  selectedInvoiceCopy!: Invoice;
   isEditingForm = this.store.selectSignal(selectEditState);
   paymentDue = computed(() => {
     const createdAt = this.invoiceForm?.get('createdAt')?.value || new Date();
@@ -59,6 +60,8 @@ export class FormComponent implements OnInit {
       total: 0,
     })
   );
+  isHovered!: boolean;
+  isFormSubmitted!: boolean;
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
@@ -92,8 +95,48 @@ export class FormComponent implements OnInit {
 
     this.setupPaymentTermsSync();
 
-    if (this.isEditingForm())
+    if (this.isEditingForm()) {
       this.populateForm(this.selectedInvoice() as Invoice);
+      this.selectedInvoiceCopy = this.selectedInvoice() as Invoice;
+    }
+
+    this.invoiceForm.valueChanges.subscribe((formValue) => {
+      this.syncFormWithStore(formValue);
+    });
+  }
+
+  private syncFormWithStore(formValue: any, parentPath: string[] = []): void {
+    Object.keys(formValue).forEach((key) => {
+      const path = [...parentPath, key];
+      const control = this.invoiceForm.get(path.join('.'));
+
+      if (control?.value !== undefined && control.dirty) {
+        this.updateField(path, control.value);
+      }
+
+      if (
+        typeof formValue[key] === 'object' &&
+        !Array.isArray(formValue[key])
+      ) {
+        this.syncFormWithStore(formValue[key], path);
+      }
+    });
+  }
+
+  private resetFormAndClose(): void {
+    this.invoiceForm.reset();
+    this.itemsCount.set(0);
+    this.items.clear();
+    this.store.dispatch(interactionsActions.closeForm());
+  }
+
+  private updateFormTotal(): void {
+    const total = this.items.controls.reduce((sum, item) => {
+      const quantity = item.get('quantity')?.value || 0;
+      const price = item.get('price')?.value || 0;
+      return sum + quantity * price;
+    }, 0);
+    this.invoiceForm.get('total')?.setValue(total, { emitEvent: false });
   }
 
   createItem(): FormGroup {
@@ -120,33 +163,26 @@ export class FormComponent implements OnInit {
     return `${randomLetters}${randomDigits}`;
   }
 
-  // addItem(): void {
-  //   this.items.push(this.createItem());
-  // }
-
-  // removeItem(index: number): void {
-  //   this.items.removeAt(index);
-  // }
-
-  populateForm(invoice: Invoice) {
+  populateForm(invoice: Invoice): void {
     this.invoiceForm.patchValue(invoice);
 
     const itemsControl = this.invoiceForm.get('items') as FormArray;
-    if (itemsControl && invoice.items) {
-      invoice.items.forEach((item, i) => {
-        if (i !== 0)
-          return itemsControl.push(
-            this.fb.group({
-              name: [item.name],
-              quantity: [item.quantity],
-              price: [item.price],
-              total: [item.total],
-            })
-          );
+    itemsControl.clear();
+
+    if (invoice.items) {
+      invoice.items.forEach((item) => {
+        itemsControl.push(
+          this.fb.group({
+            name: [item.name, Validators.required],
+            quantity: [item.quantity, [Validators.required, Validators.min(1)]],
+            price: [item.price, [Validators.required]],
+            total: [{ value: item.total, disabled: true }],
+          })
+        );
       });
     }
 
-    console.log(itemsControl);
+    this.itemsCount.set(invoice.items?.length || 0);
   }
 
   setupItemTotalCalculation(): void {
@@ -232,6 +268,10 @@ export class FormComponent implements OnInit {
     item.get('total')?.setValue(total, { emitEvent: false });
   }
 
+  updateField(path: string[], value: any): void {
+    this.store.dispatch(invoiceActions.editField({ path, value }));
+  }
+
   toggleDropdown() {
     this.isOpened = !this.isOpened;
   }
@@ -241,40 +281,51 @@ export class FormComponent implements OnInit {
   }
 
   handleDiscard(): void {
-    this.store.dispatch(interactionsActions.closeForm());
-    this.invoiceForm.reset();
+    if (this.isEditingForm()) {
+      this.populateForm(this.selectedInvoiceCopy);
+      this.store.dispatch(interactionsActions.closeForm());
+    } else this.resetFormAndClose();
   }
 
   handleAddItem(): void {
-    if (this.isEditingForm()) this.store.dispatch(invoiceActions.addItem());
-
-    this.itemsCount.update((count) => count + 1);
     this.items.push(this.createItem());
+    this.updateFormTotal();
+  }
+
+  handleDeleteItem(index: number): void {
+    this.items.removeAt(index);
+    this.updateFormTotal();
   }
 
   handleDraft(): void {
-    this.invoiceForm.get('status')?.setValue('draft', { emitEvent: false });
-    this.items.removeAt(this.items.length - 1);
-    this.store.dispatch(
-      invoiceActions.addInvoice({ invoice: this.invoiceForm.getRawValue() })
-    );
-    this.invoiceForm.reset();
-    this.store.dispatch(interactionsActions.closeForm());
+    const invoice = this.invoiceForm.getRawValue();
+    invoice.status = 'draft';
+
+    if (this.isEditingForm())
+      this.store.dispatch(invoiceActions.updateInvoice({ invoice }));
+    else this.store.dispatch(invoiceActions.addInvoice({ invoice }));
+
+    this.resetFormAndClose();
   }
 
   handleSend(): void {
-    this.store.dispatch(interactionsActions.closeForm());
-    this.items.removeAt(this.items.length - 1);
-    this.store.dispatch(
-      invoiceActions.addInvoice({ invoice: this.invoiceForm.getRawValue() })
-    );
-    this.invoiceForm.reset();
-    this.itemsCount.set(0);
-    this.items.clear();
+    this.isFormSubmitted = true;
+
+    if (!this.invoiceForm.valid) return;
+
+    const invoice = this.invoiceForm.getRawValue();
+
+    if (this.isEditingForm())
+      this.store.dispatch(invoiceActions.updateInvoice({ invoice }));
+    else this.store.dispatch(invoiceActions.addInvoice({ invoice }));
+
+    this.resetFormAndClose();
+    this.isFormSubmitted = false;
   }
 
-  handleDeleteItem(): void {
-    this.itemsCount.update((count) => count - 1);
+  hasError(controlName: string, errorName: string): boolean {
+    const control = this.invoiceForm.get(controlName);
+    return (this.isFormSubmitted && control?.hasError(errorName)) ?? false;
   }
 
   onSubmit() {

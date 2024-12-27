@@ -5,6 +5,13 @@ div {
   background-color: var(--white);
   padding: 3rem 1rem;
   border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.2s border;
+}
+
+div:hover {
+  border: 2px solid var(--primary-color);
 }
 
 p {

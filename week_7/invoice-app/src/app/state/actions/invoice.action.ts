@@ -9,7 +9,7 @@ export const invoiceActions = createActionGroup({
     loadInvoicesFailure: props<{ error: any }>(),
 
     setActiveInvoice: props<{ invoiceId: string }>(),
-    addItem: emptyProps(),
+    editField: props<{ path: string[]; value: any }>(),
     addInvoice: props<{ invoice: Invoice }>(),
     updateInvoice: props<{ invoice: Invoice }>(),
     deleteInvoice: props<{ invoiceId: string }>(),

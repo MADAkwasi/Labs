@@ -25,7 +25,7 @@ const {
   updateInvoiceStatus,
   addInvoice,
   setActiveInvoice,
-  addItem,
+  editField,
 } = invoiceActions;
 
 export const invoiceReducer = createReducer(
@@ -71,6 +71,7 @@ export const invoiceReducer = createReducer(
     invoices: state.invoices.map((inv) =>
       inv.id === invoice.id ? { ...inv, ...invoice } : inv
     ),
+    activeInvoice: invoice,
   })),
 
   on(deleteInvoice, (state, { invoiceId }) => ({
@@ -85,25 +86,32 @@ export const invoiceReducer = createReducer(
     ),
   })),
 
-  on(addItem, (state) => {
-    if (!state.activeInvoice) {
-      return state;
-    }
+  on(editField, (state, { path, value }) => {
+    if (!state.activeInvoice) return state;
+
+    const updateNestedField = (obj: any, path: string[], value: any): any => {
+      if (path.length === 1) {
+        return { ...obj, [path[0]]: value };
+      }
+      const [key, ...rest] = path;
+      return {
+        ...obj,
+        [key]: updateNestedField(obj[key], rest, value),
+      };
+    };
+
+    const updatedActiveInvoice = updateNestedField(
+      state.activeInvoice,
+      path,
+      value
+    );
 
     return {
       ...state,
-      activeInvoice: {
-        ...state.activeInvoice,
-        items: [
-          ...(state.activeInvoice.items || []),
-          {
-            name: '',
-            quantity: 1,
-            price: 0,
-            total: 0,
-          },
-        ],
-      },
+      activeInvoice: updatedActiveInvoice,
+      invoices: state.invoices.map((inv) =>
+        inv.id === updatedActiveInvoice.id ? updatedActiveInvoice : inv
+      ),
     };
   })
 );

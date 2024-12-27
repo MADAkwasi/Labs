@@ -10,6 +10,11 @@ form {
   margin-top: 2.5rem;
 }
 
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
+
 footer {
   margin-top: auto;
   display: flex;
@@ -21,6 +26,11 @@ footer span {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+
+.editing-footer {
+  justify-content: flex-end;
+  gap: 2rem;
 }
 
 .sender-address {
@@ -180,4 +190,20 @@ app-text {
 app-text p {
   display: inline-block;
   color: var(--tertiary-color);
+}
+
+.errors {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.error input {
+  border: 1px solid var(--error);
+  outline: none;
+}
+
+form.ng-invalid.ng-touched {
+  border: none;
 }

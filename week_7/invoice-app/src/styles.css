@@ -52,3 +52,9 @@ body {
   letter-spacing: 0.5px;
   overflow-x: hidden;
 }
+
+@media (max-width: 1000px) {
+  html {
+    font-size: 58%;
+  }
+}
