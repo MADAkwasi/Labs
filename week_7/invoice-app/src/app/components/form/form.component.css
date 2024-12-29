@@ -92,6 +92,7 @@ input {
 input:active,
 input:focus {
   outline: 1px solid var(--primary-color);
+  border: none;
 }
 
 .due-date-dropdown {

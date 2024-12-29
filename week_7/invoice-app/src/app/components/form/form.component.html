@@ -10,8 +10,7 @@
 } @if(isEditingForm()){
 <app-text type="emphasis" size="2.1rem"
   >Edit
-  <p>#</p>
-  {{ selectedInvoice()?.id }}
+  <p>#</p>{{ selectedInvoice()?.id }}
 </app-text>
 }@else {
 <app-text type="emphasis" size="2.1rem">New Invoice</app-text>
@@ -379,6 +378,7 @@
 </form>
 
 @if(isEditingForm()){
+<div class="shade"></div>
 <footer class="editing-footer">
   <app-button
     (onClick)="handleDiscard()"
