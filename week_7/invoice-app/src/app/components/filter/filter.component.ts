@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class FilterComponent {
   isOpened!: boolean;
+  deviceWidth = window.innerWidth;
 
+  @HostListener('window: resize', ['$event'])
+  onResize(event: Event): void {
+    this.deviceWidth = window.innerWidth;
+  }
   toggleDropdown() {
     this.isOpened = !this.isOpened;
   }

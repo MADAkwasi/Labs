@@ -1,4 +1,13 @@
-@if(isEditingForm()){
+@if(deviceWidth<=465){
+<app-icon
+  imgSrc="/assets/images/icon-arrow-left.svg"
+  altText="right-arrow"
+  [width]="10"
+  [height]="13"
+  (onClick)="handleDiscard()"
+  ><app-text>Go back</app-text></app-icon
+>
+} @if(isEditingForm()){
 <app-text type="emphasis" size="2.1rem"
   >Edit
   <p>#</p>
@@ -163,7 +172,7 @@
       </ng-container>
     </div>
 
-    <div class="dates">
+    <section class="dates">
       <div class="input-field">
         <label>Invoice Date</label>
         <input type="date" formControlName="createdAt" [disabled]="true" />
@@ -235,7 +244,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <div
       class="input-field"
@@ -301,6 +310,7 @@
                     ? '/assets/images/icon-delete-hover.svg'
                     : '/assets/images/icon-delete.svg'
                 "
+                class="icon"
                 altText="trash-can"
                 [height]="14"
                 [width]="14"
@@ -337,6 +347,7 @@
                     ? '/assets/images/icon-delete-hover.svg'
                     : '/assets/images/icon-delete.svg'
                 "
+                class="icon"
                 altText="trash-can"
                 [height]="14"
                 [width]="14"
@@ -379,8 +390,8 @@
   <app-button (onClick)="handleSend()">Save Changes</app-button>
 </footer>
 }@else {
-
-<footer>
+<div class="shade"></div>
+<footer [ngStyle]="{ width: deviceWidth <= 465 ? deviceWidth : '' }">
   <app-button
     (onClick)="handleDiscard()"
     type="edit"

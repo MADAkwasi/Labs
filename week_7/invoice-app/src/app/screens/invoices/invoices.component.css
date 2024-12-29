@@ -42,3 +42,9 @@ app-icon {
     width: 80%;
   }
 }
+
+@media (max-width: 710px) {
+  section {
+    width: 90%;
+  }
+}

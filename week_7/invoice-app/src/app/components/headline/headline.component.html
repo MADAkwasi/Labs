@@ -1,9 +1,13 @@
 <span class="title">
-  <app-text type="emphasis" size="4rem">Invoices</app-text>
-  @if(!!invoices().length){
-  <app-text size="1.3rem"
-    >There are {{ invoices().length }} total invoices</app-text
+  <app-text type="emphasis" [size]="deviceWidth <= 465 ? '3rem' : '4rem'"
+    >Invoices</app-text
   >
+  @if(!!invoices().length){
+  <app-text size="1.3rem">{{
+    deviceWidth <= 465
+      ? invoices().length + " invoices"
+      : "There are " + invoices().length + " total invoices"
+  }}</app-text>
   }@else {
   <app-text>No invoices</app-text>
   }
@@ -19,6 +23,6 @@
       [height]="13"
       [width]="13"
     ></app-icon>
-    <p>New Invoice</p>
+    <p>{{ deviceWidth <= 465 ? "New" : "New Invoice" }}</p>
   </app-button>
 </span>

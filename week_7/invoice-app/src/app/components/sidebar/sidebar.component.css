@@ -4,7 +4,7 @@
   top: 0;
   width: 100%;
   z-index: 2;
-  height: 8rem;
+  height: 9rem;
   border-top-right-radius: 25px;
 }
 
@@ -44,4 +44,86 @@ hr {
   align-items: center;
   justify-content: space-between;
   padding: 2rem 0;
+}
+
+@media (max-width: 940px) {
+  .top {
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10rem;
+    z-index: 2;
+    height: 60%;
+  }
+
+  .top::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #9277ff;
+    width: 10rem;
+    left: 0;
+    top: 4.14rem;
+    z-index: 3;
+    height: 90%;
+    border-top-left-radius: 0;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+
+  .bottom {
+    position: absolute;
+    right: 0;
+    width: 25rem;
+    height: 100%;
+    padding: 0 3rem;
+    flex-direction: row;
+  }
+
+  hr {
+    height: 100%;
+    width: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .top {
+    height: 60%;
+    width: 12rem;
+  }
+
+  .top::after {
+    height: 90%;
+    width: 12rem;
+    top: 5.45rem;
+  }
+
+  .logo {
+    top: 45%;
+  }
+}
+
+@media (max-width: 465px) {
+  .bottom {
+    width: 17rem;
+    padding: 0 2rem;
+  }
+
+  .top {
+    width: 10rem;
+    height: 60%;
+  }
+
+  .top::after {
+    width: 10rem;
+    top: 4.14rem;
+    height: 90%;
+  }
 }

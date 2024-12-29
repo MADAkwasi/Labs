@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
@@ -17,6 +17,12 @@ import { interactionsActions } from '../../state/actions/interactions.action';
 export class HeadlineComponent {
   private readonly store = inject(Store);
   invoices = this.store.selectSignal(selectAllInvoices);
+  deviceWidth = window.innerWidth;
+
+  @HostListener('window: resize', ['$event'])
+  onResize(event: Event): void {
+    this.deviceWidth = window.innerWidth;
+  }
 
   openForm() {
     this.store.dispatch(interactionsActions.openForm());

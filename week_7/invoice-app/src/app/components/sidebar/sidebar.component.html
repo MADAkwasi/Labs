@@ -2,8 +2,8 @@
   <app-icon
     class="logo"
     imgSrc="/assets/images/logo.svg"
-    [height]="49"
-    [width]="55"
+    [height]="deviceWidth <= 940 ? 34 : 49"
+    [width]="deviceWidth <= 940 ? 37 : 55"
     altText="logo"
     [isInteractive]="false"
   ></app-icon>
@@ -12,10 +12,13 @@
 <span class="bottom">
   <app-icon
     imgSrc="/assets/images/icon-moon.svg"
-    [height]="27"
-    [width]="27"
+    [height]="deviceWidth <= 465 ? 24 : 27"
+    [width]="deviceWidth <= 465 ? 24 : 27"
     altText="icon-moon"
   ></app-icon>
   <hr />
-  <app-avatar [height]="40" [width]="40"></app-avatar>
+  <app-avatar
+    [height]="deviceWidth <= 465 ? 29 : 40"
+    [width]="deviceWidth <= 465 ? 29 : 40"
+  ></app-avatar>
 </span>

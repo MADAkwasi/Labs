@@ -22,3 +22,9 @@ button {
   background-color: var(--sidebar-color);
   color: var(--text-primary-color);
 }
+
+@media (max-width: 465px) {
+  button {
+    font-size: 1.3rem;
+  }
+}

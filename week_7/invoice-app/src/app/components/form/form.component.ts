@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   ElementRef,
+  HostListener,
   inject,
   OnInit,
   signal,
@@ -62,6 +63,7 @@ export class FormComponent implements OnInit {
   );
   isHovered!: boolean;
   isFormSubmitted!: boolean;
+  deviceWidth: number = window.innerWidth;
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
@@ -103,6 +105,11 @@ export class FormComponent implements OnInit {
     this.invoiceForm.valueChanges.subscribe((formValue) => {
       this.syncFormWithStore(formValue);
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.deviceWidth = window.innerWidth;
   }
 
   private syncFormWithStore(formValue: any, parentPath: string[] = []): void {

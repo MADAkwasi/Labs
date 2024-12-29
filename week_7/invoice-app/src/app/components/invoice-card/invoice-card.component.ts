@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, HostListener, inject } from '@angular/core';
 import { TextComponent } from '../text/text.component';
 import { Store } from '@ngrx/store';
 import {
@@ -30,6 +30,7 @@ export class InvoiceCardComponent {
   private readonly router = inject(Router);
   invoices = this.store.selectSignal(selectAllInvoices);
   isLoading = this.store.selectSignal(selectLoadingState);
+  deviceWidth: number = window.innerWidth;
 
   constructor() {
     effect(() => {
@@ -37,6 +38,11 @@ export class InvoiceCardComponent {
         this.store.dispatch(invoiceActions.loadInvoices());
       }
     });
+  }
+
+  @HostListener('window: resize', ['$event'])
+  onResize(event: Event): void {
+    this.deviceWidth = window.innerWidth;
   }
 
   handleNavigate(id: string) {

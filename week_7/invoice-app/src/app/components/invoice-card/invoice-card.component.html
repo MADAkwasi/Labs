@@ -1,10 +1,10 @@
 @for(invoice of invoices(); track $index){
 <div (click)="handleNavigate(invoice.id)">
   <span class="left">
-    <app-text type="emphasis">
+    <app-text type="emphasis" [size]="deviceWidth <= 465 ? '1.4rem' : ''">
       <p>#</p>{{ invoice.id }}
     </app-text>
-    <app-text>Due {{ invoice.paymentDue | date : "d MMM, y" }}</app-text>
+    <app-text id="date">Due {{ invoice.paymentDue | date : "d MMM, y" }}</app-text>
     <app-text color="var(--text-secondary-color)">{{
       invoice.clientName
     }}</app-text>

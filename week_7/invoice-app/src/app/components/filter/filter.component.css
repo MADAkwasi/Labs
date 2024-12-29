@@ -34,6 +34,7 @@ app-icon {
   gap: 1.5rem;
   color: var(--secondary-color);
   transition: 0.3s all;
+  z-index: 5;
 }
 
 .filter-options label {

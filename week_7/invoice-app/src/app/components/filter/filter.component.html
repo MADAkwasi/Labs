@@ -1,7 +1,7 @@
 <div class="filter-dropdown" (click)="toggleDropdown()">
   <div class="filter-display">
     <span>
-      Filter by status
+      {{ deviceWidth <= 465 ? "Filter" : "Filter by status" }}
       <app-icon
         imgSrc="/assets/images/icon-arrow-down.svg"
         altText="down-arrow"
