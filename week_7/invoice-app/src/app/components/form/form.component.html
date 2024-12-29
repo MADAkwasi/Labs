@@ -10,7 +10,8 @@
 } @if(isEditingForm()){
 <app-text type="emphasis" size="2.1rem"
   >Edit
-  <p>#</p>{{ selectedInvoice()?.id }}
+  <p>#</p>
+  {{ selectedInvoice()?.id }}
 </app-text>
 }@else {
 <app-text type="emphasis" size="2.1rem">New Invoice</app-text>
@@ -266,6 +267,7 @@
       <app-text size="2rem" type="emphasis" color="var(--accent-1)"
         >Item List</app-text
       >
+      @if(deviceWidth>465){
       <div class="grid-row">
         <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
           >Item Name</app-text
@@ -280,81 +282,107 @@
           >Total</app-text
         >
       </div>
+      }
 
       <ng-container formArrayName="items">
         @if(isEditingForm()){ @for(item of items.controls; track $index){
         <div class="grid-row-input" [formGroupName]="$index">
-          <input type="text" formControlName="name" />
-          <input
-            type="number"
-            formControlName="quantity"
-            min="1"
-            (input)="updateTotal($index)"
-          />
-          <input
-            type="number"
-            formControlName="price"
-            min="0"
-            (input)="updateTotal($index)"
-          />
-          <span>
-            <input id="total" type="number" formControlName="total" />
-            <span
-              (mouseenter)="isHovered = true"
-              (mouseleave)="isHovered = false"
-            >
-              <app-icon
-                [imgSrc]="
-                  isHovered
-                    ? '/assets/images/icon-delete-hover.svg'
-                    : '/assets/images/icon-delete.svg'
-                "
-                class="icon"
-                altText="trash-can"
-                [height]="14"
-                [width]="14"
-                [isInteractive]="true"
-                (onClick)="handleDeleteItem($index)"
-              ></app-icon>
+          <div class="input-field">
+            <label>Item Name</label>
+            <input type="text" formControlName="name" />
+          </div>
+          <div class="input-field">
+            <label>Qty.</label>
+            <input
+              type="number"
+              formControlName="quantity"
+              min="1"
+              (input)="updateTotal($index)"
+            />
+          </div>
+          <div class="input-field">
+            <label>Price</label>
+            <input
+              type="number"
+              formControlName="price"
+              min="0"
+              (input)="updateTotal($index)"
+            />
+          </div>
+          <div class="input-field">
+            <label>Total</label>
+            <span>
+              <input id="total" type="number" formControlName="total" />
+              <span
+                (mouseenter)="isHovered = true"
+                (mouseleave)="isHovered = false"
+              >
+                <app-icon
+                  [imgSrc]="
+                    isHovered
+                      ? '/assets/images/icon-delete-hover.svg'
+                      : '/assets/images/icon-delete.svg'
+                  "
+                  class="icon"
+                  altText="trash-can"
+                  [height]="14"
+                  [width]="14"
+                  [isInteractive]="true"
+                  (onClick)="handleDeleteItem($index)"
+                ></app-icon>
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         } }@else { @for(item of items.controls; track $index){
         <div class="grid-row-input" [formGroupName]="$index">
-          <input type="text" formControlName="name" />
-          <input
-            type="number"
-            formControlName="quantity"
-            min="1"
-            (input)="updateTotal($index)"
-          />
-          <input
-            type="number"
-            formControlName="price"
-            min="0"
-            (input)="updateTotal($index)"
-          />
-          <span>
-            <input id="total" type="number" formControlName="total" />
-            <span
-              (mouseenter)="isHovered = true"
-              (mouseleave)="isHovered = false"
-            >
-              <app-icon
-                [imgSrc]="
-                  isHovered && $index
-                    ? '/assets/images/icon-delete-hover.svg'
-                    : '/assets/images/icon-delete.svg'
-                "
-                class="icon"
-                altText="trash-can"
-                [height]="14"
-                [width]="14"
-                [isInteractive]="true"
-                (onClick)="handleDeleteItem($index)"
-              ></app-icon
-            ></span>
-          </span>
+          <div class="input-field">
+            <label>Item Name</label>
+            <input type="text" formControlName="name" />
+          </div>
+          <div class="input-field">
+            <label>Qty.</label>
+            <input
+              type="number"
+              formControlName="quantity"
+              min="1"
+              (input)="updateTotal($index)"
+            />
+          </div>
+
+          <div class="input-field">
+            <label>Price</label>
+            <input
+              type="number"
+              formControlName="price"
+              min="0"
+              (input)="updateTotal($index)"
+            />
+          </div>
+          <div class="input-field">
+            <label>Total</label>
+            <span>
+              <input id="total" type="number" formControlName="total" />
+              <span
+                (mouseenter)="isHovered = true"
+                (mouseleave)="isHovered = false"
+              >
+                <app-icon
+                  [imgSrc]="
+                    isHovered && $index
+                      ? '/assets/images/icon-delete-hover.svg'
+                      : '/assets/images/icon-delete.svg'
+                  "
+                  class="icon"
+                  altText="trash-can"
+                  [height]="14"
+                  [width]="14"
+                  [isInteractive]="true"
+                  (onClick)="handleDeleteItem($index)"
+                ></app-icon
+              ></span>
+            </span>
+          </div>
         </div>
         } }
       </ng-container>

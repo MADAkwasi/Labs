@@ -250,6 +250,7 @@ app-delete-card {
 
   section {
     position: static;
+    margin-bottom: 9rem;
   }
 
   app-delete-card {
