@@ -43,8 +43,15 @@ app-icon {
   }
 }
 
-@media (max-width: 710px) {
+@media (max-width: 940px) {
   section {
     width: 90%;
+  }
+
+  div {
+    margin-top: 12rem;
+    gap: 2rem;
+    width: 80%;
+    text-align: center;
   }
 }

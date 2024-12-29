@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  HostListener,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { IconComponent } from '../../components/icon/icon.component';
 import { TextComponent } from '../../components/text/text.component';
 import { BadgeComponent } from '../../components/badge/badge.component';
@@ -43,6 +50,12 @@ export class InvoiceComponent implements OnInit {
     this.invoices().find((inv) => inv.id === this.idSignal())
   );
   wantsToDelete = this.store.selectSignal(selectDeleteState);
+  deviceWidth: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.deviceWidth = window.innerWidth;
+  }
 
   ngOnInit(): void {
     const { id } = this.activatedRoute.snapshot.params;

@@ -138,3 +138,125 @@ app-delete-card {
   z-index: 3;
   border-radius: 8px;
 }
+
+@media (max-width: 1300px) {
+  section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 940px) {
+  section {
+    width: 90%;
+  }
+
+  .details {
+    gap: 5rem;
+  }
+
+  app-delete-card {
+    width: 60%;
+  }
+}
+
+@media (max-width: 465px) {
+  .header span:first-child {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header span:last-child {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--white);
+    left: 0;
+    height: 9rem;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 2rem;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item {
+    gap: 0.5rem;
+  }
+
+  .content {
+    padding: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .address {
+    text-align: left;
+    margin-top: 2rem;
+    gap: 0.5rem;
+  }
+
+  .details {
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .details app-text {
+    width: 12rem;
+  }
+
+  .date__created,
+  .date__due {
+    align-self: flex-start;
+  }
+
+  .date,
+  .client {
+    width: 40%;
+  }
+
+  .email {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .grid-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .grid-item:last-child {
+    margin-top: 1.5rem;
+  }
+
+  .grid-item:first-child {
+    margin-top: 0.5rem;
+  }
+
+  #quantity {
+    position: absolute;
+  }
+
+  #price {
+    position: absolute;
+    left: 11rem;
+  }
+
+  section {
+    position: static;
+  }
+
+  app-delete-card {
+    width: 90%;
+  }
+
+  .quantitative {
+    padding: 2rem 3rem;
+  }
+}

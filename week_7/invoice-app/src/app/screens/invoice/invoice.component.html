@@ -101,6 +101,7 @@
     </div>
 
     <div class="quantitative">
+      @if(deviceWidth>465){
       <div class="grid-row">
         <app-text color="var(--tertiary-color)" size="1.1rem" class="heading"
           >Item Name</app-text
@@ -115,8 +116,7 @@
           >Total</app-text
         >
       </div>
-
-      @for(item of invoice()?.items; track $index){
+      } @for(item of invoice()?.items; track $index){
       <div class="grid-row">
         <app-text type="emphasis" size="1.4rem" class="grid-item">{{
           item.name
@@ -126,26 +126,36 @@
           size="1.4rem"
           color="var(--tertiary-color)"
           class="grid-item"
-          >{{ item.quantity }}</app-text
+          id="quantity"
+          >{{ item.quantity }}{{ deviceWidth <= 465 ? " x " : "" }}</app-text
         >
         <app-text
           type="emphasis"
           size="1.4rem"
           color="var(--tertiary-color)"
           class="grid-item"
+          id="price"
           >{{ item.price | currency : "GBP" }}</app-text
         >
-        <app-text type="emphasis" size="1.4rem" class="grid-item">{{
-          item.total | currency : "GBP"
-        }}</app-text>
+        <app-text
+          type="emphasis"
+          [size]="deviceWidth <= 465 ? '1.6rem' : '1.4rem'"
+          class="grid-item"
+          >{{ item.total | currency : "GBP" }}</app-text
+        >
       </div>
       }
     </div>
     <div class="total">
-      <app-text color="var(--white)" size="1.3rem">Amount Due</app-text>
-      <app-text type="emphasis" color="var(--white)" size="2.2rem">{{
-        invoice()?.total | currency : "GBP"
+      <app-text color="var(--white)" size="1.3rem">{{
+        deviceWidth <= 465 ? "Grand Total" : "Amount Due"
       }}</app-text>
+      <app-text
+        type="emphasis"
+        color="var(--white)"
+        [size]="deviceWidth <= 465 ? '1.9rem' : '2.2rem'"
+        >{{ invoice()?.total | currency : "GBP" }}</app-text
+      >
     </div>
   </div>
   @if(wantsToDelete()){

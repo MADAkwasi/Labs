@@ -19,7 +19,7 @@ export class InvoiceEffect {
       ofType(invoiceActions.loadInvoices),
       withLatestFrom(this.store.select(selectAllInvoices)),
       switchMap(([_, invoices]) => {
-        if (invoices && !!invoices.length) {
+        if (invoices) {
           return of(invoiceActions.loadInvoicesSuccess({ invoices }));
         }
 
