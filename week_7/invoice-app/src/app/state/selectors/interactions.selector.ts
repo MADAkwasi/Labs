@@ -18,3 +18,8 @@ export const selectEditState = createSelector(
   selectInteractionState,
   (state: InteractionsState) => state.isEditing
 );
+
+export const selectDarkModeState = createSelector(
+  selectInteractionState,
+  (state: InteractionsState) => state.isDarkMode
+);

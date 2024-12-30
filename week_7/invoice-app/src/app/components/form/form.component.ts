@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { addDays } from 'date-fns';
 import { selectActiveInvoice } from '../../state/selectors/invoice.selector';
-import { selectEditState } from '../../state/selectors/interactions.selector';
+import { selectDarkModeState, selectEditState } from '../../state/selectors/interactions.selector';
 
 @Component({
   selector: 'app-form',
@@ -48,6 +48,7 @@ export class FormComponent implements OnInit {
   selectedInvoice = this.store.selectSignal(selectActiveInvoice);
   selectedInvoiceCopy!: Invoice;
   isEditingForm = this.store.selectSignal(selectEditState);
+  isDarkMode = this.store.selectSignal(selectDarkModeState);
   paymentDue = computed(() => {
     const createdAt = this.invoiceForm?.get('createdAt')?.value || new Date();
     return addDays(new Date(createdAt), this.paymentTerms());

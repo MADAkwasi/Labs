@@ -8,5 +8,6 @@ export const interactionsActions = createActionGroup({
     openForm: emptyProps(),
     closeForm: emptyProps(),
     editForm: emptyProps(),
+    toggleTheme: emptyProps(),
   },
 });

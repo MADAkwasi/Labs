@@ -1,5 +1,21 @@
 form {
-  margin-top: 5rem;
+  margin-top: 3rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  padding-bottom: 8rem;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 app-icon[altText="right-arrow"] {
@@ -27,10 +43,18 @@ app-icon[altText="right-arrow"] {
 }
 
 footer {
-  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--footer-bg);
+  z-index: 10;
+  height: 9rem;
+  padding: 0 3rem;
+  box-shadow: 0 -3px 4px rgba(0, 0, 0, 0.1);
 }
 
 footer span {
@@ -49,6 +73,7 @@ footer span {
   flex-direction: column;
   max-width: 100%;
   margin-bottom: 4rem;
+  margin-top: 3rem;
 }
 
 .address {
@@ -95,6 +120,10 @@ input:active,
 input:focus {
   outline: 1px solid var(--primary-color);
   border: none;
+}
+
+input::placeholder {
+  color: white;
 }
 
 .due-date-dropdown {
@@ -231,19 +260,32 @@ form.ng-invalid.ng-touched {
   display: none;
 }
 
+@media (max-width: 940px) {
+  form {
+    max-height: calc(100vh - 13rem);
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 575px) {
+  footer {
+    height: 10rem;
+    align-items: center;
+    padding-bottom: 1.5rem;
+  }
+}
+
 @media (max-width: 465px) {
   footer {
-    background-color: var(--white);
     justify-content: center;
     gap: 2rem;
     height: 7rem;
     align-items: flex-end;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    padding: 0 3rem;
     padding-bottom: 1.5rem;
-    padding-right: 2rem;
+    z-index: 10;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
   }
 
   footer span {
@@ -253,8 +295,7 @@ form.ng-invalid.ng-touched {
   .shade {
     display: block;
     width: 100%;
-    height: 7rem;
-    background-color: #eee;
+    height: 6rem;
     position: absolute;
     bottom: 7rem;
     left: 0;
@@ -269,7 +310,8 @@ form.ng-invalid.ng-touched {
   }
 
   form {
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
+    max-height: calc(100vh - 18rem);
   }
 
   .address {
@@ -301,8 +343,8 @@ form.ng-invalid.ng-touched {
 
   .grid-row-input {
     display: grid;
-    grid-template-rows: auto auto; /* Two rows layout */
-    grid-template-columns: 1fr 1fr 1fr; /* Equal column widths for the second row */
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
   }
 

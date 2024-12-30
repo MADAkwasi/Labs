@@ -14,6 +14,7 @@
 main {
   width: 100vw;
   display: flex;
+  position: relative;
 }
 
 app-sidebar {
@@ -42,23 +43,6 @@ app-form {
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
-  overflow-y: auto;
-}
-
-::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
-}
-
-::-webkit-scrollbar-track {
-  background: #eee;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 10px;
 }
 
 app-dialog {
@@ -99,14 +83,13 @@ app-dialog {
   }
 
   app-form {
-    top: 9rem;
     left: 0;
     width: 85%;
     transform: translateX(-50rem);
     transition: transform 0.5s;
     animation: slidein 0.5s forwards;
     z-index: 4;
-    padding-top: 3.5rem;
+    padding-top: 8rem;
   }
 }
 
@@ -116,7 +99,7 @@ app-dialog {
   }
 
   app-form {
-    padding-top: 5.5rem;
+    padding-top: 10rem;
   }
 }
 
@@ -128,6 +111,6 @@ app-dialog {
   app-form {
     width: 100%;
     padding: 3rem;
-    padding-top: 4rem;
+    padding-top: 8rem;
   }
 }

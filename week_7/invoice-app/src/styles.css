@@ -35,6 +35,7 @@
   --cancel: #f9fafe;
   --filter-bg: #fff;
   --date-color: #0c0e16;
+  --footer-bg: #fff;
 }
 
 .dark-mode {
@@ -54,6 +55,7 @@
   --grey: #1e2139;
   --filter-bg: #252945;
   --date-color: #dfe3fa;
+  --footer-bg: #141625;
 }
 
 *,

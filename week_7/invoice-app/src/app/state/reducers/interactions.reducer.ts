@@ -5,12 +5,14 @@ export interface InteractionsState {
   wantsToDelete: boolean;
   isFormActive: boolean;
   isEditing: boolean;
+  isDarkMode: boolean;
 }
 
 const initialState: InteractionsState = {
   wantsToDelete: false,
   isFormActive: false,
   isEditing: false,
+  isDarkMode: false,
 };
 
 export const interactionsReducer = createReducer(
@@ -41,5 +43,10 @@ export const interactionsReducer = createReducer(
     ...state,
     isFormActive: true,
     isEditing: true,
+  })),
+
+  on(interactionsActions.toggleTheme, (state) => ({
+    ...state,
+    isDarkMode: !state.isDarkMode,
   }))
 );

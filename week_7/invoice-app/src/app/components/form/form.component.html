@@ -1,22 +1,22 @@
-@if(deviceWidth<=465){
-<app-icon
-  imgSrc="/assets/images/icon-arrow-left.svg"
-  altText="right-arrow"
-  [width]="10"
-  [height]="13"
-  (onClick)="handleDiscard()"
-  ><app-text>Go back</app-text></app-icon
->
-} @if(isEditingForm()){
-<app-text type="emphasis" size="2.1rem"
-  >Edit
-  <p>#</p>
-  {{ selectedInvoice()?.id }}
-</app-text>
-}@else {
-<app-text type="emphasis" size="2.1rem">New Invoice</app-text>
-}
 <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+  @if(deviceWidth<=465){
+  <app-icon
+    imgSrc="/assets/images/icon-arrow-left.svg"
+    altText="right-arrow"
+    [width]="10"
+    [height]="13"
+    (onClick)="handleDiscard()"
+    ><app-text>Go back</app-text></app-icon
+  >
+  } @if(isEditingForm()){
+  <app-text type="emphasis" size="2.1rem"
+    >Edit
+    <p>#</p>
+    {{ selectedInvoice()?.id }}
+  </app-text>
+  }@else {
+  <app-text type="emphasis" size="2.1rem">New Invoice</app-text>
+  }
   <section class="sender-address">
     <app-text color="var(--primary-color)" size="1.2rem">Bill From</app-text>
     <ng-container formGroupName="senderAddress">
@@ -406,7 +406,10 @@
 </form>
 
 @if(isEditingForm()){
-<div class="shade"></div>
+<div
+  class="shade"
+  [ngStyle]="{ display: isDarkMode() ? 'none' : 'block' }"
+></div>
 <footer class="editing-footer">
   <app-button
     (onClick)="handleDiscard()"
@@ -418,8 +421,11 @@
   <app-button (onClick)="handleSend()">Save Changes</app-button>
 </footer>
 }@else {
-<div class="shade"></div>
-<footer [ngStyle]="{ width: deviceWidth <= 465 ? deviceWidth : '' }">
+<div
+  class="shade"
+  [ngStyle]="{ display: isDarkMode() ? 'none' : 'block' }"
+></div>
+<footer>
   <app-button
     (onClick)="handleDiscard()"
     type="edit"
