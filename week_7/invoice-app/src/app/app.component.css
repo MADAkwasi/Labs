@@ -42,6 +42,12 @@ app-form {
   padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+app-dialog {
+  display: block;
 }
 
 @keyframes slidein {
