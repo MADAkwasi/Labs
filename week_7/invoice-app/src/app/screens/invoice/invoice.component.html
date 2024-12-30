@@ -38,7 +38,8 @@
     <div class="description">
       <span class="item">
         <app-text type="emphasis">
-          <p>#</p>{{ invoice()?.id }}
+          <p>#</p>
+          {{ invoice()?.id }}
         </app-text>
         <app-text>{{ invoice()?.description }}</app-text>
       </span>
@@ -146,12 +147,12 @@
       }
     </div>
     <div class="total">
-      <app-text color="var(--white)" size="1.3rem">{{
+      <app-text color="#fff" size="1.3rem">{{
         deviceWidth <= 465 ? "Grand Total" : "Amount Due"
       }}</app-text>
       <app-text
         type="emphasis"
-        color="var(--white)"
+        color="#fff"
         [size]="deviceWidth <= 465 ? '1.9rem' : '2.2rem'"
         >{{ invoice()?.total | currency : "GBP" }}</app-text
       >

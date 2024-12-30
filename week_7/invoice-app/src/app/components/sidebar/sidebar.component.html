@@ -11,9 +11,14 @@
 
 <span class="bottom">
   <app-icon
-    imgSrc="/assets/images/icon-moon.svg"
+    [imgSrc]="
+      isDarkMode
+        ? '/assets/images/icon-sun.svg'
+        : '/assets/images/icon-moon.svg'
+    "
     [height]="deviceWidth <= 465 ? 24 : 27"
     [width]="deviceWidth <= 465 ? 24 : 27"
+    (onClick)="toggleTheme()"
     altText="icon-moon"
   ></app-icon>
   <hr />

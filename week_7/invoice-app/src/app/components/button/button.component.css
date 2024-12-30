@@ -14,13 +14,17 @@ button {
 
 .addBtn {
   width: 100%;
-  background-color: var(--item-summary-bg);
+  background-color: var(--add);
   padding: 1.5rem 0;
 }
 
 .draft {
   background-color: var(--sidebar-color);
   color: var(--text-primary-color);
+}
+
+.cancel{
+  background-color: var(--cancel);
 }
 
 @media (max-width: 465px) {

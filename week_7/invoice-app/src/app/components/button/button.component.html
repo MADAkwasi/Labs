@@ -8,7 +8,11 @@
         : '',
     color: color ? color : ''
   }"
-  [ngClass]="{ addBtn: type === 'add', draft: type === 'draft' }"
+  [ngClass]="{
+    addBtn: type === 'add',
+    draft: type === 'draft',
+    cancel: type === 'cancel'
+  }"
   (click)="handleClick($event)"
   [disabled]="disabled"
 >
