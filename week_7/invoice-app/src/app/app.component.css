@@ -46,6 +46,21 @@ app-form {
   overflow-y: auto;
 }
 
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
 app-dialog {
   display: block;
 }
