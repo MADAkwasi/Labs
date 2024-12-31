@@ -1,0 +1,37 @@
+<div class="subject">
+  @if (subject && screen !== 'home') {
+    <img [ngSrc]="subject.icon" [alt]="subject.title" [height]="50" [width]="50" />
+    <h2>{{ subject.title }}</h2>
+  }
+</div>
+<div class="controls">
+  <img
+    [height]="20"
+    [ngSrc]="
+      isDarkMode
+        ? '/assets/images/icon-sun-dark.svg'
+        : '/assets/images/icon-sun.svg'
+    "
+    [width]="20"
+    alt="sun-icon"
+  />
+  <div class="toggle-switch">
+    <input
+      (click)="toggleDarkMode()"
+      [checked]="isDarkMode"
+      id="switch"
+      type="checkbox"
+    />
+    <label for="switch"></label>
+  </div>
+  <img
+    [height]="25"
+    [ngSrc]="
+      isDarkMode
+        ? '/assets/images/icon-moon-dark.svg'
+        : '/assets/images/icon-moon.svg'
+    "
+    [width]="25"
+    alt="moon-icon"
+  />
+</div>
