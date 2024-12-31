@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   FormArray,
@@ -20,6 +20,8 @@ import { updatePersonalInfo } from '../../state/actions/personal-info.action';
   styleUrls: ['./input-text-field.component.css'],
 })
 export class InputTextFieldComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store);
   inputFields = [
     {
       label: 'Name',
@@ -43,11 +45,6 @@ export class InputTextFieldComponent implements OnInit {
   formArray!: FormArray;
   errors!: ValidationErrors | null;
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<{ personalInfo: PersonalInfoState }>
-  ) {}
-
   ngOnInit(): void {
     this.store
       .select((state) => state.personalInfo)
@@ -66,14 +63,21 @@ export class InputTextFieldComponent implements OnInit {
                 : null,
             ].filter((v): v is ValidatorFn => v !== null);
 
-            const initialValue =
-              field.key === 'name'
-                ? state.name
-                : field.key === 'email'
-                ? state.email
-                : field.key === 'number'
-                ? state.number
-                : '';
+            let initialValue: string;
+
+            switch (field.key) {
+              case 'name':
+                initialValue = state.name;
+                break;
+              case 'email':
+                initialValue = state.email;
+                break;
+              case 'number':
+                initialValue = state.number;
+                break;
+              default:
+                initialValue = '';
+            }
 
             return this.fb.control(initialValue, validators);
           })

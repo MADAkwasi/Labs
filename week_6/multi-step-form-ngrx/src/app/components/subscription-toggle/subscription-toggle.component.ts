@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { PlanState } from '../../state/reducers/plan.reducer';
@@ -16,8 +16,8 @@ import { rate } from '../plan-card/plan.model';
 })
 export class SubscriptionToggleComponent implements OnInit, OnDestroy {
   selectedRate: rate = 'monthly';
-  private subscriptions: Subscription[] = [];
-  private store: Store<PlanState>;
+  private readonly subscriptions: Subscription[] = [];
+  private readonly store = inject(Store)
 
   constructor(store: Store<PlanState>) {
     this.store = store;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,7 +8,6 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PlanState } from '../../../state/reducers/plan.reducer';
 import { rate } from '../../../components/plan-card/plan.model';
 import {
   updateSubscriptionRate,
@@ -19,19 +18,16 @@ import {
   selectSubscriptionRate,
 } from '../../../state/selectors/plan.selector';
 import { selectPersonalInfoValid } from '../../../state/selectors/personal-info.selector';
-import { HeadingComponent } from '../../../components/heading/heading.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { PlanCardComponent } from '../../../components/plan-card/plan-card.component';
 import { AsyncPipe } from '@angular/common';
 import { SubscriptionToggleComponent } from '../../../components/subscription-toggle/subscription-toggle.component';
-import { RootState } from '../../../state/reducers/reducers';
 
 @Component({
   selector: 'app-plan-tab',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    HeadingComponent,
     ButtonComponent,
     PlanCardComponent,
     AsyncPipe,
@@ -41,12 +37,14 @@ import { RootState } from '../../../state/reducers/reducers';
   styleUrls: ['./plan-tab.component.css'],
 })
 export class PlanTabComponent implements OnInit, OnDestroy {
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store);
+  private readonly subscriptions: Subscription[] = [];
   myForm!: FormGroup;
   subscriptionRate$: Observable<rate>;
   isFormValid$!: Observable<boolean>;
-  private subscriptions: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private store: Store<RootState>) {
+  constructor() {
     this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
   }
 
@@ -54,8 +52,6 @@ export class PlanTabComponent implements OnInit, OnDestroy {
     this.myForm = this.fb.group({
       subscriptionRate: ['monthly', Validators.required],
     });
-
-    const personalInfoIsValid$ = this.store.select(selectPersonalInfoValid);
 
     this.isFormValid$ = combineLatest([
       this.store.select(selectPersonalInfoValid),

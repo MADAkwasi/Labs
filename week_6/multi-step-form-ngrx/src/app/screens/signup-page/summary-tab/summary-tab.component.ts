@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { OverviewCardComponent } from '../../../components/overview-card/overview-card.component';
@@ -18,12 +18,11 @@ import { StorageService } from '../../../storage.service';
   styleUrl: './summary-tab.component.css',
 })
 export class SummaryTabComponent implements OnInit {
+  private readonly storageService = inject(StorageService);
   heading = 'Finishing up';
   details = 'Double-check everything looks OK before confirming';
   isSubmitted!: boolean;
   isFormValid!: boolean;
-
-  constructor(private storageService: StorageService) {}
 
   ngOnInit(): void {
     const personalFormIsValid = this.storageService.getData<boolean>(

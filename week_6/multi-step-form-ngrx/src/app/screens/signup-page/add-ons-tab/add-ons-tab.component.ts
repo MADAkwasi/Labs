@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   FormBuilder,
@@ -6,7 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { updateSelectedAddOns } from '../../../state/actions/add-ons.action';
 import { selectSelectedAddOns } from '../../../state/selectors/add-ons.selector';
 import {
@@ -20,7 +20,6 @@ import {
 import { HeadingComponent } from '../../../components/heading/heading.component';
 import { AddOnItemComponent } from '../../../components/add-on-item/add-on-item.component';
 import { ButtonComponent } from '../../../components/button/button.component';
-import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-add-ons-tab',
@@ -35,6 +34,9 @@ import { combineLatest } from 'rxjs';
   styleUrls: ['./add-ons-tab.component.css'],
 })
 export class AddOnsTabComponent implements OnInit, OnDestroy {
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store);
+  private readonly subscriptions: Subscription[] = [];
   heading = 'Pick add-ons';
   details = 'Add-ons enhance your gaming experience';
 
@@ -44,9 +46,8 @@ export class AddOnsTabComponent implements OnInit, OnDestroy {
 
   formValid: boolean = false;
   myForm!: FormGroup;
-  private subscriptions: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor() {
     this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
     this.selectedAddOns$ = this.store.select(selectSelectedAddOns);
     this.planValid$ = this.store.select(selectPlanValid);

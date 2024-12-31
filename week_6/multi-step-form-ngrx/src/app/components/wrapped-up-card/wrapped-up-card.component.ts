@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './wrapped-up-card.component.css',
 })
 export class WrappedUpCardComponent implements OnInit {
-  constructor(private router: Router) {}
-
+  private readonly router = inject(Router);
   ngOnInit(): void {
     setTimeout(() => this.router.navigateByUrl('/'), 3000);
   }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AddOnItem, rate } from './add-on-item.model';
 import { CommonModule } from '@angular/common';
 import { selectSelectedAddOns } from '../../state/selectors/add-ons.selector';
@@ -17,6 +17,8 @@ import { selectSubscriptionRate } from '../../state/selectors/plan.selector';
   styleUrls: ['./add-on-item.component.css'],
 })
 export class AddOnItemComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly fb = inject(FormBuilder);
   items: AddOnItem[] = [
     {
       name: 'Online Service',
@@ -41,7 +43,7 @@ export class AddOnItemComponent implements OnInit {
 
   isChecked: boolean[] = [];
 
-  constructor(private store: Store, private fb: FormBuilder) {
+  constructor() {
     this.selectedAddOns$ = this.store.select(selectSelectedAddOns);
     this.subscriptionRate$ = this.store.select(selectSubscriptionRate);
   }

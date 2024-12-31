@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Plan, rate, selectedPackage } from './plan.model';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { PlanState } from '../../state/reducers/plan.reducer';
 import {
   selectSelectedPlan,
   selectSubscriptionRate,
@@ -17,6 +16,7 @@ import { updateSubscriptionPlan } from '../../state/actions/plan.action';
   styleUrls: ['./plan-card.component.css'],
 })
 export class PlanCardComponent implements OnInit {
+  private readonly store = inject(Store);
   plans: Plan[] = [
     {
       icon: 'assets/images/icon-arcade.svg',
@@ -37,8 +37,6 @@ export class PlanCardComponent implements OnInit {
 
   selectedPlan: selectedPackage = { name: '', price: '' };
   subscriptionRate: rate = 'monthly';
-
-  constructor(private store: Store<PlanState>) {}
 
   ngOnInit(): void {
     this.store.select(selectSubscriptionRate).subscribe((rate: rate) => {

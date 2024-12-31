@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -30,6 +30,8 @@ import { ButtonComponent } from '../../../components/button/button.component';
   styleUrls: ['./personal-info-tab.component.css'],
 })
 export class PersonalInfoTabComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store);
   heading = 'Personal Info';
   details = 'Please provide your name, email address, and phone number';
   myForm!: FormGroup;
@@ -54,11 +56,6 @@ export class PersonalInfoTabComponent implements OnInit {
       placeholder: 'e.g. +1 234 567 890',
     },
   ];
-
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<{ personalInfo: PersonalInfoState }>
-  ) {}
 
   get inputFieldsArray(): FormArray {
     return this.myForm.get('textFields') as FormArray;
