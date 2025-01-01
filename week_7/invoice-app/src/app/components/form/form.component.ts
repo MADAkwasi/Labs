@@ -298,7 +298,6 @@ export class FormComponent implements OnInit {
     const control = this.invoiceForm.get('createdAt');
     control?.setValue(selectedDate);
     control?.markAsDirty();
-    console.log('Updated createdAt:', control?.value); // Add this line
   }
 
   getNativeElement(): HTMLElement {
@@ -339,7 +338,6 @@ export class FormComponent implements OnInit {
     if (!this.invoiceForm.valid) return;
 
     const invoice = this.invoiceForm.getRawValue();
-    console.log('Invoice on Submit:', invoice); // Add this line
 
     if (this.isEditingForm())
       this.store.dispatch(invoiceActions.updateInvoice({ invoice }));
@@ -354,7 +352,5 @@ export class FormComponent implements OnInit {
     return (this.isFormSubmitted && control?.hasError(errorName)) ?? false;
   }
 
-  onSubmit() {
-    console.log(this.invoiceForm.value);
-  }
+  onSubmit() {}
 }
