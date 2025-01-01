@@ -133,7 +133,6 @@ input::placeholder {
   cursor: pointer;
   color: var(--base-black);
   font-size: 1.2rem;
-  margin-top: auto;
   border: 1px solid var(--tertiary-color);
   border-radius: 6px;
   padding: 2px 0;

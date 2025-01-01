@@ -1,0 +1,90 @@
+.custom-date-picker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  padding-bottom: 2rem;
+}
+
+.active {
+  outline: 1px solid var(--primary-color);
+  border: none;
+}
+
+.display-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  cursor: pointer;
+}
+
+.calendar-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.arrow-left,
+.arrow-right {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.current-month-year {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.calendar-days {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.calendar-days td {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+}
+
+.calendar-days td.in-current-month {
+  color: var(--date-color);
+  font-weight: 700;
+}
+
+.calendar-days td.out-of-current-month {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.calendar-days td.selected {
+  color: #9277ff;
+}
+
+.calendar-days td.disabled {
+  color: #ddd;
+  pointer-events: none;
+}
+
+.calendar-days td:hover {
+  color: #9277ff;
+}

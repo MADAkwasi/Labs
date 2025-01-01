@@ -10,6 +10,7 @@ import {
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -24,7 +25,11 @@ import { CommonModule } from '@angular/common';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { addDays } from 'date-fns';
 import { selectActiveInvoice } from '../../state/selectors/invoice.selector';
-import { selectDarkModeState, selectEditState } from '../../state/selectors/interactions.selector';
+import {
+  selectDarkModeState,
+  selectEditState,
+} from '../../state/selectors/interactions.selector';
+import { DatePickerComponent } from '../date-picker/date-picker.component';
 
 @Component({
   selector: 'app-form',
@@ -34,6 +39,7 @@ import { selectDarkModeState, selectEditState } from '../../state/selectors/inte
     IconComponent,
     ReactiveFormsModule,
     CommonModule,
+    DatePickerComponent,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
@@ -69,7 +75,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
       id: [this.generateId()],
-      createdAt: [new Date()],
+      createdAt: [null, Validators.required],
       paymentDue: ['', Validators.required],
       description: ['', Validators.required],
       paymentTerms: [1, Validators.required],
@@ -158,6 +164,10 @@ export class FormComponent implements OnInit {
 
   get items(): FormArray<FormGroup> {
     return this.invoiceForm.get('items') as FormArray<FormGroup>;
+  }
+
+  get createdAtControl(): FormControl {
+    return this.invoiceForm.get('createdAt') as FormControl;
   }
 
   generateId(): string {
@@ -284,6 +294,13 @@ export class FormComponent implements OnInit {
     this.isOpened = !this.isOpened;
   }
 
+  onDateChange(selectedDate: Date | null): void {
+    const control = this.invoiceForm.get('createdAt');
+    control?.setValue(selectedDate);
+    control?.markAsDirty();
+    console.log('Updated createdAt:', control?.value); // Add this line
+  }
+
   getNativeElement(): HTMLElement {
     return this.elementRef.nativeElement;
   }
@@ -322,6 +339,7 @@ export class FormComponent implements OnInit {
     if (!this.invoiceForm.valid) return;
 
     const invoice = this.invoiceForm.getRawValue();
+    console.log('Invoice on Submit:', invoice); // Add this line
 
     if (this.isEditingForm())
       this.store.dispatch(invoiceActions.updateInvoice({ invoice }));

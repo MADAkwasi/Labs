@@ -175,7 +175,10 @@
     <section class="dates">
       <div class="input-field">
         <label>Invoice Date</label>
-        <input type="date" formControlName="createdAt" [disabled]="true" />
+        <app-date-picker
+          (dateChange)="onDateChange($event)"
+          [selectedDate]="invoiceForm.get('createdAt')?.value || null"
+        ></app-date-picker>
       </div>
 
       <div class="input-field">
