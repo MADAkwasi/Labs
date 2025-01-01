@@ -14,5 +14,6 @@ export const invoiceActions = createActionGroup({
     updateInvoice: props<{ invoice: Invoice }>(),
     deleteInvoice: props<{ invoiceId: string }>(),
     updateInvoiceStatus: props<{ invoiceId: string; status: invoiceStatus }>(),
+    updateFilters: props<{ statuses: string[] }>(),
   },
 });

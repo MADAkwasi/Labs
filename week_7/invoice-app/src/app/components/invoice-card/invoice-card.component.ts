@@ -2,7 +2,7 @@ import { Component, effect, HostListener, inject } from '@angular/core';
 import { TextComponent } from '../text/text.component';
 import { Store } from '@ngrx/store';
 import {
-  selectAllInvoices,
+  selectFilteredInvoices,
   selectLoadingState,
 } from '../../state/selectors/invoice.selector';
 import { invoiceActions } from '../../state/actions/invoice.action';
@@ -28,7 +28,7 @@ import { Router } from '@angular/router';
 export class InvoiceCardComponent {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  invoices = this.store.selectSignal(selectAllInvoices);
+  invoices = this.store.selectSignal(selectFilteredInvoices);
   isLoading = this.store.selectSignal(selectLoadingState);
   deviceWidth: number = window.innerWidth;
 

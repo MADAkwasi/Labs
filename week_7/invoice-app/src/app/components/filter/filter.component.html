@@ -15,17 +15,15 @@
     class="filter-options"
     [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
   >
+    @for(status of statuses; track $index){
     <label>
-      <input type="checkbox" value="Draft" />
-      <span>Draft</span>
+      <input
+        type="checkbox"
+        [value]="status"
+        (change)="onCheckboxChange($event, status)"
+      />
+      <span class="status">{{ status }}</span>
     </label>
-    <label>
-      <input type="checkbox" value="Pending" />
-      <span>Pending</span>
-    </label>
-    <label>
-      <input type="checkbox" value="Paid" />
-      <span>Paid</span>
-    </label>
+    }
   </div>
 </div>

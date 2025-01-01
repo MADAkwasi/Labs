@@ -6,6 +6,7 @@ export interface InvoiceState {
   invoices: Invoice[];
   activeInvoice: Invoice | null;
   isLoading: boolean;
+  filters: { statuses: string[] };
   error: string | null;
 }
 
@@ -13,6 +14,9 @@ const initialInvoiceState: InvoiceState = {
   invoices: [],
   activeInvoice: null,
   isLoading: false,
+  filters: {
+    statuses: [],
+  },
   error: null,
 };
 
@@ -26,6 +30,7 @@ const {
   addInvoice,
   setActiveInvoice,
   editField,
+  updateFilters,
 } = invoiceActions;
 
 export const invoiceReducer = createReducer(
@@ -113,5 +118,10 @@ export const invoiceReducer = createReducer(
         inv.id === updatedActiveInvoice.id ? updatedActiveInvoice : inv
       ),
     };
-  })
+  }),
+
+  on(updateFilters, (state, { statuses }) => ({
+    ...state,
+    filters: { ...state.filters, statuses },
+  }))
 );
