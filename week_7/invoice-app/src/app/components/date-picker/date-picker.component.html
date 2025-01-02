@@ -1,0 +1,60 @@
+<div class="custom-date-picker">
+  <div
+    class="display-date"
+    [ngClass]="{ active: isCalendarVisible }"
+    (click)="toggleCalendar()"
+  >
+    <app-text
+      type="emphasis"
+      size="1.5rem"
+      [color]="selectedDate ? '' : '#ccc'"
+      >{{ displayDate }}</app-text
+    >
+
+    <app-icon
+      imgSrc="/assets/images/icon-calendar.svg"
+      altText="calendar-icon"
+      [height]="17"
+      [width]="17"
+    ></app-icon>
+  </div>
+  @if(isCalendarVisible){
+  <div class="calendar-popup">
+    <div class="calendar-header">
+      <app-icon
+        imgSrc="/assets/images/icon-arrow-left.svg"
+        altText="left-arrow"
+        [height]="10"
+        [width]="5"
+        (onClick)="changeMonth(-1)"
+      ></app-icon>
+      <span class="current-month-year">{{ currentMonthYear }}</span>
+      <app-icon
+        imgSrc="/assets/images/icon-arrow-right.svg"
+        altText="left-arrow"
+        [height]="10"
+        [width]="5"
+        (onClick)="changeMonth(1)"
+      ></app-icon>
+    </div>
+    <table class="calendar-days">
+      @for(week of calendar; track $index){
+      <tr>
+        @for(dateObj of week; track $index){
+        <td
+          [ngClass]="{
+            selected: isSelected(dateObj.date),
+            'in-current-month': dateObj.inCurrentMonth,
+            'out-of-current-month': !dateObj.inCurrentMonth
+          }"
+          (click)="onDateSelected(dateObj.date)"
+        >
+          {{ dateObj?.date ? dateObj?.date?.getDate() : "" }}
+        </td>
+        }
+      </tr>
+      }
+    </table>
+  </div>
+  }
+</div>

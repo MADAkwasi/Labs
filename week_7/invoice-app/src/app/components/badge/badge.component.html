@@ -1,0 +1,21 @@
+<span
+  class="badge"
+  [ngClass]="{
+    paid: status === 'paid',
+    pending: status === 'pending',
+    draft: status === 'draft'
+  }"
+>
+  <span
+    class="dot"
+    [ngStyle]="{
+      backgroundColor:
+        status === 'paid'
+          ? 'var(--paid)'
+          : status === 'pending'
+          ? 'var(--pending)'
+          : 'var(--draft)'
+    }"
+  ></span>
+  <ng-content></ng-content>
+</span>

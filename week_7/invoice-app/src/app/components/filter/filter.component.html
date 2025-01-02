@@ -1,0 +1,29 @@
+<div class="filter-dropdown" (click)="toggleDropdown()">
+  <div class="filter-display">
+    <span>
+      {{ deviceWidth <= 465 ? "Filter" : "Filter by status" }}
+      <app-icon
+        imgSrc="/assets/images/icon-arrow-down.svg"
+        altText="down-arrow"
+        [height]="9"
+        [width]="14"
+        [rotate]="isOpened ? '180deg' : '0deg'"
+      ></app-icon>
+    </span>
+  </div>
+  <div
+    class="filter-options"
+    [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
+  >
+    @for(status of statuses; track $index){
+    <label>
+      <input
+        type="checkbox"
+        [value]="status"
+        (change)="onCheckboxChange($event, status)"
+      />
+      <span class="status">{{ status }}</span>
+    </label>
+    }
+  </div>
+</div>
