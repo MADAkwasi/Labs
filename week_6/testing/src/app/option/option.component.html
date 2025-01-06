@@ -1,7 +1,0 @@
-@for (quiz of quizzes; track $index) {
-
-  <div class="option" (click)="onSelectSubject(subjectTitle)">
-    <img [ngSrc]="quiz.icon" [alt]="quiz.title" [height]="35" [width]="35" />
-    <p #subjectTitle>{{ quiz.title }}</p>
-  </div>
-}
