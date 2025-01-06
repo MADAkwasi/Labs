@@ -32,7 +32,13 @@ export class DatePickerComponent {
   }
 
   get displayDate(): string {
-    const date = this.selectedDate || this.today;
+    const date =
+      this.selectedDate instanceof Date && !isNaN(this.selectedDate.getTime())
+        ? this.selectedDate
+        : this.today instanceof Date && !isNaN(this.today.getTime())
+        ? this.today
+        : new Date(); // Fallback to the current date if both are invalid
+
     return new Intl.DateTimeFormat('en-US', {
       day: 'numeric',
       month: 'short',

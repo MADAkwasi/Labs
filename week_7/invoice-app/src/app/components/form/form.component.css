@@ -2,6 +2,7 @@ form {
   margin-top: 3rem;
   max-height: calc(100vh - 6rem);
   overflow-y: auto;
+  padding: 0 1px;
   padding-bottom: 8rem;
 }
 

@@ -43,7 +43,6 @@ export class InvoiceComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  private readonly invoiceService = inject(InvoiceService);
   invoices = this.store.selectSignal(selectAllInvoices);
   idSignal = signal<string | null>(null);
   invoice = computed(() =>
