@@ -30,7 +30,13 @@
           <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
           }
         </span>
-        <input type="text" formControlName="street" />
+        <app-text-field
+          [value]="invoiceForm.get('senderAddress.street')?.value"
+          (valueChange)="
+            invoiceForm.get('senderAddress.street')?.setValue($event)
+          "
+          [error]="hasError('senderAddress.street', 'required')"
+        ></app-text-field>
       </div>
       <div class="address">
         <div
@@ -45,7 +51,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="city" />
+          <app-text-field
+            [value]="invoiceForm.get('senderAddress.city')?.value"
+            (valueChange)="
+              invoiceForm.get('senderAddress.city')?.setValue($event)
+            "
+            [error]="hasError('senderAddress.city', 'required')"
+          ></app-text-field>
         </div>
         <div
           class="input-field"
@@ -59,7 +71,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="postCode" />
+          <app-text-field
+            [value]="invoiceForm.get('senderAddress.postCode')?.value"
+            (valueChange)="
+              invoiceForm.get('senderAddress.postCode')?.setValue($event)
+            "
+            [error]="hasError('senderAddress.postCode', 'required')"
+          ></app-text-field>
         </div>
         <div
           class="input-field"
@@ -73,7 +91,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="country" />
+          <app-text-field
+            [value]="invoiceForm.get('senderAddress.country')?.value"
+            (valueChange)="
+              invoiceForm.get('senderAddress.country')?.setValue($event)
+            "
+            [error]="hasError('senderAddress.country', 'required')"
+          ></app-text-field>
         </div>
       </div>
     </ng-container>
@@ -92,7 +116,11 @@
           <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
           }
         </span>
-        <input type="text" formControlName="clientName" />
+        <app-text-field
+          [value]="invoiceForm.get('clientName')?.value"
+          (valueChange)="invoiceForm.get('clientName')?.setValue($event)"
+          [error]="hasError('clientName', 'required')"
+        ></app-text-field>
       </div>
       <div
         class="input-field"
@@ -104,7 +132,11 @@
           <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
           }
         </span>
-        <input type="text" formControlName="clientEmail" />
+        <app-text-field
+          [value]="invoiceForm.get('clientEmail')?.value"
+          (valueChange)="invoiceForm.get('clientEmail')?.setValue($event)"
+          [error]="hasError('clientEmail', 'required')"
+        ></app-text-field>
       </div>
 
       <ng-container formGroupName="clientAddress">
@@ -120,7 +152,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="street" />
+          <app-text-field
+            [value]="invoiceForm.get('clientAddress.street')?.value"
+            (valueChange)="
+              invoiceForm.get('clientAddress.street')?.setValue($event)
+            "
+            [error]="hasError('clientAddress.street', 'required')"
+          ></app-text-field>
         </div>
       </ng-container>
     </div>
@@ -139,7 +177,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="city" />
+          <app-text-field
+            [value]="invoiceForm.get('clientAddress.city')?.value"
+            (valueChange)="
+              invoiceForm.get('clientAddress.city')?.setValue($event)
+            "
+            [error]="hasError('clientAddress.city', 'required')"
+          ></app-text-field>
         </div>
         <div
           class="input-field"
@@ -153,7 +197,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="postCode" />
+          <app-text-field
+            [value]="invoiceForm.get('clientAddress.postCode')?.value"
+            (valueChange)="
+              invoiceForm.get('clientAddress.postCode')?.setValue($event)
+            "
+            [error]="hasError('clientAddress.postCode', 'required')"
+          ></app-text-field>
         </div>
         <div
           class="input-field"
@@ -167,7 +217,13 @@
             >
             }
           </span>
-          <input type="text" formControlName="country" />
+          <app-text-field
+            [value]="invoiceForm.get('clientAddress.country')?.value"
+            (valueChange)="
+              invoiceForm.get('clientAddress.country')?.setValue($event)
+            "
+            [error]="hasError('clientAddress.country', 'required')"
+          ></app-text-field>
         </div>
       </ng-container>
     </div>
@@ -259,11 +315,12 @@
         <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
         }
       </span>
-      <input
-        type="text"
+      <app-text-field
+        [value]="invoiceForm.get('description')?.value"
+        (valueChange)="invoiceForm.get('description')?.setValue($event)"
         placeholder="e.g. Graphic Design Service"
-        formControlName="description"
-      />
+        [error]="hasError('description', 'required')"
+      ></app-text-field>
     </div>
 
     <div class="items">

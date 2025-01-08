@@ -1,0 +1,24 @@
+input {
+  padding: 1rem;
+  border: 1px solid var(--grey);
+  border-radius: 6px;
+  outline: none;
+  background-color: var(--input-bg);
+  color: var(--base-black);
+  width: 100%;
+}
+
+input:active,
+input:focus {
+  outline: 1px solid var(--primary-color);
+  border: none;
+}
+
+input::placeholder {
+  color: white;
+}
+
+.error {
+  border: 1px solid var(--error);
+  outline: none;
+}

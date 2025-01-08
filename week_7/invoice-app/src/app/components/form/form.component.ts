@@ -30,6 +30,7 @@ import {
   selectEditState,
 } from '../../state/selectors/interactions.selector';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { TextFieldComponent } from '../text-field/text-field.component';
 
 @Component({
   selector: 'app-form',
@@ -40,6 +41,7 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
     ReactiveFormsModule,
     CommonModule,
     DatePickerComponent,
+    TextFieldComponent,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
@@ -120,6 +122,10 @@ export class FormComponent implements OnInit {
   }
 
   private syncFormWithStore(formValue: any, parentPath: string[] = []): void {
+    if (!formValue || typeof formValue !== 'object') {
+      return;
+    }
+
     Object.keys(formValue).forEach((key) => {
       const path = [...parentPath, key];
       const control = this.invoiceForm.get(path.join('.'));

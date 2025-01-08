@@ -1,1 +1,7 @@
-<p>text-field works!</p>
+<input
+  [type]="type"
+  [value]="value"
+  [placeholder]="placeholder"
+  (input)="handleInputChange($event)"
+  [ngClass]="{ error: error }"
+/>
