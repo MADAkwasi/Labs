@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { HeadlineComponent } from '../../components/headline/headline.component';
 import { Store } from '@ngrx/store';
 import { invoiceActions } from '../../state/actions/invoice.action';
@@ -26,6 +26,7 @@ export class InvoicesComponent implements OnInit {
   private readonly store = inject(Store);
   isLoading = this.store.selectSignal(selectLoadingState);
   invoices = this.store.selectSignal(selectAllInvoices);
+  invoiceLength = computed(() => this.invoices().length);
 
   ngOnInit(): void {
     if (!this.isLoading()) {

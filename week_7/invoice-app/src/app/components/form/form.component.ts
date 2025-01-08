@@ -78,7 +78,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
       id: [this.formService.generateId()],
-      createdAt: [null, Validators.required],
+      createdAt: [new Date(), Validators.required],
       paymentDue: ['', Validators.required],
       description: ['', Validators.required],
       paymentTerms: [1, Validators.required],

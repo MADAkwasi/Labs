@@ -177,7 +177,7 @@
         <label>Invoice Date</label>
         <app-date-picker
           (dateChange)="onDateChange($event)"
-          [selectedDate]="invoiceForm.get('createdAt')?.value || null"
+          [selectedDate]="invoiceForm.get('createdAt')?.value"
         ></app-date-picker>
       </div>
 

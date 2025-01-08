@@ -10,7 +10,7 @@ import { TextComponent } from '../text/text.component';
   styleUrls: ['./date-picker.component.css'],
 })
 export class DatePickerComponent {
-  @Output() dateChange = new EventEmitter<Date | null>();
+  @Output() dateChange = new EventEmitter<Date>();
   @Input() selectedDate!: Date;
   today = new Date();
   isCalendarVisible = false;
@@ -20,7 +20,7 @@ export class DatePickerComponent {
   daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   calendar: CalendarDate[][] = [];
 
-  onDateSelected(date: Date | null) {
+  onDateSelected(date: Date) {
     this.dateChange.emit(date);
   }
 
@@ -32,15 +32,9 @@ export class DatePickerComponent {
   }
 
   get displayDate(): string {
-    const date =
-      this.selectedDate instanceof Date && !isNaN(this.selectedDate.getTime())
-        ? this.selectedDate
-        : this.today instanceof Date && !isNaN(this.today.getTime())
-        ? this.today
-        : new Date();
-
+    const date = this.selectedDate;
     return new Intl.DateTimeFormat('en-US', {
-      day: 'numeric',
+      day: '2-digit',
       month: 'short',
       year: 'numeric',
     }).format(date);
@@ -67,11 +61,12 @@ export class DatePickerComponent {
     ).getDay();
 
     const dates: CalendarDate[] = [];
+    const placeholderDate = new Date(0);
 
     Array.from({ length: firstDayOfMonth }).forEach(() => {
-      dates.push({ date: null, inCurrentMonth: false });
+      dates.push({ date: placeholderDate, inCurrentMonth: false });
     });
-  
+
     Array.from({ length: daysInMonth }).forEach((_, index) => {
       dates.push({
         date: new Date(this.currentYear, this.currentMonth, index + 1),
@@ -105,14 +100,12 @@ export class DatePickerComponent {
     this.generateCalendar();
   }
 
-  selectDate(date: Date | null): void {
-    if (date) {
-      this.selectedDate = date;
-      this.isCalendarVisible = false;
-    }
+  selectDate(date: Date): void {
+    this.selectedDate = date;
+    this.isCalendarVisible = false;
   }
 
-  isSelected(date: Date | null): boolean {
+  isSelected(date: Date): boolean {
     return (
       !!date &&
       !!this.selectedDate &&
@@ -124,6 +117,6 @@ export class DatePickerComponent {
 }
 
 interface CalendarDate {
-  date: Date | null;
+  date: Date;
   inCurrentMonth: boolean;
 }
