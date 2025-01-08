@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
@@ -18,6 +18,7 @@ export class HeadlineComponent {
   private readonly store = inject(Store);
   invoices = this.store.selectSignal(selectAllInvoices);
   deviceWidth = window.innerWidth;
+  invoiceLength = computed(() => this.invoices().length);
 
   @HostListener('window: resize', ['$event'])
   onResize(event: Event): void {

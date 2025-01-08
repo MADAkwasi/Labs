@@ -2,7 +2,7 @@
   <app-text type="emphasis" [size]="deviceWidth <= 465 ? '3rem' : '4rem'"
     >Invoices</app-text
   >
-  @if(!!invoices().length){
+  @if(invoiceLength()>0){
   <app-text size="1.3rem">{{
     deviceWidth <= 465
       ? invoices().length + " invoices"
