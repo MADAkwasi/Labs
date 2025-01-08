@@ -68,16 +68,16 @@ export class DatePickerComponent {
 
     const dates: CalendarDate[] = [];
 
-    for (let i = 0; i < firstDayOfMonth; i++) {
+    Array.from({ length: firstDayOfMonth }).forEach(() => {
       dates.push({ date: null, inCurrentMonth: false });
-    }
-
-    for (let day = 1; day <= daysInMonth; day++) {
+    });
+  
+    Array.from({ length: daysInMonth }).forEach((_, index) => {
       dates.push({
-        date: new Date(this.currentYear, this.currentMonth, day),
+        date: new Date(this.currentYear, this.currentMonth, index + 1),
         inCurrentMonth: true,
       });
-    }
+    });
 
     let nextMonthDay = 1;
     while (dates.length % 7 !== 0) {
@@ -88,9 +88,9 @@ export class DatePickerComponent {
     }
 
     this.calendar = [];
-    for (let i = 0; i < dates.length; i += 7) {
-      this.calendar.push(dates.slice(i, i + 7));
-    }
+    Array.from({ length: Math.ceil(dates.length / 7) }).forEach((_, index) => {
+      this.calendar.push(dates.slice(index * 7, index * 7 + 7));
+    });
   }
 
   changeMonth(offset: number): void {
