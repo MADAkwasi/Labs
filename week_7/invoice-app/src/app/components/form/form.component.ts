@@ -30,6 +30,7 @@ import {
   selectEditState,
 } from '../../state/selectors/interactions.selector';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { FormService } from './form.service';
 
 @Component({
   selector: 'app-form',
@@ -41,6 +42,7 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
     CommonModule,
     DatePickerComponent,
   ],
+  providers: [FormService],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -48,6 +50,7 @@ export class FormComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly elementRef = inject(ElementRef);
   private readonly fb = inject(FormBuilder);
+  private readonly formService = inject(FormService);
   isOpened!: boolean;
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
@@ -74,7 +77,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
-      id: [this.generateId()],
+      id: [this.formService.generateId()],
       createdAt: [null, Validators.required],
       paymentDue: ['', Validators.required],
       description: ['', Validators.required],
@@ -168,17 +171,6 @@ export class FormComponent implements OnInit {
 
   get createdAtControl(): FormControl {
     return this.invoiceForm.get('createdAt') as FormControl;
-  }
-
-  generateId(): string {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const randomLetters = Array.from({ length: 2 }, () =>
-      letters.charAt(Math.floor(Math.random() * letters.length))
-    ).join('');
-
-    const randomDigits = Math.floor(1000 + Math.random() * 9000).toString();
-
-    return `${randomLetters}${randomDigits}`;
   }
 
   populateForm(invoice: Invoice): void {
