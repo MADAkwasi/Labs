@@ -1,23 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { FormService } from './form.service';
 
-import { FormComponent } from './form.component';
+describe('FormService', () => {
+  let service: FormService;
 
-describe('FormComponent', () => {
-  let component: FormComponent;
-  let fixture: ComponentFixture<FormComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FormComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(FormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(FormService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should generate a valid ID', () => {
+    const id = service.generateId();
+    expect(id).toMatch(/^[A-Z]{2}\d{4}$/);
+  });
+
+  it('should generate unique IDs', () => {
+    const id1 = service.generateId();
+    const id2 = service.generateId();
+    expect(id1).not.toEqual(id2);
   });
 });
