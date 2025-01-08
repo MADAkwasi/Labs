@@ -19,7 +19,7 @@ import { DeleteCardComponent } from '../../components/delete-card/delete-card.co
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { selectDeleteState } from '../../state/selectors/interactions.selector';
 import { interactionsActions } from '../../state/actions/interactions.action';
-import { invoiceStatus } from '../../../assets/data/model';
+import { Invoice, invoiceStatus } from '../../../assets/data/model';
 import { InvoiceService } from '../../invoice.service';
 
 @Component({
@@ -45,8 +45,8 @@ export class InvoiceComponent implements OnInit {
   private readonly router = inject(Router);
   invoices = this.store.selectSignal(selectAllInvoices);
   idSignal = signal<string | null>(null);
-  invoice = computed(() =>
-    this.invoices().find((inv) => inv.id === this.idSignal())
+  invoice = computed(
+    () => this.invoices().find((inv) => inv.id === this.idSignal()) as Invoice
   );
   wantsToDelete = this.store.selectSignal(selectDeleteState);
   deviceWidth: number = window.innerWidth;

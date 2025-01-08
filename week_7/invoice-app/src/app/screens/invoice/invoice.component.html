@@ -11,9 +11,7 @@
   <div class="header">
     <span>
       <app-text>Status</app-text>
-      <app-badge [status]="invoice()?.status">{{
-        invoice()?.status
-      }}</app-badge>
+      <app-badge [status]="invoice().status">{{ invoice().status }}</app-badge>
     </span>
 
     <span>
@@ -27,8 +25,8 @@
         >Delete</app-button
       >
       <app-button
-        [disabled]="invoice()?.status === 'draft'"
-        (onClick)="onChangeStatus(invoice()?.status)"
+        [disabled]="invoice().status === 'draft'"
+        (onClick)="onChangeStatus(invoice().status)"
         >Mark as Paid</app-button
       >
     </span>
@@ -39,22 +37,18 @@
       <span class="item">
         <app-text type="emphasis">
           <p>#</p>
-          {{ invoice()?.id }}
+          {{ invoice().id }}
         </app-text>
-        <app-text>{{ invoice()?.description }}</app-text>
+        <app-text>{{ invoice().description }}</app-text>
       </span>
 
       <span class="address">
+        <app-text size="1.2rem">{{ invoice().senderAddress.street }}</app-text>
         <app-text size="1.2rem">{{
-          invoice()?.senderAddress?.street
+          invoice().senderAddress.postCode
         }}</app-text>
-        <app-text size="1.2rem">{{
-          invoice()?.senderAddress?.postCode
-        }}</app-text>
-        <app-text size="1.2rem">{{ invoice()?.senderAddress?.city }}</app-text>
-        <app-text size="1.2rem">{{
-          invoice()?.senderAddress?.country
-        }}</app-text>
+        <app-text size="1.2rem">{{ invoice().senderAddress.city }}</app-text>
+        <app-text size="1.2rem">{{ invoice().senderAddress.country }}</app-text>
       </span>
     </div>
 
@@ -63,14 +57,14 @@
         <span class="date__created">
           <app-text>Invoice Date</app-text>
           <app-text type="emphasis" size="1.6rem">{{
-            invoice()?.createdAt | date : "d MMM, yyyy"
+            invoice().createdAt | date : "d MMM, yyyy"
           }}</app-text>
         </span>
 
         <span class="date__due">
           <app-text>Payment Due</app-text>
           <app-text type="emphasis" size="1.6rem">{{
-            invoice()?.paymentDue | date : "d MMM, yyyy"
+            invoice().paymentDue | date : "d MMM, yyyy"
           }}</app-text>
         </span>
       </span>
@@ -78,24 +72,20 @@
       <span class="client">
         <app-text>Bill To</app-text>
         <app-text type="emphasis" size="1.6rem">{{
-          invoice()?.clientName
+          invoice().clientName
         }}</app-text>
+        <app-text size="1.2rem">{{ invoice().clientAddress.street }}</app-text>
         <app-text size="1.2rem">{{
-          invoice()?.clientAddress?.street
+          invoice().clientAddress.postCode
         }}</app-text>
-        <app-text size="1.2rem">{{
-          invoice()?.clientAddress?.postCode
-        }}</app-text>
-        <app-text size="1.2rem">{{ invoice()?.clientAddress?.city }}</app-text>
-        <app-text size="1.2rem">{{
-          invoice()?.clientAddress?.country
-        }}</app-text>
+        <app-text size="1.2rem">{{ invoice().clientAddress.city }}</app-text>
+        <app-text size="1.2rem">{{ invoice().clientAddress.country }}</app-text>
       </span>
 
       <span class="email">
         <app-text>Sent To</app-text>
         <app-text type="emphasis" size="1.6rem">{{
-          invoice()?.clientEmail
+          invoice().clientEmail
         }}</app-text>
       </span>
     </div>
@@ -116,7 +106,7 @@
           >Total</app-text
         >
       </div>
-      } @for(item of invoice()?.items; track $index){
+      } @for(item of invoice().items; track $index){
       <div class="grid-row">
         <app-text type="emphasis" size="1.4rem" class="grid-item">{{
           item.name
@@ -154,7 +144,7 @@
         type="emphasis"
         color="#fff"
         [size]="deviceWidth <= 465 ? '1.9rem' : '2.2rem'"
-        >{{ invoice()?.total | currency : "GBP" }}</app-text
+        >{{ invoice().total | currency : "GBP" }}</app-text
       >
     </div>
   </div>
