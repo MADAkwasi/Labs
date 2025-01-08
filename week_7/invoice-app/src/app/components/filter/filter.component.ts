@@ -1,10 +1,11 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { invoiceStatus } from '../../../assets/data/model';
 import { selectFilteredInvoices } from '../../state/selectors/invoice.selector';
+import { ResizeService } from '../../resize.service';
 
 @Component({
   selector: 'app-filter',
@@ -15,15 +16,17 @@ import { selectFilteredInvoices } from '../../state/selectors/invoice.selector';
 })
 export class FilterComponent {
   private readonly store = inject(Store);
+  private readonly resizeService = inject(ResizeService);
   isOpened!: boolean;
-  deviceWidth = window.innerWidth;
+  deviceWidth!: number;
   statuses: invoiceStatus[] = ['draft', 'paid', 'pending'];
   selectedStatuses: Set<string> = new Set();
   invoices = this.store.selectSignal(selectFilteredInvoices);
 
-  @HostListener('window: resize', ['$event'])
-  onResize(event: Event): void {
-    this.deviceWidth = window.innerWidth;
+  constructor() {
+    this.resizeService.deviceWidth$.subscribe((width) => {
+      this.deviceWidth = width;
+    });
   }
   toggleDropdown() {
     this.isOpened = !this.isOpened;

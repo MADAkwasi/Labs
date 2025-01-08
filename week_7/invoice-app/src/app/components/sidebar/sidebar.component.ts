@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { ThemeTogglerComponent } from '../theme-toggler/theme-toggler.component';
+import { ResizeService } from '../../resize.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,10 +12,12 @@ import { ThemeTogglerComponent } from '../theme-toggler/theme-toggler.component'
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
-  deviceWidth: number = window.innerWidth;
+  private readonly resizeService = inject(ResizeService);
+  deviceWidth!: number;
 
-  @HostListener('window: resize', ['$event'])
-  onResize(event: Event): void {
-    this.deviceWidth = window.innerWidth;
+  constructor() {
+    this.resizeService.deviceWidth$.subscribe((width) => {
+      this.deviceWidth = width;
+    });
   }
 }

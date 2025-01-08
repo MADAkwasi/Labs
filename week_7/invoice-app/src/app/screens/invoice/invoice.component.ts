@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  HostListener,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { IconComponent } from '../../components/icon/icon.component';
 import { TextComponent } from '../../components/text/text.component';
 import { BadgeComponent } from '../../components/badge/badge.component';
@@ -20,6 +13,7 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { selectDeleteState } from '../../state/selectors/interactions.selector';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { Invoice, invoiceStatus } from '../../../assets/data/model';
+import { ResizeService } from '../../resize.service';
 
 @Component({
   selector: 'app-invoice',
@@ -42,17 +36,19 @@ export class InvoiceComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
+  private readonly resizeService = inject(ResizeService);
   invoices = this.store.selectSignal(selectAllInvoices);
   invoiceId = signal<string | null>(null);
   invoice = computed(
     () => this.invoices().find((inv) => inv.id === this.invoiceId()) as Invoice
   );
   shouldDelete = this.store.selectSignal(selectDeleteState);
-  deviceWidth: number = window.innerWidth;
+  deviceWidth!: number;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.deviceWidth = window.innerWidth;
+  constructor() {
+    this.resizeService.deviceWidth$.subscribe((width) => {
+      this.deviceWidth = width;
+    });
   }
 
   ngOnInit(): void {

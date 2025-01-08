@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectDarkModeState } from '../../state/selectors/interactions.selector';
 import { interactionsActions } from '../../state/actions/interactions.action';
+import { ResizeService } from '../../resize.service';
 
 @Component({
   selector: 'app-theme-toggler',
@@ -12,14 +13,17 @@ import { interactionsActions } from '../../state/actions/interactions.action';
   styleUrl: './theme-toggler.component.css',
 })
 export class ThemeTogglerComponent {
-  store = inject(Store);
-  deviceWidth: number = window.innerWidth;
+  private readonly resizeService = inject(ResizeService);
+  private readonly store = inject(Store);
+  deviceWidth!: number;
   isDarkMode = this.store.selectSignal(selectDarkModeState);
 
-  @HostListener('window: resize', ['$event'])
-  onResize(event: Event): void {
-    this.deviceWidth = window.innerWidth;
+  constructor() {
+    this.resizeService.deviceWidth$.subscribe((width) => {
+      this.deviceWidth = width;
+    });
   }
+
   ngOnInit(): void {
     this.initializeTheme();
   }
