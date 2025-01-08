@@ -43,9 +43,9 @@ export class InvoiceComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   invoices = this.store.selectSignal(selectAllInvoices);
-  idSignal = signal<string | null>(null);
+  invoiceId = signal<string | null>(null);
   invoice = computed(
-    () => this.invoices().find((inv) => inv.id === this.idSignal()) as Invoice
+    () => this.invoices().find((inv) => inv.id === this.invoiceId()) as Invoice
   );
   shouldDelete = this.store.selectSignal(selectDeleteState);
   deviceWidth: number = window.innerWidth;
@@ -58,7 +58,7 @@ export class InvoiceComponent implements OnInit {
   ngOnInit(): void {
     const { id } = this.activatedRoute.snapshot.params;
     this.store.dispatch(invoiceActions.setActiveInvoice({ invoiceId: id }));
-    this.idSignal.set(id);
+    this.invoiceId.set(id);
 
     if (!this.invoices() || this.invoices().length === 0) {
       this.store.dispatch(invoiceActions.loadInvoices());
@@ -80,7 +80,7 @@ export class InvoiceComponent implements OnInit {
   onChangeStatus(status: invoiceStatus | undefined): void {
     this.store.dispatch(
       invoiceActions.updateInvoiceStatus({
-        invoiceId: this.idSignal() as string,
+        invoiceId: this.invoiceId() as string,
         status: 'paid',
       })
     );
