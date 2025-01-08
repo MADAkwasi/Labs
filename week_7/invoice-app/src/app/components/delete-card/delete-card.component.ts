@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-card',
@@ -16,6 +17,7 @@ export class DeleteCardComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly toastr = inject(ToastrService);
   invoiceId!: string;
 
   ngOnInit(): void {
@@ -34,5 +36,6 @@ export class DeleteCardComponent implements OnInit {
     this.store.dispatch(interactionsActions.cancelDelete());
 
     this.router.navigate(['/dashboard']);
+    this.toastr.success(`Invoice ${this.invoiceId} deleted successfully`);
   }
 }

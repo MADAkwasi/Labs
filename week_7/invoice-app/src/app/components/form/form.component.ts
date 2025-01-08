@@ -31,6 +31,7 @@ import {
 } from '../../state/selectors/interactions.selector';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { TextFieldComponent } from '../text-field/text-field.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
@@ -50,6 +51,7 @@ export class FormComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly elementRef = inject(ElementRef);
   private readonly fb = inject(FormBuilder);
+  private readonly toastr = inject(ToastrService);
   isOpened!: boolean;
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
@@ -336,6 +338,7 @@ export class FormComponent implements OnInit {
     else this.store.dispatch(invoiceActions.addInvoice({ invoice }));
 
     this.resetFormAndClose();
+    this.toastr.info(`Invoice ${invoice.id} saved as draft`);
   }
 
   handleSend(): void {
@@ -351,6 +354,10 @@ export class FormComponent implements OnInit {
 
     this.resetFormAndClose();
     this.isFormSubmitted = false;
+
+    if (this.isEditingForm())
+      this.toastr.success(`Invoice ${invoice.id} added successfully`);
+    else this.toastr.success(`Invoice ${invoice.id} edited successfully`);
   }
 
   hasError(controlName: string, errorName: string): boolean {

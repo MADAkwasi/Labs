@@ -17,6 +17,8 @@ import {
   reducers,
   metaReducers,
 } from './state/reducers/local-storage-sync.reducer';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,5 +30,10 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([InvoiceEffect]),
     provideHttpClient(),
+    provideAnimations(),
+    provideToastr({
+      positionClass: 'toast-top-center',
+      progressBar: true,
+    }),
   ],
 };
