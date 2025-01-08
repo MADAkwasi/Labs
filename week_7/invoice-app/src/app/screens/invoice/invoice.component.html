@@ -148,10 +148,10 @@
       >
     </div>
   </div>
-  @if(wantsToDelete()){
+  @if(shouldDelete()){
   <app-delete-card></app-delete-card>
   }
 </section>
-@if(wantsToDelete()){
+@if(shouldDelete()){
 <app-dialog></app-dialog>
 }

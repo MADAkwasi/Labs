@@ -47,7 +47,7 @@ export class InvoiceComponent implements OnInit {
   invoice = computed(
     () => this.invoices().find((inv) => inv.id === this.idSignal()) as Invoice
   );
-  wantsToDelete = this.store.selectSignal(selectDeleteState);
+  shouldDelete = this.store.selectSignal(selectDeleteState);
   deviceWidth: number = window.innerWidth;
 
   @HostListener('window:resize', ['$event'])
