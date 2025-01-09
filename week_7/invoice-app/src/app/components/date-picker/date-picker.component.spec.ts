@@ -1,4 +1,3 @@
-// filepath: /c:/Users/MichaelAgyemanDarko/OneDrive - AmaliTech gGmbH/Documents/Labs/week_7/invoice-app/src/app/components/date-picker/date-picker.component.spec.ts
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePickerComponent } from './date-picker.component';
 import { By } from '@angular/platform-browser';
