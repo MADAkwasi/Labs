@@ -41,7 +41,7 @@ export class AppComponent {
         this.renderer.setStyle(document.body, 'overflow', 'auto');
       }
 
-      if (deleteState) {
+      if (deleteState || formState) {
         this.viewportScroller.scrollToPosition([0, 0]);
       }
     });
