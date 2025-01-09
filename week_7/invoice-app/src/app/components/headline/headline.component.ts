@@ -3,7 +3,7 @@ import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
 import { Store } from '@ngrx/store';
-import { selectAllInvoices } from '../../state/selectors/invoice.selector';
+import { selectFilteredInvoices } from '../../state/selectors/invoice.selector';
 import { TextComponent } from '../text/text.component';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { ResizeService } from '../../resize.service';
@@ -18,7 +18,7 @@ import { ResizeService } from '../../resize.service';
 export class HeadlineComponent {
   private readonly store = inject(Store);
   private readonly resizeService = inject(ResizeService);
-  invoices = this.store.selectSignal(selectAllInvoices);
+  invoices = this.store.selectSignal(selectFilteredInvoices);
   deviceWidth!: number;
   invoiceLength = computed(() => this.invoices().length);
 
