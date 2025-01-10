@@ -45,7 +45,7 @@ span {
 }
 
 app-text {
-  width: 13rem;
+  width: 14.5rem;
 }
 
 @media (max-width: 710px) {
@@ -104,9 +104,5 @@ app-text {
 
   app-badge {
     margin-top: auto;
-  }
-
-  #date {
-    margin-top: 1rem;
   }
 }
