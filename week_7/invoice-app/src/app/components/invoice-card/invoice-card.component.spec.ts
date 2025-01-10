@@ -44,7 +44,6 @@ describe('InvoiceCardComponent', () => {
     fixture = TestBed.createComponent(InvoiceCardComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
-    store = TestBed.inject(MockStore);
     router = TestBed.inject(Router);
     fixture.detectChanges();
   });

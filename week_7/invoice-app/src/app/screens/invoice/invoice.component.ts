@@ -66,7 +66,7 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
-  handleNaviagteBack(): void {
+  handleNavigateBack(): void {
     this.router.navigate(['/dashboard']);
   }
 
