@@ -39,11 +39,18 @@
         >
           <span class="labels">
             <label>City</label>
-            @if(hasError('senderAddress.city', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('senderAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('senderAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
           <input type="text" formControlName="city" />
         </div>
@@ -67,11 +74,18 @@
         >
           <span class="labels">
             <label>Country</label>
-            @if(hasError('senderAddress.country', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('senderAddress.country', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('senderAddress.country', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
           <input type="text" formControlName="country" />
         </div>
@@ -88,9 +102,18 @@
       >
         <span class="labels">
           <label>Client's Name</label>
-          @if(hasError('clientName', 'required')){
-          <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
-          }
+          <app-text
+            *ngIf="hasError('clientName', 'required')"
+            color="var(--error)"
+            size="1.1rem"
+            >can't be empty</app-text
+          >
+          <app-text
+            *ngIf="hasError('clientName', 'pattern')"
+            color="var(--error)"
+            size="1.1rem"
+            >invalid format</app-text
+          >
         </span>
         <input type="text" formControlName="clientName" />
       </div>
@@ -100,9 +123,18 @@
       >
         <span class="labels">
           <label placeholder="e.g. email@example.com">Client's Email</label>
-          @if(hasError('clientEmail', 'required')){
-          <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
-          }
+          <app-text
+            *ngIf="hasError('clientEmail', 'required')"
+            color="var(--error)"
+            size="1.1rem"
+            >can't be empty</app-text
+          >
+          <app-text
+            *ngIf="hasError('clientEmail', 'email')"
+            color="var(--error)"
+            size="1.1rem"
+            >invalid format</app-text
+          >
         </span>
         <input type="text" formControlName="clientEmail" />
       </div>
@@ -133,11 +165,18 @@
         >
           <span class="labels">
             <label>City</label>
-            @if(hasError('clientAddress.city', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
           <input type="text" formControlName="city" />
         </div>
@@ -161,11 +200,18 @@
         >
           <span class="labels">
             <label>Country</label>
-            @if(hasError('clientAddress.country', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
           <input type="text" formControlName="country" />
         </div>

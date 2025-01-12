@@ -91,7 +91,7 @@ export class FormComponent implements OnInit {
       status: ['pending'],
       senderAddress: this.fb.group({
         street: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        city: ['', Validators.required],
+        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         postCode: ['', Validators.required],
         country: [
           '',
