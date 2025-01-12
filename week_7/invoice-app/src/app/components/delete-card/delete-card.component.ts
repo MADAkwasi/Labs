@@ -36,6 +36,6 @@ export class DeleteCardComponent implements OnInit {
     this.store.dispatch(interactionsActions.cancelDelete());
 
     this.router.navigate(['/dashboard']);
-    this.toastr.success(`Invoice ${this.invoiceId} deleted successfully`);
+    this.toastr.success(`Invoice #${this.invoiceId} deleted successfully`);
   }
 }
