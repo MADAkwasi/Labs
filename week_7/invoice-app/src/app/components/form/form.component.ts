@@ -348,7 +348,9 @@ export class FormComponent implements OnInit {
     this.resetFormAndClose();
     this.isFormSubmitted = false;
 
-    this.toastr.success(`Invoice #${invoice.id} saved successfully`);
+    if (this.isEditingForm())
+      this.toastr.success(`Invoice #${invoice.id} edited successfully`);
+    else this.toastr.success(`Invoice #${invoice.id} sent successfully`);
   }
 
   hasError(controlName: string, errorName: string): boolean {
