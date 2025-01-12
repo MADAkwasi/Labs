@@ -31,6 +31,7 @@ import {
 } from '../../state/selectors/interactions.selector';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { FormService } from './form.service';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-form',
@@ -41,6 +42,7 @@ import { FormService } from './form.service';
     ReactiveFormsModule,
     CommonModule,
     DatePickerComponent,
+    DropdownComponent,
   ],
   providers: [FormService],
   templateUrl: './form.component.html',
@@ -51,7 +53,6 @@ export class FormComponent implements OnInit {
   private readonly elementRef = inject(ElementRef);
   private readonly fb = inject(FormBuilder);
   private readonly formService = inject(FormService);
-  isOpened!: boolean;
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
   selectedInvoice = this.store.selectSignal(selectActiveInvoice);
@@ -280,10 +281,6 @@ export class FormComponent implements OnInit {
 
   updateField(path: string[], value: any): void {
     this.store.dispatch(invoiceActions.editField({ path, value }));
-  }
-
-  toggleDropdown() {
-    this.isOpened = !this.isOpened;
   }
 
   onDateChange(selectedDate: Date | null): void {
