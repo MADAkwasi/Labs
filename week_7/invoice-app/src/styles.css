@@ -1,7 +1,11 @@
 @font-face {
-  font-family: "Ubuntu";
-  src: url("/assets/fonts/LeagueSpartan-VariableFont_wght.ttf")
-    format("truetype");
+  font-family: "Spartan";
+  src: url("/assets/fonts/Spartan-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Spartan";
+  src: url("/assets/fonts/Spartan-Bold.ttf") format("truetype");
 }
 
 :root {

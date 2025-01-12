@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './badge.component.css',
 })
 export class BadgeComponent {
-  @Input() status!: string | undefined;
+  @Input() status!: string;
 }

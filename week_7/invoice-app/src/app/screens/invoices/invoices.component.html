@@ -1,6 +1,6 @@
 <section>
   <app-headline></app-headline>
-  @if(!!invoices().length){ @if(isLoading()){
+  @if(this.invoices().length>0){ @if(isLoading()){
   <p>Loading...</p>
   }@else {
   <app-invoice-card></app-invoice-card>

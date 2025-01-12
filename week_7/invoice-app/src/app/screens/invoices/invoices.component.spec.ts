@@ -9,7 +9,7 @@ import {
 } from '../../state/selectors/invoice.selector';
 import { invoiceActions } from '../../state/actions/invoice.action';
 
-describe('InvoicesComponent', () => {
+describe('InvoiceComponent', () => {
   let component: InvoicesComponent;
   let fixture: ComponentFixture<InvoicesComponent>;
   let debugElement: DebugElement;

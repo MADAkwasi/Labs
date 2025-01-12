@@ -30,8 +30,8 @@ import {
   selectEditState,
 } from '../../state/selectors/interactions.selector';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
-import { TextFieldComponent } from '../text-field/text-field.component';
-import { ToastrService } from 'ngx-toastr';
+import { FormService } from './form.service';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-form',
@@ -42,8 +42,9 @@ import { ToastrService } from 'ngx-toastr';
     ReactiveFormsModule,
     CommonModule,
     DatePickerComponent,
-    TextFieldComponent,
+    DropdownComponent,
   ],
+  providers: [FormService],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -51,8 +52,7 @@ export class FormComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly elementRef = inject(ElementRef);
   private readonly fb = inject(FormBuilder);
-  private readonly toastr = inject(ToastrService);
-  isOpened!: boolean;
+  private readonly formService = inject(FormService);
   invoiceForm!: FormGroup;
   paymentTerms = signal<number>(1);
   selectedInvoice = this.store.selectSignal(selectActiveInvoice);
@@ -78,25 +78,34 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
-      id: [this.generateId()],
-      createdAt: [null, Validators.required],
+      id: [this.formService.generateId()],
+      createdAt: [new Date(), Validators.required],
       paymentDue: ['', Validators.required],
       description: ['', Validators.required],
       paymentTerms: [1, Validators.required],
-      clientName: ['', Validators.required],
+      clientName: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z ]*$')],
+      ],
       clientEmail: ['', [Validators.required, Validators.email]],
       status: ['pending'],
       senderAddress: this.fb.group({
-        street: ['', Validators.required],
-        city: ['', Validators.required],
+        street: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         postCode: ['', Validators.required],
-        country: ['', Validators.required],
+        country: [
+          '',
+          [Validators.required, Validators.pattern('^[a-zA-Z ]*$')],
+        ],
       }),
       clientAddress: this.fb.group({
         street: ['', Validators.required],
-        city: ['', Validators.required],
+        city: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         postCode: ['', Validators.required],
-        country: ['', Validators.required],
+        country: [
+          '',
+          [Validators.required, Validators.pattern('^[a-zA-Z ]*$')],
+        ],
       }),
       items: this.fb.array([this.createItem()]),
       total: [{ value: 0 }],
@@ -124,10 +133,6 @@ export class FormComponent implements OnInit {
   }
 
   private syncFormWithStore(formValue: any, parentPath: string[] = []): void {
-    if (!formValue || typeof formValue !== 'object') {
-      return;
-    }
-
     Object.keys(formValue).forEach((key) => {
       const path = [...parentPath, key];
       const control = this.invoiceForm.get(path.join('.'));
@@ -176,17 +181,6 @@ export class FormComponent implements OnInit {
 
   get createdAtControl(): FormControl {
     return this.invoiceForm.get('createdAt') as FormControl;
-  }
-
-  generateId(): string {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const randomLetters = Array.from({ length: 2 }, () =>
-      letters.charAt(Math.floor(Math.random() * letters.length))
-    ).join('');
-
-    const randomDigits = Math.floor(1000 + Math.random() * 9000).toString();
-
-    return `${randomLetters}${randomDigits}`;
   }
 
   populateForm(invoice: Invoice): void {
@@ -298,10 +292,6 @@ export class FormComponent implements OnInit {
     this.store.dispatch(invoiceActions.editField({ path, value }));
   }
 
-  toggleDropdown() {
-    this.isOpened = !this.isOpened;
-  }
-
   onDateChange(selectedDate: Date | null): void {
     const control = this.invoiceForm.get('createdAt');
     control?.setValue(selectedDate);
@@ -338,7 +328,6 @@ export class FormComponent implements OnInit {
     else this.store.dispatch(invoiceActions.addInvoice({ invoice }));
 
     this.resetFormAndClose();
-    this.toastr.info(`Invoice ${invoice.id} saved as draft`);
   }
 
   handleSend(): void {
@@ -354,10 +343,6 @@ export class FormComponent implements OnInit {
 
     this.resetFormAndClose();
     this.isFormSubmitted = false;
-
-    if (this.isEditingForm())
-      this.toastr.success(`Invoice ${invoice.id} added successfully`);
-    else this.toastr.success(`Invoice ${invoice.id} edited successfully`);
   }
 
   hasError(controlName: string, errorName: string): boolean {

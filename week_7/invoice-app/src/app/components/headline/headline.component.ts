@@ -1,11 +1,12 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
 import { FilterComponent } from '../filter/filter.component';
 import { Store } from '@ngrx/store';
-import { selectAllInvoices } from '../../state/selectors/invoice.selector';
+import { selectFilteredInvoices } from '../../state/selectors/invoice.selector';
 import { TextComponent } from '../text/text.component';
 import { interactionsActions } from '../../state/actions/interactions.action';
+import { ResizeService } from '../../resize.service';
 
 @Component({
   selector: 'app-headline',
@@ -16,12 +17,15 @@ import { interactionsActions } from '../../state/actions/interactions.action';
 })
 export class HeadlineComponent {
   private readonly store = inject(Store);
-  invoices = this.store.selectSignal(selectAllInvoices);
-  deviceWidth = window.innerWidth;
+  private readonly resizeService = inject(ResizeService);
+  invoices = this.store.selectSignal(selectFilteredInvoices);
+  deviceWidth!: number;
+  invoiceLength = computed(() => this.invoices().length);
 
-  @HostListener('window: resize', ['$event'])
-  onResize(event: Event): void {
-    this.deviceWidth = window.innerWidth;
+  constructor() {
+    this.resizeService.deviceWidth$.subscribe((width) => {
+      this.deviceWidth = width;
+    });
   }
 
   openForm() {

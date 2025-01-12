@@ -30,13 +30,7 @@
           <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
           }
         </span>
-        <app-text-field
-          [value]="invoiceForm.get('senderAddress.street')?.value"
-          (valueChange)="
-            invoiceForm.get('senderAddress.street')?.setValue($event)
-          "
-          [error]="hasError('senderAddress.street', 'required')"
-        ></app-text-field>
+        <input type="text" formControlName="street" />
       </div>
       <div class="address">
         <div
@@ -45,19 +39,20 @@
         >
           <span class="labels">
             <label>City</label>
-            @if(hasError('senderAddress.city', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('senderAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('senderAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('senderAddress.city')?.value"
-            (valueChange)="
-              invoiceForm.get('senderAddress.city')?.setValue($event)
-            "
-            [error]="hasError('senderAddress.city', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="city" />
         </div>
         <div
           class="input-field"
@@ -71,13 +66,7 @@
             >
             }
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('senderAddress.postCode')?.value"
-            (valueChange)="
-              invoiceForm.get('senderAddress.postCode')?.setValue($event)
-            "
-            [error]="hasError('senderAddress.postCode', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="postCode" />
         </div>
         <div
           class="input-field"
@@ -85,19 +74,20 @@
         >
           <span class="labels">
             <label>Country</label>
-            @if(hasError('senderAddress.country', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('senderAddress.country', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('senderAddress.country', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('senderAddress.country')?.value"
-            (valueChange)="
-              invoiceForm.get('senderAddress.country')?.setValue($event)
-            "
-            [error]="hasError('senderAddress.country', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="country" />
         </div>
       </div>
     </ng-container>
@@ -112,15 +102,20 @@
       >
         <span class="labels">
           <label>Client's Name</label>
-          @if(hasError('clientName', 'required')){
-          <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
-          }
+          <app-text
+            *ngIf="hasError('clientName', 'required')"
+            color="var(--error)"
+            size="1.1rem"
+            >can't be empty</app-text
+          >
+          <app-text
+            *ngIf="hasError('clientName', 'pattern')"
+            color="var(--error)"
+            size="1.1rem"
+            >invalid format</app-text
+          >
         </span>
-        <app-text-field
-          [value]="invoiceForm.get('clientName')?.value"
-          (valueChange)="invoiceForm.get('clientName')?.setValue($event)"
-          [error]="hasError('clientName', 'required')"
-        ></app-text-field>
+        <input type="text" formControlName="clientName" />
       </div>
       <div
         class="input-field"
@@ -128,15 +123,20 @@
       >
         <span class="labels">
           <label placeholder="e.g. email@example.com">Client's Email</label>
-          @if(hasError('clientEmail', 'required')){
-          <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
-          }
+          <app-text
+            *ngIf="hasError('clientEmail', 'required')"
+            color="var(--error)"
+            size="1.1rem"
+            >can't be empty</app-text
+          >
+          <app-text
+            *ngIf="hasError('clientEmail', 'email')"
+            color="var(--error)"
+            size="1.1rem"
+            >invalid format</app-text
+          >
         </span>
-        <app-text-field
-          [value]="invoiceForm.get('clientEmail')?.value"
-          (valueChange)="invoiceForm.get('clientEmail')?.setValue($event)"
-          [error]="hasError('clientEmail', 'required')"
-        ></app-text-field>
+        <input type="text" formControlName="clientEmail" />
       </div>
 
       <ng-container formGroupName="clientAddress">
@@ -152,13 +152,7 @@
             >
             }
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('clientAddress.street')?.value"
-            (valueChange)="
-              invoiceForm.get('clientAddress.street')?.setValue($event)
-            "
-            [error]="hasError('clientAddress.street', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="street" />
         </div>
       </ng-container>
     </div>
@@ -171,19 +165,20 @@
         >
           <span class="labels">
             <label>City</label>
-            @if(hasError('clientAddress.city', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('clientAddress.city')?.value"
-            (valueChange)="
-              invoiceForm.get('clientAddress.city')?.setValue($event)
-            "
-            [error]="hasError('clientAddress.city', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="city" />
         </div>
         <div
           class="input-field"
@@ -197,13 +192,7 @@
             >
             }
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('clientAddress.postCode')?.value"
-            (valueChange)="
-              invoiceForm.get('clientAddress.postCode')?.setValue($event)
-            "
-            [error]="hasError('clientAddress.postCode', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="postCode" />
         </div>
         <div
           class="input-field"
@@ -211,19 +200,20 @@
         >
           <span class="labels">
             <label>Country</label>
-            @if(hasError('clientAddress.country', 'required')){
-            <app-text color="var(--error)" size="1.1rem"
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'required')"
+              color="var(--error)"
+              size="1.1rem"
               >can't be empty</app-text
             >
-            }
+            <app-text
+              *ngIf="hasError('clientAddress.city', 'pattern')"
+              color="var(--error)"
+              size="1.1rem"
+              >invalid format</app-text
+            >
           </span>
-          <app-text-field
-            [value]="invoiceForm.get('clientAddress.country')?.value"
-            (valueChange)="
-              invoiceForm.get('clientAddress.country')?.setValue($event)
-            "
-            [error]="hasError('clientAddress.country', 'required')"
-          ></app-text-field>
+          <input type="text" formControlName="country" />
         </div>
       </ng-container>
     </div>
@@ -233,75 +223,13 @@
         <label>Invoice Date</label>
         <app-date-picker
           (dateChange)="onDateChange($event)"
-          [selectedDate]="invoiceForm.get('createdAt')?.value || null"
+          [selectedDate]="invoiceForm.get('createdAt')?.value"
         ></app-date-picker>
       </div>
 
       <div class="input-field">
         <label>Payment Terms</label>
-        <div class="due-date-dropdown" (click)="toggleDropdown()">
-          <div class="due-date-display">
-            <span>
-              <app-text type="emphasis" size="1.3rem">{{
-                paymentTerms() === 1
-                  ? "Next 1 day"
-                  : "Next " + paymentTerms() + " days"
-              }}</app-text>
-              <app-icon
-                imgSrc="/assets/images/icon-arrow-down.svg"
-                altText="down-arrow"
-                [height]="9"
-                [width]="14"
-                [rotate]="isOpened ? '180deg' : '0deg'"
-              ></app-icon>
-            </span>
-          </div>
-
-          <div
-            class="due-date-options"
-            [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
-          >
-            <label>
-              <input
-                type="radio"
-                value="1"
-                name="paymentTerms"
-                formControlName="paymentTerms"
-              />
-              <p type="emphasis" size="1.3rem">Next 1 day</p>
-            </label>
-            <hr />
-            <label>
-              <input
-                type="radio"
-                value="7"
-                name="paymentTerms"
-                formControlName="paymentTerms"
-              />
-              <p type="emphasis" size="1.3rem">Next 7 days</p>
-            </label>
-            <hr />
-            <label>
-              <input
-                type="radio"
-                value="14"
-                name="paymentTerms"
-                formControlName="paymentTerms"
-              />
-              <p type="emphasis" size="1.3rem">Next 14 days</p>
-            </label>
-            <hr />
-            <label>
-              <input
-                type="radio"
-                value="30"
-                name="paymentTerms"
-                formControlName="paymentTerms"
-              />
-              <p type="emphasis" size="1.3rem">Next 30 days</p>
-            </label>
-          </div>
-        </div>
+        <app-dropdown formControlName="paymentTerms"></app-dropdown>
       </div>
     </section>
 
@@ -315,12 +243,11 @@
         <app-text color="var(--error)" size="1.1rem">can't be empty</app-text>
         }
       </span>
-      <app-text-field
-        [value]="invoiceForm.get('description')?.value"
-        (valueChange)="invoiceForm.get('description')?.setValue($event)"
+      <input
+        type="text"
         placeholder="e.g. Graphic Design Service"
-        [error]="hasError('description', 'required')"
-      ></app-text-field>
+        formControlName="description"
+      />
     </div>
 
     <div class="items">

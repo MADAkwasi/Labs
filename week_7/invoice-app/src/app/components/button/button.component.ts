@@ -9,8 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
-  @Input() type: 'normal' | 'edit' | 'delete' | 'add' | 'draft' | 'cancel' =
-    'normal';
+  @Input() type: buttonType = 'normal';
   @Input() color!: string;
   @Input() disabled!: boolean;
   @Output() onClick = new EventEmitter();
@@ -20,3 +19,5 @@ export class ButtonComponent {
     this.onClick.emit();
   }
 }
+
+type buttonType = 'normal' | 'edit' | 'delete' | 'add' | 'draft' | 'cancel';
