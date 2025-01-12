@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, Renderer2 } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -17,6 +17,8 @@ import { ResizeService } from '../../resize.service';
 export class FilterComponent {
   private readonly store = inject(Store);
   private readonly resizeService = inject(ResizeService);
+  private readonly renderer = inject(Renderer2);
+  private readonly el = inject(ElementRef);
   isOpened!: boolean;
   deviceWidth!: number;
   statuses: invoiceStatus[] = ['draft', 'paid', 'pending'];
@@ -26,6 +28,12 @@ export class FilterComponent {
   constructor() {
     this.resizeService.deviceWidth$.subscribe((width) => {
       this.deviceWidth = width;
+    });
+
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (!this.el.nativeElement.contains(e.target)) {
+        this.isOpened = false;
+      }
     });
   }
   toggleDropdown() {

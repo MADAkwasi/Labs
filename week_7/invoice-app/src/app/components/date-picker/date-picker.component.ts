@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  Renderer2,
+} from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { TextComponent } from '../text/text.component';
 
@@ -10,6 +18,8 @@ import { TextComponent } from '../text/text.component';
   styleUrls: ['./date-picker.component.css'],
 })
 export class DatePickerComponent {
+  private readonly renderer = inject(Renderer2);
+  private readonly el = inject(ElementRef);
   @Output() dateChange = new EventEmitter<Date>();
   @Input() selectedDate!: Date;
   today = new Date();
@@ -42,6 +52,12 @@ export class DatePickerComponent {
 
   constructor() {
     this.generateCalendar();
+
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (!this.el.nativeElement.contains(e.target)) {
+        this.isCalendarVisible = false;
+      }
+    });
   }
 
   toggleCalendar(): void {
