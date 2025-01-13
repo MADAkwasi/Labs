@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -348,6 +349,30 @@ export class FormComponent implements OnInit {
   hasError(controlName: string, errorName: string): boolean {
     const control = this.invoiceForm.get(controlName);
     return (this.isFormSubmitted && control?.hasError(errorName)) ?? false;
+  }
+
+  getFormControls(formGroup: FormGroup): AbstractControl[] {
+    const controls: AbstractControl[] = [];
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      if (control instanceof FormGroup) {
+        controls.push(...this.getFormControls(control));
+      } else if (control) {
+        controls.push(control);
+      }
+    });
+    return controls;
+  }
+
+  getErrorMessage(control: AbstractControl): string {
+    if (control.errors?.['required']) {
+      return 'Required fields missing';
+    } else if (control.errors?.['pattern']) {
+      return 'Invalid format';
+    } else if (control.errors?.['email']) {
+      return 'Invalid email';
+    }
+    return 'Invalid field';
   }
 
   onSubmit() {}

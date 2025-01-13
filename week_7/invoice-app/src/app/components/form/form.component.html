@@ -382,14 +382,14 @@
       >
     </div>
   </section>
-  @if(!invoiceForm.valid) {
-  <div class="errors">
+  <div class="errors" *ngIf="!invoiceForm.valid && isFormSubmitted">
     <app-text color="var(--error)">- All fields must be added</app-text>
-    @if(!invoiceForm.valid && isFormSubmitted) {
-    <app-text color="var(--error)">- An item must be added</app-text>
-    }
+    <ng-container *ngFor="let control of getFormControls(invoiceForm)">
+      <app-text *ngIf="control.invalid && control.touched" color="var(--error)">
+        - {{ getErrorMessage(control) }}
+      </app-text>
+    </ng-container>
   </div>
-  }
 </form>
 
 @if(isEditingForm()){
