@@ -13,18 +13,16 @@ import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 import { InvoiceEffect } from './state/effects/invoice.effect';
 import { interactionsReducer } from './state/reducers/interactions.reducer';
-import {
-  reducers,
-  metaReducers,
-} from './state/reducers/local-storage-sync.reducer';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { AuthGuard } from './auth/auth-guard';
+import { AuthService } from './auth/auth.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore(reducers, { metaReducers }),
+    provideStore(),
     provideState({ name: 'invoices', reducer: invoiceReducer }),
     provideState({ name: 'interactions', reducer: interactionsReducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
@@ -35,5 +33,7 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-center',
       progressBar: true,
     }),
+    AuthGuard,
+    AuthService,
   ],
 };
