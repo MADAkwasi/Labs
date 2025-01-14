@@ -13,6 +13,7 @@ import { TextComponent } from '../text/text.component';
 
 @Component({
   selector: 'app-date-picker',
+  standalone: true,
   imports: [CommonModule, IconComponent, TextComponent],
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],

@@ -36,6 +36,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-form',
+  standalone: true,
   imports: [
     TextComponent,
     ButtonComponent,
