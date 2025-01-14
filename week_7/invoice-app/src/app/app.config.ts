@@ -10,13 +10,14 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { invoiceReducer } from './state/reducers/invoice.reducer';
 import { provideEffects } from '@ngrx/effects';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { InvoiceEffect } from './state/effects/invoice.effect';
 import { interactionsReducer } from './state/reducers/interactions.reducer';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { AuthGuard } from './auth/auth-guard';
 import { AuthService } from './auth/auth.service';
+import { authInterceptorInterceptor } from './auth/auth-interceptor.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'interactions', reducer: interactionsReducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([InvoiceEffect]),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptorInterceptor])),
     provideAnimations(),
     provideToastr({
       positionClass: 'toast-top-center',
