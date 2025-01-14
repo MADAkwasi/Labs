@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap, finalize } from 'rxjs/operators';
 import { INVOICES_API } from '../invoice.service';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { INVOICES_API } from '../invoice.service';
 export class AuthService {
   private readonly authUrl = INVOICES_API + 'login';
   private readonly http = inject(HttpClient);
+  private readonly loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('authToken');
@@ -21,12 +23,14 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
+    this.loadingSubject.next(true);
     return this.http.post<any>(this.authUrl, { username, password }).pipe(
       tap((response) => {
         if (response?.token) {
           localStorage.setItem('authToken', response.token);
         }
-      })
+      }),
+      finalize(() => this.loadingSubject.next(false))
     );
   }
 
