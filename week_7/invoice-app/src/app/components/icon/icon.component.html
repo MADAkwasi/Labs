@@ -5,7 +5,7 @@
   [width]="width"
   [ngStyle]="{
     transform: 'rotate(' + rotate + ')',
-    cursor: isInteractive ? 'pointer' : ''
+    cursor: disabled ? 'not-allowed' : isInteractive ? 'pointer' : ''
   }"
   (click)="handleClick()"
 />

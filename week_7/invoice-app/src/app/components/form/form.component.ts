@@ -34,9 +34,11 @@ import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { FormService } from './form.service';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { ToastrService } from 'ngx-toastr';
+import { TextFieldComponent } from '../text-field/text-field.component';
 
 @Component({
   selector: 'app-form',
+  standalone: true,
   imports: [
     TextComponent,
     ButtonComponent,
@@ -45,6 +47,7 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule,
     DatePickerComponent,
     DropdownComponent,
+    TextFieldComponent,
   ],
   providers: [FormService],
   templateUrl: './form.component.html',
@@ -75,7 +78,6 @@ export class FormComponent implements OnInit {
       total: 0,
     })
   );
-  isHovered!: boolean;
   isFormSubmitted!: boolean;
   deviceWidth: number = window.innerWidth;
 
@@ -318,6 +320,7 @@ export class FormComponent implements OnInit {
   }
 
   handleDeleteItem(index: number): void {
+    if (this.items.length === 1) return;
     this.items.removeAt(index);
     this.updateFormTotal();
   }

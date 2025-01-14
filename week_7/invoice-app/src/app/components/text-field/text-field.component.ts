@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-text-field',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './text-field.component.html',
   styleUrl: './text-field.component.css',

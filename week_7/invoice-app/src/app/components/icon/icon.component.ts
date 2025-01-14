@@ -15,6 +15,7 @@ export class IconComponent {
   @Input() height!: number;
   @Input() rotate!: string;
   @Input() isInteractive = true;
+  @Input() disabled!: boolean;
   @Output() onClick = new EventEmitter();
 
   handleClick() {

@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-card',
+  standalone: true,
   imports: [TextComponent, ButtonComponent],
   templateUrl: './delete-card.component.html',
   styleUrl: './delete-card.component.css',
