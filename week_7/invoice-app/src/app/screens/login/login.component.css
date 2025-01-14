@@ -1,0 +1,40 @@
+form {
+  height: fit-content;
+  padding: 5rem 4rem;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+.input-field {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 5rem;
+  font-size: 4rem;
+  color: var(--base-black);
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+
+app-text {
+  align-self: flex-start;
+  margin-bottom: 2rem;
+}
+
+app-button {
+  align-self: flex-end;
+  margin-top: 5rem;
+}

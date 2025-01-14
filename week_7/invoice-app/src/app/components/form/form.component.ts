@@ -37,6 +37,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form',
+  standalone: true,
   imports: [
     TextComponent,
     ButtonComponent,

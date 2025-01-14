@@ -1,28 +1,26 @@
 import { Component, effect, inject, Renderer2 } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import {  ViewportScroller } from '@angular/common';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { FormComponent } from '../form/form.component';
 import { Store } from '@ngrx/store';
+import { ViewportScroller } from '@angular/common';
 import {
   selectDeleteState,
   selectFormState,
-} from './state/selectors/interactions.selector';
-import { AuthService } from './auth/auth.service';
+} from '../../state/selectors/interactions.selector';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    RouterOutlet,
-  ],
+  selector: 'app-layout',
   standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  imports: [SidebarComponent, DialogComponent, FormComponent, RouterOutlet],
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.css',
 })
-export class AppComponent {
+export class LayoutComponent {
   private readonly store = inject(Store);
   private readonly viewportScroller = inject(ViewportScroller);
   private readonly renderer = inject(Renderer2);
-  private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly authService = inject(AuthService);
   shouldDelete = this.store.selectSignal(selectDeleteState);
   isFormActive = this.store.selectSignal(selectFormState);
 
