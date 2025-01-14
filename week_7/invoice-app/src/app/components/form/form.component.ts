@@ -74,7 +74,6 @@ export class FormComponent implements OnInit {
       total: 0,
     })
   );
-  isHovered!: boolean;
   isFormSubmitted!: boolean;
   deviceWidth: number = window.innerWidth;
 
@@ -317,6 +316,7 @@ export class FormComponent implements OnInit {
   }
 
   handleDeleteItem(index: number): void {
+    if (this.items.length === 1) return;
     this.items.removeAt(index);
     this.updateFormTotal();
   }

@@ -300,16 +300,9 @@
             <label>Total</label>
             <span>
               <input id="total" type="number" formControlName="total" />
-              <span
-                (mouseenter)="isHovered = true"
-                (mouseleave)="isHovered = false"
-              >
+              <span>
                 <app-icon
-                  [imgSrc]="
-                    isHovered
-                      ? '/assets/images/icon-delete-hover.svg'
-                      : '/assets/images/icon-delete.svg'
-                  "
+                  imgSrc="/assets/images/icon-delete.svg"
                   class="icon"
                   altText="trash-can"
                   [height]="14"
@@ -350,21 +343,15 @@
             <label>Total</label>
             <span>
               <input id="total" type="number" formControlName="total" />
-              <span
-                (mouseenter)="isHovered = true"
-                (mouseleave)="isHovered = false"
-              >
+              <span>
                 <app-icon
-                  [imgSrc]="
-                    isHovered && $index
-                      ? '/assets/images/icon-delete-hover.svg'
-                      : '/assets/images/icon-delete.svg'
-                  "
+                  imgSrc="assets/images/icon-delete.svg"
                   class="icon"
                   altText="trash-can"
                   [height]="14"
                   [width]="14"
                   [isInteractive]="true"
+                  [disabled]="items.length === 1"
                   (onClick)="handleDeleteItem($index)"
                 ></app-icon
               ></span>
