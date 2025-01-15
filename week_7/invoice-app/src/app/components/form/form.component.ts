@@ -76,6 +76,7 @@ export class FormComponent implements OnInit {
   );
   isFormSubmitted!: boolean;
   deviceWidth: number = window.innerWidth;
+  hoveredIndex: number | null = null;
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({

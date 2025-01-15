@@ -300,14 +300,22 @@
             <label>Total</label>
             <span>
               <input id="total" type="number" formControlName="total" />
-              <span>
+              <span
+                (mouseenter)="hoveredIndex = $index"
+                (mouseleave)="hoveredIndex = null"
+              >
                 <app-icon
-                  imgSrc="/assets/images/icon-delete.svg"
+                  [imgSrc]="
+                    hoveredIndex === $index && items.length > 1
+                      ? '/assets/images/icon-delete-hover.svg'
+                      : '/assets/images/icon-delete.svg'
+                  "
                   class="icon"
                   altText="trash-can"
                   [height]="14"
                   [width]="14"
                   [isInteractive]="true"
+                  [disabled]="items.length === 1"
                   (onClick)="handleDeleteItem($index)"
                 ></app-icon>
               </span>
@@ -343,9 +351,16 @@
             <label>Total</label>
             <span>
               <input id="total" type="number" formControlName="total" />
-              <span>
+              <span
+                (mouseenter)="hoveredIndex = $index"
+                (mouseleave)="hoveredIndex = null"
+              >
                 <app-icon
-                  imgSrc="assets/images/icon-delete.svg"
+                  [imgSrc]="
+                    hoveredIndex === $index && items.length > 1
+                      ? '/assets/images/icon-delete-hover.svg'
+                      : '/assets/images/icon-delete.svg'
+                  "
                   class="icon"
                   altText="trash-can"
                   [height]="14"
