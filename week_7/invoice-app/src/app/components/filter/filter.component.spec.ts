@@ -25,6 +25,8 @@ describe('FilterComponent', () => {
     fixture.detectChanges();
   });
 
+  const status: invoiceStatus = 'draft';
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -56,13 +58,11 @@ describe('FilterComponent', () => {
   });
 
   it('should add status to selectedStatuses when checkbox is checked', () => {
-    const status: invoiceStatus = 'draft';
     component.handleCheckboxChange(status, true);
     expect(component.selectedStatuses.has(status)).toBeTruthy();
   });
 
   it('should remove status from selectedStatuses when checkbox is unchecked', () => {
-    const status: invoiceStatus = 'draft';
     component.selectedStatuses.add(status);
     component.handleCheckboxChange(status, false);
     expect(component.selectedStatuses.has(status)).toBeFalsy();
@@ -70,7 +70,6 @@ describe('FilterComponent', () => {
 
   it('should dispatch updateFilters action when checkbox is changed', () => {
     jest.spyOn(store, 'dispatch');
-    const status: invoiceStatus = 'draft';
     component.handleCheckboxChange(status, true);
     expect(store.dispatch).toHaveBeenCalledWith(
       invoiceActions.updateFilters({ statuses: [status] })
