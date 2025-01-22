@@ -68,4 +68,20 @@ export class InvoiceEffect {
       )
     )
   );
+
+  updateInvoiceStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.updateInvoiceStatus),
+      switchMap(({ invoiceId, status }) =>
+        this.invoiceService.updateInvoiceStatus(invoiceId, status).pipe(
+          map(() =>
+            invoiceActions.updateInvoiceStatusSuccess({ invoiceId, status })
+          ),
+          catchError((error) =>
+            of(invoiceActions.updateInvoiceStatusFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }

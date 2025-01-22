@@ -20,9 +20,13 @@ export const invoiceActions = createActionGroup({
     deleteInvoiceSuccess: props<{ invoiceId: string }>(),
     deleteInvoiceFailure: props<{ error: any }>(),
 
+    updateInvoiceStatus: props<{ invoiceId: string; status: invoiceStatus }>(),
+    updateInvoiceStatusSuccess: props<{ invoiceId: string; status: invoiceStatus }>(),
+    updateInvoiceStatusFailure: props<{ error: any }>(),
+    
+
     setActiveInvoice: props<{ invoiceId: string }>(),
     editField: props<{ path: string[]; value: any }>(),
-    updateInvoiceStatus: props<{ invoiceId: string; status: invoiceStatus }>(),
     updateFilters: props<{ statuses: string[] }>(),
   },
 });
