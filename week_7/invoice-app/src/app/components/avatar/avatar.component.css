@@ -20,3 +20,11 @@ button {
   text-align: center;
   cursor: pointer;
 }
+
+@media (max-width: 940px) {
+  span {
+    position: absolute;
+    top: 70%;
+    right: 1px;
+  }
+}
