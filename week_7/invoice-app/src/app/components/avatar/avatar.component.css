@@ -1,3 +1,22 @@
 img {
   border-radius: 50%;
+  cursor: pointer;
+}
+
+span {
+  width: 10rem;
+  margin: 1rem 0;
+  background-color: var(--light-bg);
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+button {
+  background-color: transparent;
+  padding: 1rem 1.5rem;
+  border: none;
+  color: var(--base-black);
+  text-align: center;
+  cursor: pointer;
 }
