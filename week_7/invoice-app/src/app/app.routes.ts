@@ -31,7 +31,7 @@ export const routes: Routes = [
     path: 'unauthorized',
     component: UnauthorizedComponent,
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: '**',
     component: PageNotFoundComponent,

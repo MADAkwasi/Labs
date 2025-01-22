@@ -16,7 +16,32 @@ export class InvoiceService {
   loadInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(INVOICES_API + 'invoices').pipe(
       catchError((error) => {
-        console.error('Error loading invoices', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  addInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.http.post<Invoice>(`${INVOICES_API}/invoices`, invoice).pipe(
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
+  }
+
+  updateInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.http
+      .put<Invoice>(`${INVOICES_API}/invoices/${invoice.id}`, invoice)
+      .pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      );
+  }
+
+  deleteInvoice(invoiceId: string): Observable<void> {
+    return this.http.delete<void>(`${INVOICES_API}/invoices/${invoiceId}`).pipe(
+      catchError((error) => {
         return throwError(error);
       })
     );

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TextComponent } from '../../components/text/text.component';
 import { TextFieldComponent } from '../../components/text-field/text-field.component';
 import { ButtonComponent } from '../../components/button/button.component';
@@ -29,7 +29,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly toastr = inject(ToastrService);
   private readonly router = inject(Router);
@@ -44,6 +44,10 @@ export class LoginComponent {
     });
 
     this.loading$ = this.authService.loading$;
+  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('authToken')) this.router.navigate(['/dashboard']);
   }
 
   handleLogin() {
