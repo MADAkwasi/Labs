@@ -38,3 +38,15 @@ app-button {
   align-self: flex-end;
   margin-top: 5rem;
 }
+
+@media (max-width: 940px) {
+  form {
+    width: 70%;
+  }
+}
+
+@media (max-width: 465px) {
+  form {
+    width: 90%;
+  }
+}
