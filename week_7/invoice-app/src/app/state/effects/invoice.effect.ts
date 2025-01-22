@@ -24,4 +24,48 @@ export class InvoiceEffect {
       )
     )
   );
+
+  addInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.addInvoice),
+      switchMap(({ invoice }) =>
+        this.invoiceService.addInvoice(invoice).pipe(
+          map((newInvoice) =>
+            invoiceActions.addInvoiceSuccess({ invoice: newInvoice })
+          ),
+          catchError((error) => of(invoiceActions.addInvoiceFailure({ error })))
+        )
+      )
+    )
+  );
+
+  updateInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.updateInvoice),
+      switchMap(({ invoice }) =>
+        this.invoiceService.updateInvoice(invoice).pipe(
+          map((updatedInvoice) =>
+            invoiceActions.updateInvoiceSuccess({ invoice: updatedInvoice })
+          ),
+          catchError((error) =>
+            of(invoiceActions.updateInvoiceFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.deleteInvoice),
+      switchMap(({ invoiceId }) =>
+        this.invoiceService.deleteInvoice(invoiceId).pipe(
+          map(() => invoiceActions.deleteInvoiceSuccess({ invoiceId })),
+          catchError((error) =>
+            of(invoiceActions.deleteInvoiceFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }
