@@ -1,0 +1,65 @@
+<div class="due-date-dropdown" (click)="toggleDropdown()">
+  <div class="due-date-display">
+    <span>
+      <app-text type="emphasis" size="1.3rem">{{
+        paymentTerms === 1 ? "Next 1 day" : "Next " + paymentTerms + " days"
+      }}</app-text>
+      <app-icon
+        imgSrc="/assets/images/icon-arrow-down.svg"
+        altText="down-arrow"
+        [height]="9"
+        [width]="14"
+        [rotate]="isOpened ? '180deg' : '0deg'"
+      ></app-icon>
+    </span>
+  </div>
+
+  <div
+    class="due-date-options"
+    [ngStyle]="{ display: isOpened ? 'flex' : 'none' }"
+  >
+    <label>
+      <input
+        type="radio"
+        value="1"
+        name="paymentTerms"
+        [checked]="paymentTerms === 1"
+        (change)="onSelectionChange(1)"
+      />
+      <p type="emphasis" size="1.3rem">Next 1 day</p>
+    </label>
+    <hr />
+    <label>
+      <input
+        type="radio"
+        value="7"
+        name="paymentTerms"
+        [checked]="paymentTerms === 7"
+        (change)="onSelectionChange(7)"
+      />
+      <p type="emphasis" size="1.3rem">Next 7 days</p>
+    </label>
+    <hr />
+    <label>
+      <input
+        type="radio"
+        value="14"
+        name="paymentTerms"
+        [checked]="paymentTerms === 14"
+        (change)="onSelectionChange(14)"
+      />
+      <p type="emphasis" size="1.3rem">Next 14 days</p>
+    </label>
+    <hr />
+    <label>
+      <input
+        type="radio"
+        value="30"
+        name="paymentTerms"
+        [checked]="paymentTerms === 30"
+        (change)="onSelectionChange(30)"
+      />
+      <p type="emphasis" size="1.3rem">Next 30 days</p>
+    </label>
+  </div>
+</div>
