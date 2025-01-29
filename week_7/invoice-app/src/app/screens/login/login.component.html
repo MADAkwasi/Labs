@@ -17,6 +17,7 @@
     </span>
     <app-text-field
       placeholder="Password"
+      type="password"
       [value]="loginForm.get('password')?.value"
       (valueChange)="loginForm.get('password')?.setValue($event)"
     ></app-text-field>
