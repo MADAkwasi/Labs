@@ -8,7 +8,7 @@ import { INVOICES_API } from '../invoice.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly authUrl = INVOICES_API + 'login';
+  private readonly authUrl = `${INVOICES_API}login`;
   private readonly http = inject(HttpClient);
   private readonly loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
