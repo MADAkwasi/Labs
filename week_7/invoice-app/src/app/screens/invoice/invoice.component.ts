@@ -8,12 +8,12 @@ import { selectAllInvoices } from '../../state/selectors/invoice.selector';
 import { ButtonComponent } from '../../components/button/button.component';
 import { invoiceActions } from '../../state/actions/invoice.action';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { DeleteCardComponent } from '../../components/delete-card/delete-card.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { selectDeleteState } from '../../state/selectors/interactions.selector';
 import { interactionsActions } from '../../state/actions/interactions.action';
 import { Invoice, invoiceStatus } from '../../../assets/data/model';
 import { ResizeService } from '../../resize.service';
+import { DeleteCardComponent } from '../../components/delete-card/delete-card.component';
 
 @Component({
   selector: 'app-invoice',
@@ -25,9 +25,9 @@ import { ResizeService } from '../../resize.service';
     ButtonComponent,
     DatePipe,
     CurrencyPipe,
-    DeleteCardComponent,
     DialogComponent,
     CommonModule,
+    DeleteCardComponent,
   ],
   templateUrl: './invoice.component.html',
   styleUrl: './invoice.component.css',

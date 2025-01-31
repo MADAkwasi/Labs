@@ -8,12 +8,25 @@ export const invoiceActions = createActionGroup({
     loadInvoicesSuccess: props<{ invoices: Invoice[] }>(),
     loadInvoicesFailure: props<{ error: any }>(),
 
+    addInvoice: props<{ invoice: Invoice }>(),
+    addInvoiceSuccess: props<{ invoice: Invoice }>(),
+    addInvoiceFailure: props<{ error: any }>(),
+
+    updateInvoice: props<{ invoice: Invoice }>(),
+    updateInvoiceSuccess: props<{ invoice: Invoice }>(),
+    updateInvoiceFailure: props<{ error: any }>(),
+
+    deleteInvoice: props<{ invoiceId: string }>(),
+    deleteInvoiceSuccess: props<{ invoiceId: string }>(),
+    deleteInvoiceFailure: props<{ error: any }>(),
+
+    updateInvoiceStatus: props<{ invoiceId: string; status: invoiceStatus }>(),
+    updateInvoiceStatusSuccess: props<{ invoiceId: string; status: invoiceStatus }>(),
+    updateInvoiceStatusFailure: props<{ error: any }>(),
+    
+
     setActiveInvoice: props<{ invoiceId: string }>(),
     editField: props<{ path: string[]; value: any }>(),
-    addInvoice: props<{ invoice: Invoice }>(),
-    updateInvoice: props<{ invoice: Invoice }>(),
-    deleteInvoice: props<{ invoiceId: string }>(),
-    updateInvoiceStatus: props<{ invoiceId: string; status: invoiceStatus }>(),
     updateFilters: props<{ statuses: string[] }>(),
   },
 });

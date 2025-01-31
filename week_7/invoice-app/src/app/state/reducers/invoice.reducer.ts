@@ -25,9 +25,15 @@ const {
   loadInvoicesSuccess,
   loadInvoicesFailure,
   deleteInvoice,
+  deleteInvoiceSuccess,
+  deleteInvoiceFailure,
   updateInvoice,
+  updateInvoiceSuccess,
+  updateInvoiceFailure,
   updateInvoiceStatus,
   addInvoice,
+  addInvoiceSuccess,
+  addInvoiceFailure,
   setActiveInvoice,
   editField,
   updateFilters,
@@ -66,22 +72,61 @@ export const invoiceReducer = createReducer(
     ) as Invoice,
   })),
 
-  on(addInvoice, (state, { invoice }) => ({
+  on(addInvoice, (state) => ({
     ...state,
+    isLoading: true,
+    error: null,
+  })),
+
+  on(addInvoiceSuccess, (state, { invoice }) => ({
+    ...state,
+    isLoading: false,
     invoices: [...state.invoices, invoice],
   })),
 
-  on(updateInvoice, (state, { invoice }) => ({
+  on(addInvoiceFailure, (state, { error }) => ({
     ...state,
+    isLoading: false,
+    error,
+  })),
+
+  on(updateInvoice, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+
+  on(updateInvoiceSuccess, (state, { invoice }) => ({
+    ...state,
+    isLoading: false,
     invoices: state.invoices.map((inv) =>
       inv.id === invoice.id ? { ...inv, ...invoice } : inv
     ),
     activeInvoice: invoice,
   })),
 
-  on(deleteInvoice, (state, { invoiceId }) => ({
+  on(updateInvoiceFailure, (state, { error }) => ({
     ...state,
+    isLoading: false,
+    error,
+  })),
+
+  on(deleteInvoice, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+
+  on(deleteInvoiceSuccess, (state, { invoiceId }) => ({
+    ...state,
+    isLoading: false,
     invoices: state.invoices.filter((inv) => inv.id !== invoiceId),
+  })),
+
+  on(deleteInvoiceFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
   })),
 
   on(updateInvoiceStatus, (state, { invoiceId, status }) => ({

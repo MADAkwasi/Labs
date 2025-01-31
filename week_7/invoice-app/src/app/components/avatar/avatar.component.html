@@ -3,4 +3,9 @@
   alt="avatar"
   [height]="height"
   [width]="width"
+  (click)="handleToggleDropdown()"
 />
+
+<span *ngIf="isLoggingOut">
+  <button (click)="handlelogout()">Logout</button>
+</span>

@@ -29,8 +29,6 @@ export class InvoicesComponent implements OnInit {
   invoiceLength = computed(() => this.invoices().length);
 
   ngOnInit(): void {
-    if (!this.isLoading()) {
-      this.store.dispatch(invoiceActions.loadInvoices());
-    }
+    this.store.dispatch(invoiceActions.loadInvoices());
   }
 }

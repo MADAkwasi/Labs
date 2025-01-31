@@ -1,0 +1,39 @@
+<h1>Invoice App</h1>
+<form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+  <app-text type="emphasis" size="2.5rem">Welcome Back!</app-text>
+  <div class="input-field">
+    <span class="labels">
+      <label>Username</label>
+    </span>
+    <app-text-field
+      placeholder="Username"
+      [value]="loginForm.get('username')?.value"
+      (valueChange)="loginForm.get('username')?.setValue($event)"
+    ></app-text-field>
+  </div>
+  <div class="input-field">
+    <span class="labels">
+      <label>Password</label>
+    </span>
+    <app-text-field
+      placeholder="Password"
+      type="password"
+      [value]="loginForm.get('password')?.value"
+      (valueChange)="loginForm.get('password')?.setValue($event)"
+    ></app-text-field>
+  </div>
+  <app-button
+    type="normal"
+    [disabled]="loginForm.invalid || (loading$ | async) === true"
+    (onClick)="handleLogin()"
+    >Login</app-button
+  >
+</form>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+>
+</ngx-spinner>

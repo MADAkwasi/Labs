@@ -52,6 +52,6 @@ export class InvoiceCardComponent {
   }
 
   handleNavigate(id: string) {
-    this.router.navigate(['/invoice', id]);
+    this.router.navigate(['/dashboard/invoice', id]);
   }
 }

@@ -1,10 +1,10 @@
 <section>
   <app-headline></app-headline>
-  @if(this.invoices().length>0){ @if(isLoading()){
+  @if(isLoading()){
   <p>Loading...</p>
-  }@else {
+  }@else{ @if(this.invoices().length>0){
   <app-invoice-card></app-invoice-card>
-  } }@else {
+  } @else {
   <div>
     <app-icon
       imgSrc="/assets/images/illustration-empty.svg"
@@ -17,5 +17,5 @@
       Create an invoice by clicking the New Invoice button and get started
     </app-text>
   </div>
-  }
+  } }
 </section>
