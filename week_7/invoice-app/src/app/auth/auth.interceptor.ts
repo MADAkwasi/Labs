@@ -3,7 +3,7 @@ import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-export const authInterceptorInterceptor: HttpInterceptorFn = (
+export const authInterceptor: HttpInterceptorFn = (
   request,
   next
 ) => {

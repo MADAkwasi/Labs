@@ -17,7 +17,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { AuthGuard } from './auth/auth-guard';
 import { AuthService } from './auth/auth.service';
-import { authInterceptorInterceptor } from './auth/auth-interceptor.interceptor';
+import { authInterceptor } from './auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'interactions', reducer: interactionsReducer }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([InvoiceEffect]),
-    provideHttpClient(withInterceptors([authInterceptorInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
     provideToastr({
       positionClass: 'toast-top-center',
